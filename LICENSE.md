@@ -1,4 +1,5 @@
-BSD 3-Clause License
+LICENSE
+=======
 
 Copyright (c) 2017, Carl Zeiss Innovationszentrum für Messtechnik GmbH All rights reserved.
 All rights reserved.
