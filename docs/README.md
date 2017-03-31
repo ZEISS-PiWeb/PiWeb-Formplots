@@ -25,17 +25,17 @@ The PiWeb Formplot library helps to read and write the PiWeb formplot data forma
 
 |  |Element type | Formplot type |
 |---|------------- |-------------| 
-| <img src=" https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/AxialityplotElement.png" align="left" height="24" width="24" >| Axiality | `Cylindricity` |
-| ![alt text][circleinprofile]| Circle in profile | `CircleInProfile` |  
-| ![alt text][cylindricity]| Cylindricity |  `Cylindricity` | 
-| ![alt text][flatness]| Flatness |  `Flatness` | 
-| ![alt text][generatrix]| Generatrix |  `Cylindricity` | 
-| ![alt text][lineprofile]| Line profile |  `CurveProfile` | 
-| ![alt text][pattern]| Pattern |  `BorePattern` | 
-| ![alt text][pitch]| Pitch |  `Pitch` | 
-| ![alt text][roughness]| Roughness |  `Straightness` | 
-| ![alt text][roundness]| Roundness |  `Roundness` | 
-| ![alt text][straightness]| Straightness |  `Straightness` | 
+| ![][axiality]| Axiality | `Cylindricity` |
+| ![][circleinprofile]| Circle in profile | `CircleInProfile` |  
+| ![][cylindricity]| Cylindricity |  `Cylindricity` | 
+| ![][flatness]| Flatness |  `Flatness` | 
+| ![][generatrix]| Generatrix |  `Cylindricity` | 
+| ![][lineprofile]| Line profile |  `CurveProfile` | 
+| ![][pattern]| Pattern |  `BorePattern` | 
+| ![][pitch]| Pitch |  `Pitch` | 
+| ![][roughness]| Roughness |  `Straightness` | 
+| ![][roundness]| Roundness |  `Roundness` | 
+| ![][straightness]| Straightness |  `Straightness` | 
 
 #### Creating a formplot and writing it to a stream:
 
