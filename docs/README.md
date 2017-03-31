@@ -24,7 +24,7 @@ PiWeb formplot library
 - [Installation](#installation)
 - [Features](#features)
 - [Basic Usage](#basic-usage)
-- [Learn more](#learn more)
+- [Learn more](#learn-more)
 
 ## Introduction
 
