@@ -23,19 +23,19 @@ The PiWeb Formplot library helps to read and write the PiWeb formplot data forma
 
 
 
-| Element type | Formplot type |
-| ------------- |:-------------:| 
-| ![alt text][axiality] Axiality | `Cylindricity` |
-| ![alt text][circleinprofile] Circle in profile | `CircleInProfile` |  
-| ![alt text][cylindricity] Cylindricity |  `Cylindricity` | 
-| ![alt text][flatness] Flatness |  `Flatness` | 
-| ![alt text][generatrix] Generatrix |  `Cylindricity` | 
-| ![alt text][lineprofile] Line profile |  `CurveProfile` | 
-| ![alt text][pattern] Pattern |  `BorePattern` | 
-| ![alt text][pitch] Pitch |  `Pitch` | 
-| ![alt text][roughness] Roughness |  `Straightness` | 
-| ![alt text][roundness] Roundness |  `Roundness` | 
-| ![alt text][straightness] Straightness |  `Straightness` | 
+|  |Element type | Formplot type |
+|---|------------- |-------------| 
+| <img src=" https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/AxialityplotElement.png" align="left" height="24" width="24" >| Axiality | `Cylindricity` |
+| ![alt text][circleinprofile]| Circle in profile | `CircleInProfile` |  
+| ![alt text][cylindricity]| Cylindricity |  `Cylindricity` | 
+| ![alt text][flatness]| Flatness |  `Flatness` | 
+| ![alt text][generatrix]| Generatrix |  `Cylindricity` | 
+| ![alt text][lineprofile]| Line profile |  `CurveProfile` | 
+| ![alt text][pattern]| Pattern |  `BorePattern` | 
+| ![alt text][pitch]| Pitch |  `Pitch` | 
+| ![alt text][roughness]| Roughness |  `Straightness` | 
+| ![alt text][roundness]| Roundness |  `Roundness` | 
+| ![alt text][straightness]| Straightness |  `Straightness` | 
 
 #### Creating a formplot and writing it to a stream:
 
