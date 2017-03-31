@@ -9,8 +9,6 @@
     <AssemblyName>PiWeb.Formplot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AssemblyOriginatorKeyFile>..\snkey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -19,22 +17,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\Compile\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\PiWeb.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\Compile\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\PiWeb.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\bin\Release\Compile\PiWeb.Formplot.XML</DocumentationFile>
+    <WarningLevel>4</WarningLevel>    
+    <DocumentationFile>bin\Release\PiWeb.Formplot.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Zeiss.IMT.PiWeb.Formplot</RootNamespace>
@@ -47,13 +43,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\SharedAssemblyInfo.cs">
-      <Link>SharedAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\Version_PiWeb.cs">
-      <Link>Version_PiWeb.cs</Link>
-    </Compile>
+  <ItemGroup>    
     <Compile Include="Common\EnumParser.cs" />
     <Compile Include="FileFormat\EmptyPlot.cs" />
     <Compile Include="FileFormat\FormplotExtensions.cs" />
