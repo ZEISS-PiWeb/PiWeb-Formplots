@@ -1,4 +1,4 @@
-[logo]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/Logo.png "PiWeb Logo"
+[logo]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/Logo.png "PiWeb Logo"
 [axiality]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/AxialityplotElement.png "Axiality plot"
 [pattern]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/BorepatternplotElement.png "Pattern plot"
 [roundness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CircleplotElement.png "Roundness plot"
