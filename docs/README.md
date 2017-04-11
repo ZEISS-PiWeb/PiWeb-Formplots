@@ -1,4 +1,4 @@
-[logo]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/Logo.png "PiWeb Logo"
+[logo]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/Logo.png "PiWeb Logo"
 [axiality]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/AxialityplotElement.png "Axiality plot"
 [pattern]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/BorepatternplotElement.png "Pattern plot"
 [roundness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CircleplotElement.png "Roundness plot"
@@ -12,55 +12,88 @@
 [generatrix]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
 
 
-PiWeb-Formplots
+PiWeb formplot library
 =========
 
 ![alt text][logo]
 
-The PiWeb Formplot library helps to read and write the PiWeb formplot data format. The library provides an easy to use interface to create the different formplot types.
 
-#### Supported formplot types
+### Overview
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Features](#features)
+- [Basic Usage](#basic-usage)
+- [Learn more](#learn-more)
+
+## Introduction
+
+The **PiWeb formplot library** provides an easy to use interface for reading and especially writing PiWeb formplot data. PiWeb formplot files are zip-compressed archives, containing three files:
+
+* *fileversion.txt*: Contains the formplot **file version**.
+* *header.xml*: Contains **structural information**, such as geometry, tolerances, segments and the plots element system.
+* *plotpoints.dat*: Contains **binary plot ploints**, composed from position, normal, deviations and others, depending on the plot type.
+
+To simplify and shorten the progress of writing formplot files, we published the formplot library!
+
+
+## Installation
+
+The **PiWeb Formplot library** is available via [NuGet](https://www.nuget.org/packages/Zeiss.IMT.PiWeb.Formplots/):
+
+```
+PM> Install-Package Zeiss.IMT.PiWeb.Formplots
+```
+Or compile the library by yourself. Requirements:
+
+* Microsoft Visual Studio 2015 
+* Microsoft .NET Framework v4.5
+
+## Features
+
+Following _element types_ with their respective _formplot types_ are supported by the library:
 
 
 
 |  |Element type | Formplot type |
 |---|------------- |-------------| 
-| ![][axiality]| Axiality | `Cylindricity` |
-| ![][circleinprofile]| Circle in profile | `CircleInProfile` |  
-| ![][cylindricity]| Cylindricity |  `Cylindricity` | 
-| ![][flatness]| Flatness |  `Flatness` | 
-| ![][generatrix]| Generatrix |  `Cylindricity` | 
-| ![][lineprofile]| Line profile |  `CurveProfile` | 
-| ![][pattern]| Pattern |  `BorePattern` | 
-| ![][pitch]| Pitch |  `Pitch` | 
-| ![][roughness]| Roughness |  `Straightness` | 
-| ![][roundness]| Roundness |  `Roundness` | 
-| ![][straightness]| Straightness |  `Straightness` | 
+| ![][axiality]| [Axiality](#axiality) | `Cylindricity` |
+| ![][circleinprofile]| [Circle in profile](#circleinprofile) | `CircleInProfile` |  
+| ![][cylindricity]| [Cylindricity](#cylindricity) |  `Cylindricity` | 
+| ![][flatness]| [Flatness](#flatness) |  `Flatness` | 
+| ![][generatrix]| [Generatrix](#generatrix) |  `Cylindricity` | 
+| ![][lineprofile]| [Line profile](#lineprofile) |  `CurveProfile` | 
+| ![][pattern]| [Pattern](#pattern) |  `BorePattern` | 
+| ![][pitch]| [Pitch](#pitch) |  `Pitch` | 
+| ![][roughness]| [Roughness](#roughness) |  `Straightness` | 
+| ![][roundness]| [Roundness](#roundness) |  `Roundness` | 
+| ![][straightness]| [Straightness](#straightness) |  `Straightness` | 
 
-#### Creating a formplot and writing it to a stream:
+## Basic Usage
 
-```cs
+Create a plot of the desired plot type and a list of plot points
+```csharp
 var plot = new StraightnessPlot();
 var points = new List<LinePoint>();
+```
+Fill your point array
 
-var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
-
-for( var i = 0; i < 100; i++ )
+```csharp
+for( var i = 0; i < pointCount; i++ )
 {
-  var position = ( double ) i / 100 * 3;
-  var deviation = 0.1 * ( Math.Sin( position * 2.0 * Math.PI ) + ( rand.NextDouble() - 0.5 ) * 0.5 );
-  var point = new LinePoint( segment, position, deviation );
-
-  points.Add( point );
+	points.Add( new LinePoint( segment, position, deviation ) );
 }
-
-plot.Tolerance = new Tolerance( -0.1, 0.1 );
-plot.DefaultErrorScaling = 100;
+```
+Add the point list to your plot
+```csharp
 plot.Points = points;
+```
+Write your plot file, e.g. using the [PiWeb API](https://github.com/ZEISS-PiWeb/PiWeb-Api)
 
+```csharp
 plot.WriteTo( outputStream );
 ```
 
+## Learn more
 
-#### Data format:
+>Create a documentation here
