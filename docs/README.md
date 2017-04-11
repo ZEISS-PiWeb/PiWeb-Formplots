@@ -1,15 +1,15 @@
-[logo]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/Logo.png "PiWeb Logo"
-[axiality]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/AxialityplotElement.png "Axiality plot"
-[pattern]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/BorepatternplotElement.png "Pattern plot"
-[roundness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CircleplotElement.png "Roundness plot"
-[circleinprofile]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CircleprofileplotElement.png "Circle in profile plot"
-[lineprofile]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CurveplotElement.png "Line profile plot"
-[cylindricity]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/CylinderplotElement.png "Cylindricity plot"
-[straightness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/LineplotElement.png "Straightness plot"
-[pitch]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/PitchplotElement.png "Pitch plot"
-[flatness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/PlaneplotElement.png "Flatness plot"
-[roughness]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/RoughnessplotElement.png "Roughness plot"
-[generatrix]: https://github.com/ZEISS-PiWeb/PiWeb-Formplots/blob/master/docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
+[logo]: gfx/Logo.png "PiWeb Logo"
+[axiality]: gfx/32px/AxialityplotElement.png "Axiality plot"
+[pattern]: gfx/32px/BorepatternplotElement.png "Pattern plot"
+[roundness]: gfx/32px/CircleplotElement.png "Roundness plot"
+[circleinprofile]: gfx/32px/CircleprofileplotElement.png "Circle in profile plot"
+[lineprofile]:gfx/32px/CurveplotElement.png "Line profile plot"
+[cylindricity]: gfx/32px/CylinderplotElement.png "Cylindricity plot"
+[straightness]: gfx/32px/LineplotElement.png "Straightness plot"
+[pitch]: gfx/32px/PitchplotElement.png "Pitch plot"
+[flatness]: gfx/32px/PlaneplotElement.png "Flatness plot"
+[roughness]: gfx/32px/RoughnessplotElement.png "Roughness plot"
+[generatrix]: gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
 
 
 PiWeb formplot library
@@ -18,7 +18,7 @@ PiWeb formplot library
 ![alt text][logo]
 
 
-### Overview
+## Overview
 
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -46,7 +46,7 @@ PM> Install-Package Zeiss.IMT.PiWeb.Formplots
 ```
 Or compile the library by yourself. Requirements:
 
-* Microsoft Visual Studio 2015 
+* Microsoft Visual Studio 2015
 * Microsoft .NET Framework v4.5
 
 ## Features
@@ -56,40 +56,38 @@ Following _element types_ with their respective _formplot types_ are supported b
 
 
 |  |Element type | Formplot type |
-|---|------------- |-------------| 
+|---|------------- |-------------|
 | ![][axiality]| [Axiality](#axiality) | `Cylindricity` |
 | ![][circleinprofile]| [Circle in profile](#circleinprofile) | `CircleInProfile` |  
-| ![][cylindricity]| [Cylindricity](#cylindricity) |  `Cylindricity` | 
-| ![][flatness]| [Flatness](#flatness) |  `Flatness` | 
-| ![][generatrix]| [Generatrix](#generatrix) |  `Cylindricity` | 
-| ![][lineprofile]| [Line profile](#lineprofile) |  `CurveProfile` | 
-| ![][pattern]| [Pattern](#pattern) |  `BorePattern` | 
-| ![][pitch]| [Pitch](#pitch) |  `Pitch` | 
-| ![][roughness]| [Roughness](#roughness) |  `Straightness` | 
-| ![][roundness]| [Roundness](#roundness) |  `Roundness` | 
-| ![][straightness]| [Straightness](#straightness) |  `Straightness` | 
+| ![][cylindricity]| [Cylindricity](#cylindricity) |  `Cylindricity` |
+| ![][flatness]| [Flatness](#flatness) |  `Flatness` |
+| ![][generatrix]| [Generatrix](#generatrix) |  `Cylindricity` |
+| ![][lineprofile]| [Line profile](Curve.md) |  `CurveProfile` |
+| ![][pattern]| [Pattern](#pattern) |  `BorePattern` |
+| ![][pitch]| [Pitch](#pitch) |  `Pitch` |
+| ![][roughness]| [Roughness](#roughness) |  `Straightness` |
+| ![][roundness]| [Roundness](#roundness) |  `Roundness` |
+| ![][straightness]| [Straightness](#straightness) |  `Straightness` |
 
 ## Basic Usage
 
-Create a plot of the desired plot type and a list of plot points
+1. Create a plot of the desired plot type and a list of plot points
 ```csharp
 var plot = new StraightnessPlot();
 var points = new List<LinePoint>();
 ```
-Fill your point array
-
+2. Fill your point array
 ```csharp
 for( var i = 0; i < pointCount; i++ )
 {
 	points.Add( new LinePoint( segment, position, deviation ) );
 }
 ```
-Add the point list to your plot
+3. Add the point list to your plot
 ```csharp
 plot.Points = points;
 ```
-Write your plot file, e.g. using the [PiWeb API](https://github.com/ZEISS-PiWeb/PiWeb-Api)
-
+4. Write your plot file, e.g. using the [PiWeb API](https://github.com/ZEISS-PiWeb/PiWeb-Api)
 ```csharp
 plot.WriteTo( outputStream );
 ```
