@@ -28,7 +28,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Enumerates all <paramref name="rangeLists"/> keys whose values contain the <paramref name="value"/>.
 		/// </summary>
-		public static IEnumerable<T> GetKeysInRange<T>( Dictionary<T, RangeList> rangeLists, int value )
+		internal static IEnumerable<T> GetKeysInRange<T>( Dictionary<T, RangeList> rangeLists, int value )
 		{
 			return from kvp in rangeLists where kvp.Value.Any( range => range.IsValueInRange( value ) ) select kvp.Key;
 		}
@@ -37,7 +37,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// Tries to parse a new <see cref="RangeList"/> instance from the <paramref name="rangesString"/>.
 		/// <remarks>In case <paramref name="rangesString"/> doesn't define a valid range, an empty <see cref="RangeList"/> instance is returned.</remarks>
 		/// </summary>
-		public static RangeList TryParseOrEmpty( string rangesString )
+		internal static RangeList TryParseOrEmpty( string rangesString )
 		{
 			var returnValue = new RangeList();
 			var rangeStrings = rangesString.Split( ';' );

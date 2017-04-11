@@ -69,7 +69,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		/// <param name="writer">The writer.</param>
 		/// <exception cref="System.ArgumentNullException">writer</exception>
-		public void Serialize( XmlWriter writer )
+		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
 			{

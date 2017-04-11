@@ -66,7 +66,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		/// <param name="writer">The writer.</param>
 		/// <exception cref="System.ArgumentNullException"></exception>
-		public void Serialize( XmlWriter writer )
+		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
 				throw new ArgumentNullException( nameof( writer ) );
@@ -82,7 +82,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="reader">The reader.</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentNullException">reader</exception>
-		public static Vector Deserialize( XmlReader reader )
+		internal static Vector Deserialize( XmlReader reader )
 		{
 			if( reader == null )
 				throw new ArgumentNullException( nameof( reader ) );

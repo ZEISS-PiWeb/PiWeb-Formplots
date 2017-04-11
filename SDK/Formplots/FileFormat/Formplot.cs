@@ -188,37 +188,14 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		{
 			return FormplotHelpers.ReadFrom( stream );
 		}
-
+		
 		/// <summary>
-		/// Creates a formplot with the specified type.
+		/// Writes the formplot file content to the specified stream.
 		/// </summary>
-		/// <param name="type">The formplot type.</param>
-		/// <returns></returns>
-		public static Formplot Create( FormplotTypes type )
+		/// <param name="stream">The stream.</param>
+		public void WriteTo( Stream stream )
 		{
-			switch( type )
-			{
-				case FormplotTypes.None:
-					return new EmptyPlot();
-				case FormplotTypes.Roundness:
-					return new RoundnessPlot();
-				case FormplotTypes.Flatness:
-					return new FlatnessPlot();
-				case FormplotTypes.CurveProfile:
-					return new CurveProfilePlot();
-				case FormplotTypes.Straightness:
-					return new StraightnessPlot();
-				case FormplotTypes.Cylindricity:
-					return new CylindricityPlot();
-				case FormplotTypes.Pitch:
-					return new PitchPlot();
-				case FormplotTypes.BorePattern:
-					return new BorePatternPlot();
-				case FormplotTypes.CircleInProfile:
-					return new CircleInProfilePlot();
-				default:
-					throw new ArgumentOutOfRangeException( nameof( type ), type, null );
-			}
+			FormplotExtensions.WriteTo( this, stream );
 		}
 
 		#endregion

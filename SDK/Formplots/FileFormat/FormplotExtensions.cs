@@ -25,7 +25,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Extension class to provide serialization of formplots.
 	/// </summary>
-	public static class FormplotExtensions
+	internal static class FormplotExtensions
 	{
 		#region methods
 
@@ -33,7 +33,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// Writes the data of the plot into the specified <paramref name="stream"/>.
 		/// </summary>
 		/// <exception cref="ArgumentNullException"></exception>
-		public static void WriteTo( this Formplot plot, Stream stream )
+		internal static void WriteTo( this Formplot plot, Stream stream )
 		{
 			if( stream == null )
 				throw new ArgumentNullException( nameof( stream ) );

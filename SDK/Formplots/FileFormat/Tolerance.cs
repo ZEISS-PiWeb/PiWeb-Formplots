@@ -179,7 +179,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 				if( toleranceType == ToleranceType.Circular )
 				{
-					radius = XmlConvert.ToDouble( reader.GetAttribute( "Radius" ) );
+					var radiusText = reader.GetAttribute( "Radius" );
+					if( !string.IsNullOrEmpty( radiusText ) )
+						radius = XmlConvert.ToDouble( radiusText );
 				}
 				else if( toleranceType == ToleranceType.Rectangular )
 				{

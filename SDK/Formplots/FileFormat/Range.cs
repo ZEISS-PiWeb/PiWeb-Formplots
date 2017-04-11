@@ -95,7 +95,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// Tries to parse a <see cref="Range"/> instance from a <see cref="string"/>.
 		/// <remarks>In case <paramref name="rangeString"/> doesn't define a valid range. an empty <see cref="Range"/> instance is returned.</remarks>
 		/// </summary>
-		public static Range TryParseOrNull( string rangeString )
+		internal static Range TryParseOrNull( string rangeString )
 		{
 			if( !string.IsNullOrWhiteSpace( rangeString ) )
 			{

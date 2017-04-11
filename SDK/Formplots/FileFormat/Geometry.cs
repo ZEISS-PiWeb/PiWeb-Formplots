@@ -47,7 +47,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Creates a geometry of the specified geometry type.
 		/// </summary>
-		public static Geometry Create( GeometryTypes geometryType )
+		internal static Geometry Create( GeometryTypes geometryType )
 		{
 			switch( geometryType )
 			{
@@ -109,7 +109,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="geometryType">Type of the geometry.</param>
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentNullException"></exception>
-		public static Geometry DeserializeGeometry( XmlReader reader, GeometryTypes geometryType )
+		internal static Geometry DeserializeGeometry( XmlReader reader, GeometryTypes geometryType )
 		{
 			if( reader == null )
 			{

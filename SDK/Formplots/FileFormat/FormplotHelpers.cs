@@ -36,13 +36,13 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 		#region members
 
-		private static Lazy<HashSet<string>> _UpgradeResourceNamesLazy = new Lazy<HashSet<string>>( () => new HashSet<string>( typeof( Formplot ).Assembly.GetManifestResourceNames().Where( s => s.StartsWith( typeof( Formplot ).Namespace + ".Compatibility.", StringComparison.OrdinalIgnoreCase ) && s.EndsWith( ".xsl", StringComparison.OrdinalIgnoreCase ) ) ) );
+		private static readonly Lazy<HashSet<string>> UpgradeResourceNamesLazy = new Lazy<HashSet<string>>( () => new HashSet<string>( typeof( Formplot ).Assembly.GetManifestResourceNames().Where( s => s.StartsWith( typeof( Formplot ).Namespace + ".Compatibility.", StringComparison.OrdinalIgnoreCase ) && s.EndsWith( ".xsl", StringComparison.OrdinalIgnoreCase ) ) ) );
 
 		#endregion
 
 		#region properties
 
-		private static HashSet<string> UpgradeResourceNames => _UpgradeResourceNamesLazy.Value;
+		private static HashSet<string> UpgradeResourceNames => UpgradeResourceNamesLazy.Value;
 
 		#endregion
 
@@ -62,20 +62,19 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			}
 		}
 
-		public static Formplot ReadFrom( Stream stream )
+		internal static Formplot ReadFrom( Stream stream )
 		{
 			if( stream == null )
 			{
 				throw new ArgumentNullException( nameof( stream ) );
 			}
 
-			Version version = null;
-
 			using( var zipFile = new ZipArchive( stream, ZipArchiveMode.Read ) )
 			using( var metadataStream = new MemoryStream() )
 			{
 				var fileVersionEntry = zipFile.GetEntry( "fileversion.txt" );
 
+				Version version;
 				if( fileVersionEntry != null )
 				{
 					using( var inputStream = fileVersionEntry.Open() )
@@ -98,7 +97,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 					using( var inputStream = headerEntry.Open() )
 					{
-						// Ok, so here is the problem: Calypso writes broken XML files which end on ascii zero bytes. The XML loader used in GetFormplotType() does not like this.
+						// Ok, so here is the problem: Some applications writes broken XML files which end on ascii zero bytes. The XML loader used in GetFormplotType() does not like this.
 						// We need to cut of trailling zeros. However, we cannot do this in little endian UTF-16 encoded files (the last zero would be part of the '>' character).
 						// So we compare the first few bytes of the XML header to what Calypso would write to make sure it is not UTF-16.
 						var content = ReadFully( inputStream );
@@ -115,8 +114,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 					string upgradeResourceName = typeof( Formplot ).Namespace + ".Compatibility." + plotType + "_" + version.ToString( 2 ) + ".xsl";
 
-					if( version != targetVersion &&
-					    !UpgradeResourceNames.Contains( upgradeResourceName ) )
+					if( version != targetVersion && !UpgradeResourceNames.Contains( upgradeResourceName ) )
 					{
 						throw new NotSupportedException( "formplot upgrade resource is missing" );
 					}
@@ -134,10 +132,16 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 						var transform = new XslCompiledTransform();
 
 						using( var transformInputStream = typeof( Formplot ).Assembly.GetManifestResourceStream( upgradeResourceName ) )
-						using( var reader = XmlReader.Create( transformInputStream, settings ) )
 						{
-							transform.Load( reader );
+							if (transformInputStream == null)
+								throw new NotSupportedException( "couldn't load upgrade resource" );
+
+							using( var reader = XmlReader.Create( transformInputStream, settings ) )
+							{
+								transform.Load( reader );
+							}
 						}
+						
 
 						using( var reader = XmlReader.Create( metadataStream, settings ) )
 						using( var newMetadataStream = new MemoryStream { Capacity = metadataStream.Capacity } )
@@ -314,8 +318,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 			return result.ToArray();
 		}
-
-
+		
 		private static bool IsTruncationSafe( byte[] content )
 		{
 			// check if first few bytes correspond to ascii "<?xml"
@@ -337,7 +340,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			var pos = stream.Position;
 
 			var xdoc = XDocument.Load( stream );
-			if( xdoc.Root.Name.LocalName == FormplotRootTag && xdoc.Root.HasAttributes )
+			if( xdoc.Root != null && xdoc.Root.Name.LocalName == FormplotRootTag && xdoc.Root.HasAttributes )
 			{
 				var attr = xdoc.Root.Attribute( XName.Get( "Type" ) );
 				if( attr != null )
@@ -386,7 +389,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			var tolerance = default ( Tolerance );
 			var defaultErrorScaling = default ( double? );
 			var projectionAxis = ProjectionAxis.None;
-			var geometryType = GeometryTypes.None;
 			var nominal = default ( Geometry );
 			var actual = default ( Geometry );
 			var points = default ( Point[] );
@@ -421,6 +423,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 						break;
 					case "Geometry":
 						var geometryString = metaDataReader.GetAttribute( "Type" );
+						GeometryTypes geometryType;
 						if( EnumParser<GeometryTypes>.TryParse( geometryString, out geometryType ) )
 						{
 							if( geometryType != Geometry.GetGeometryTypeFromFormplotType( formplotType ) )
@@ -453,7 +456,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				}
 			}
 
-			var plot = Formplot.Create( formplotType );
+			var plot = CreateFormplot( formplotType );
 
 			plot.CreatorSoftware = creatorSoftware;
 			plot.CreatorSoftwareVersion = creatorSoftwareVersion;
@@ -466,6 +469,38 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			plot.Points = points;
 
 			return plot;
+		}
+
+		/// <summary>
+		/// Creates a formplot with the specified type.
+		/// </summary>
+		/// <param name="type">The formplot type.</param>
+		/// <returns></returns>
+		private static Formplot CreateFormplot( FormplotTypes type )
+		{
+			switch( type )
+			{
+				case FormplotTypes.None:
+					return new EmptyPlot();
+				case FormplotTypes.Roundness:
+					return new RoundnessPlot();
+				case FormplotTypes.Flatness:
+					return new FlatnessPlot();
+				case FormplotTypes.CurveProfile:
+					return new CurveProfilePlot();
+				case FormplotTypes.Straightness:
+					return new StraightnessPlot();
+				case FormplotTypes.Cylindricity:
+					return new CylindricityPlot();
+				case FormplotTypes.Pitch:
+					return new PitchPlot();
+				case FormplotTypes.BorePattern:
+					return new BorePatternPlot();
+				case FormplotTypes.CircleInProfile:
+					return new CircleInProfilePlot();
+				default:
+					throw new ArgumentOutOfRangeException( nameof( type ), type, null );
+			}
 		}
 
 		#endregion

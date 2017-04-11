@@ -220,7 +220,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		/// <param name="writer">The writer.</param>
 		/// <exception cref="System.ArgumentNullException">writer</exception>
-		public void Serialize( XmlWriter writer )
+		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
 				throw new ArgumentNullException( nameof( writer ) );
@@ -245,7 +245,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <returns></returns>
 		/// <exception cref="System.ArgumentNullException">reader</exception>
 		/// <exception cref="System.NotSupportedException"></exception>
-		public static Property Deserialize( XmlReader reader )
+		internal static Property Deserialize( XmlReader reader )
 		{
 			if( reader == null )
 				throw new ArgumentNullException( nameof( reader ) );

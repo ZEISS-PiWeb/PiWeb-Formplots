@@ -110,7 +110,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Returns a point for a specified formplot type.
 		/// </summary>
-		public static Point Create( FormplotTypes formplotType )
+		internal static Point Create( FormplotTypes formplotType )
 		{
 			switch( formplotType )
 			{
