@@ -1,12 +1,20 @@
-[preview]: gfx/preview/curve.png "Curve plot"
+[preview]: gfx/LineProfile.png "Curve plot"
 
-### Curve plot
+### Line profile plot
 
 ![curve plot][preview]
 
 #### Description
 
-The curve plot is a two dimensional presentation of custom curves and shapes with single measurement points or scanned measurement data. The points of segments are displayed as a connected line.
+The curve plot is a two dimensional presentation of custom curves and shapes with single measurement points or scanned measurement data.
+
+#### Point structure
+
+* Position (3D)
+* Direction (3D)
+* Deviation
+
+While the points are specified as three dimensional entities, the plot displays them in a two dimensional projection plane. The plane is either selected automatically, or specified in the PiWeb Designer.
 
 #### Example
 
@@ -22,7 +30,7 @@ var lastPosition = new Vector();
 for( var i = 0; i < count; i++ )
 {
 	var angle = ( double ) i / count * 2.0 * Math.PI;
-	
+
 	var deviation = 0.025 + 0.05 * rand.NextDouble();
 
 	var x = angle;

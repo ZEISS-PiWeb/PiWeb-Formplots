@@ -57,17 +57,17 @@ Following _element types_ with their respective _formplot types_ are supported b
 
 |  |Element type | Formplot type |
 |---|------------- |-------------|
-| ![][axiality]| [Axiality](#axiality) | `Cylindricity` |
-| ![][circleinprofile]| [Circle in profile](#circleinprofile) | `CircleInProfile` |  
-| ![][cylindricity]| [Cylindricity](#cylindricity) |  `Cylindricity` |
-| ![][flatness]| [Flatness](#flatness) |  `Flatness` |
-| ![][generatrix]| [Generatrix](#generatrix) |  `Cylindricity` |
-| ![][lineprofile]| [Line profile](Curve.md) |  `CurveProfile` |
-| ![][pattern]| [Pattern](#pattern) |  `BorePattern` |
-| ![][pitch]| [Pitch](#pitch) |  `Pitch` |
-| ![][roughness]| [Roughness](#roughness) |  `Straightness` |
-| ![][roundness]| [Roundness](#roundness) |  `Roundness` |
-| ![][straightness]| [Straightness](#straightness) |  `Straightness` |
+| ![][axiality]| [Axiality](Plots/Axiality.md) | `Cylindricity` |
+| ![][circleinprofile]| [Circle in profile](Plots/CircleInProfile.md) | `CircleInProfile` |  
+| ![][cylindricity]| [Cylindricity](Plots/Cylindricity.md) |  `Cylindricity` |
+| ![][flatness]| [Plane](/Plots/Plane.md) |  `Flatness` |
+| ![][generatrix]| [Generatrix](Plots/Generatrix.md) |  `Cylindricity` |
+| ![][lineprofile]| [Line profile](Plots/LineProfile.md) |  `CurveProfile` |
+| ![][pattern]| [Pattern](Plots/Pattern.md) |  `BorePattern` |
+| ![][pitch]| [Pitch](Plots/Pitch.md) |  `Pitch` |
+| ![][roughness]| [Roughness](Plots/Line.md) |  `Straightness` |
+| ![][roundness]| [Roundness](Plots/Circle.md) |  `Roundness` |
+| ![][straightness]| [Straightness](Plots/Line.md) |  `Straightness` |
 
 ## Basic Usage
 
