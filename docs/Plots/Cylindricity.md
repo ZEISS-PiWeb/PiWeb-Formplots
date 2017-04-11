@@ -14,7 +14,7 @@ The cylindricity plot displays deviations on a cylinder, usually a helix or circ
 * Height
 * Deviation (from circle)
 
-The points should use `Helix` or `Circle` as their segment type. Please not that the plot won't display the points in case they are located on a single height. If they are specified like this on purpose, use the [circle plot](Circle.md) instead.
+The points should use `Helix` or `Circle` as their segment type. Please note that the plot won't display the points in case they are all located on the same height. If they are specified like this on purpose, use the [circle plot](Circle.md) instead.
 
 #### Geometry
 
