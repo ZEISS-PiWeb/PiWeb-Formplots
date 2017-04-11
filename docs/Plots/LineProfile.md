@@ -2,11 +2,11 @@
 
 ### Line profile plot
 
-![curve plot][preview]
+![line profile plot][preview]
 
 #### Description
 
-The curve plot is a two dimensional presentation of custom curves and shapes with single measurement points or scanned measurement data.
+The line profile plot is a two dimensional presentation of custom curves and shapes with single measurement points or scanned measurement data.
 
 #### Point structure
 

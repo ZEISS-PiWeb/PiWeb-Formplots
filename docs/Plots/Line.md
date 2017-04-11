@@ -6,7 +6,7 @@
 
 #### Description
 
-The line plot displays deviations from a straight line in both positive and negative direction.
+The line plot displays deviations from a straight line in both positive and negative direction. The line plot data can also be displayed as roughness plot.
 
 #### Points
 
@@ -18,7 +18,7 @@ The positions don't have to be equidistant like in the example.
 
 #### Geometry
 
-The plot axis can be modified with the _actual_ geometry parameters `Length` and `Position`. The `Length` parameter will be multiplied to the points position range to determine the value range of the plot, while the `Position` parameter is added as an offset. The plots `ProjectionAxis` determines, which coordinate of the `Position` is used as offset. 
+The plot axis can be modified with the _actual_ geometry parameters `Length` and `Position`. The `Length` parameter will be multiplied to the points position range to determine the value range of the plot, while the `Position` parameter is added as an offset. The plots `ProjectionAxis` determines, which coordinate of the `Position` is used as offset.
 
 #### Example
 
