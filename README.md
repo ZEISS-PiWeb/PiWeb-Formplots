@@ -53,8 +53,6 @@ Or compile the library by yourself. Requirements:
 
 Following _element types_ with their respective _formplot types_ are supported by the library:
 
-
-
 |  |Element type | Formplot type |
 |---|------------- |-------------|
 | ![][axiality]| [Axiality](docs/Plots/Axiality.md) | `Cylindricity` |
@@ -94,4 +92,4 @@ plot.WriteTo( outputStream );
 
 ## Learn more
 
->Create a documentation here
+>Follow the links in the [features section](#features) for detailed plot descriptions.
