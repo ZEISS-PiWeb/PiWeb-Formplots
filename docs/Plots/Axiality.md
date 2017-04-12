@@ -1,3 +1,4 @@
+
 [preview]: gfx/Axiality.png "Axiality plot"
 
 ### Axiality plot
@@ -18,7 +19,7 @@ The points should use `Axis` as their segment type.
 
 #### Geometry
 
-The plot can display a height axis. The range of the axis is determined by multiplying the points height range with the actual geometries height. The other geometry parameters are currently unused.
+The plot can display a height axis. The range of the axis is determined by multiplying the points height range with the _actual_ geometries `Height` parameter. The other geometry parameters are currently unused.
 
 #### Example
 
@@ -50,3 +51,4 @@ plot.Points = points;
 
 * The points may not be located in a single X-Y plane (share one height)
 * The points may have different angles, the plot can rotate them back into one plane if needed.
+<br></br>
