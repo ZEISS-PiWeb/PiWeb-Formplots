@@ -1,6 +1,6 @@
-<br/>
-[preview]: gfx/Axiality.png "Axiality plot"
 
+[preview]: gfx/Axiality.png "Axiality plot"
+<br/>
 ### Axiality plot
 
 ![curve plot][preview]
