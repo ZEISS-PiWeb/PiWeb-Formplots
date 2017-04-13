@@ -1,5 +1,5 @@
 [preview]: gfx/Pattern.png "Pattern plot"
-
+<br/>
 ### Pattern plot
 
 ![pattern plot][preview]
@@ -44,3 +44,5 @@ plot.Tolerance = new Tolerance
 plot.DefaultErrorScaling = 100;
 plot.Points = points;
 ```
+<br/>
+<br/>

@@ -1,5 +1,5 @@
 [preview]: gfx/Line.png "Line plot"
-
+<br/>
 ### Line plot
 
 ![line plot][preview]
@@ -52,3 +52,5 @@ plot.Points = points;
 #### Remarks
 
 * While the plot might have resemblance with a mathematical function plotter, PiWeb assumes that the deviations are much smaller than the position. The error scaling can't be smaller than 1.0.
+<br/>
+<br/>

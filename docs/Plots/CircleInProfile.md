@@ -1,5 +1,5 @@
 [preview]: gfx/CircleInProfile.png "Circle-in-profile plot"
-
+<br/>
 ### Circle-in-profile plot
 
 ![Circle in profile plot][preview]
@@ -73,3 +73,5 @@ plot.Tolerance = new Tolerance( 0.1 );
 plot.DefaultErrorScaling = 250;
 plot.Points = points;
 ```
+<br/>
+<br/>

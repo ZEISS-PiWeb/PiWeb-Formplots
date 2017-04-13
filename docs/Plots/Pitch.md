@@ -1,5 +1,5 @@
 [preview]: gfx/Pitch.png "Pitch plot"
-
+<br/>
 ### Pitch plot
 
 ![pitch plot][preview]
@@ -37,3 +37,5 @@ plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
 plot.Points = points;
 ```
+<br/>
+<br/>

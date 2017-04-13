@@ -1,5 +1,5 @@
 [preview]: gfx/Circle.png "Circle plot"
-
+<br/>
 ### Circle plot
 
 ![Circle plot][preview]
@@ -45,3 +45,5 @@ plot.Points = points;
 #### Remarks
 
 * The plot points are connected in the order of their appearance, and _not_ sorted by their angle.
+<br/>
+<br/>

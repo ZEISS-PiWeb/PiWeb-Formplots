@@ -1,5 +1,5 @@
 [preview]: gfx/Cylindricity.png "Cylindricity plot"
-
+<br/>
 ### Cylindricity plot
 
 ![cylindricity plot][preview]
@@ -51,3 +51,5 @@ plot.Points = points;
 
 * The points may not be located in a single X-Y plane (share one height)
 * When displaying multiple circles on different heights, use a different segment for every circle, to avoid the lines beeing connected.
+<br/>
+<br/>

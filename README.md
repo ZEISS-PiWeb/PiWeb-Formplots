@@ -11,7 +11,7 @@
 [roughness]: docs/gfx/32px/RoughnessplotElement.png "Roughness plot"
 [generatrix]: docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
 
-
+<br/>
 PiWeb formplot library
 =========
 
@@ -93,4 +93,6 @@ plot.WriteTo( outputStream );
 ## Learn more
 
 >Follow the links in the [features section](#features) for detailed plot descriptions.
->
+
+<br/>
+<br/>

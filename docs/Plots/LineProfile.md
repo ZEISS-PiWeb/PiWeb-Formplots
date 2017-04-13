@@ -1,5 +1,5 @@
 [preview]: gfx/LineProfile.png "Curve plot"
-
+<br/>
 ### Line profile plot
 
 ![line profile plot][preview]
@@ -53,3 +53,5 @@ plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
 plot.Points = points;
 ```
+<br/>
+<br/>

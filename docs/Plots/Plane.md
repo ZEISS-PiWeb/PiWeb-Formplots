@@ -1,5 +1,5 @@
 [preview]: gfx/Plane.png "Plane plot"
-
+<br/>
 ### Plane plot
 
 ![plane plot][preview]
@@ -54,3 +54,5 @@ plot.Points = points;
 
 * Currently, the plot can't display tolerances.
 * The plot points must not lay in one line.
+<br/>
+<br/>

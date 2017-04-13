@@ -1,5 +1,5 @@
 [preview]: gfx/Generatrix.png "Generatrix plot"
-
+<br/>
 ### Generatrix plot
 
 ![Generatrix plot][preview]
@@ -55,3 +55,5 @@ plot.Points = points;
 
 * The points may not be located in a single X-Y plane (share one height)
 * The points of a segment may have different angles, the plot will rotate them back into one plane.
+<br/>
+<br/>
