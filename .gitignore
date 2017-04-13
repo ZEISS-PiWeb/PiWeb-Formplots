@@ -1,3 +1,4 @@
 *.suo
 *.dll
 *.xml
+/SDK/Formplots/*.user

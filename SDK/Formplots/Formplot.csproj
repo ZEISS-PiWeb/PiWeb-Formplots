@@ -20,7 +20,8 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>    
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -29,11 +30,18 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>    
+    <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\PiWeb.Formplot.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Zeiss.IMT.PiWeb.Formplot</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Formplot.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -43,7 +51,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>    
+  <ItemGroup>
     <Compile Include="Common\EnumParser.cs" />
     <Compile Include="FileFormat\EmptyPlot.cs" />
     <Compile Include="FileFormat\FormplotExtensions.cs" />
@@ -117,9 +125,7 @@
     <Content Include="License.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Diagrams\Formplot.cd" />
-    <None Include="Diagrams\Geometry.cd" />
-    <None Include="Diagrams\Point.cd" />
+    <None Include="Formplot.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
