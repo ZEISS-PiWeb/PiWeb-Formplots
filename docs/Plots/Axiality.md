@@ -49,8 +49,8 @@ plot.Points = points;
 
 #### Remarks
 
-The points may not be located at the same height.
-The points may have different angles, the plot can rotate them back into one plane if needed.
+* The points may not be located at the same height.
+* The points may have different angles, the plot can rotate them back into one plane if needed.
 
 <br/>
 <br/>
