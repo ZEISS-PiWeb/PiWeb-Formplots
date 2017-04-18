@@ -12,8 +12,7 @@
 [generatrix]: docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
 
 <br/>
-PiWeb formplot library
-=========
+# PiWeb formplot library
 
 ![alt text][logo]
 
