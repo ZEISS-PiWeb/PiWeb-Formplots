@@ -6,7 +6,7 @@
 
 #### Description
 
-The plane plot shows deviations on a plane in the planes normal direcion. The plane is usually displayed in an isometric perspective.
+The plane plot shows deviations on a plane in the planes normal direction. The plane is usually displayed in an isometric perspective.
 
 #### Point structure
 
