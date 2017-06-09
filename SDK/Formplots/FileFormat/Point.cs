@@ -102,6 +102,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return typeof( BorePatternPoint );
 				case FormplotTypes.CircleInProfile:
 					return typeof( CircleInProfilePoint );
+				case FormplotTypes.Fourier:
+					return typeof( FourierPoint );
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}
@@ -130,6 +132,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new BorePatternPoint();
 				case FormplotTypes.CircleInProfile:
 					return new CircleInProfilePoint();
+				case FormplotTypes.Fourier:
+					return new FourierPoint();
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}

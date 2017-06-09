@@ -473,7 +473,43 @@ namespace Zeiss.IMT.NGPS.Serialization
 		}
 
 		[Test]
-		public void Test10_FormplotFiles()
+		public void Test09_FourierFormplot()
+		{
+			var points = new ReadOnlyList<FourierPoint>( new[]
+			{
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 0, 0.1 ) { Tolerance = new Tolerance( null, 0.25 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 1, 0.095 ) { Tolerance = new Tolerance( null, 0.1 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 2, 0.081 ) { Tolerance = new Tolerance( null, 0.09 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 3, 0.079 ) { Tolerance = new Tolerance( null, 0.08 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 4, 0.075 ) { Tolerance = new Tolerance( null, 0.075 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 5, 0.71 ) { Tolerance = new Tolerance( null, 0.07 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 6, 0.06 ) { Tolerance = new Tolerance( null, 0.065 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 7, 0.057 ) { Tolerance = new Tolerance( null, 0.05 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 8, 0.048 ) { Tolerance = new Tolerance( null, 0.042 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 9, 0.042 ) { Tolerance = new Tolerance( null, 0.038 ) },
+				new FourierPoint( new Segment( "Fourier", SegmentTypes.None ), 10, 0.021 ) { Tolerance = new Tolerance( null, 0.025 ) }
+			} );
+
+			var plot = new FourierPlot
+			{
+				Properties = new[]
+				{
+					Property.Create( "BeliebigerName", "Beliebiger Text" ),
+					Property.Create( "BeliebigerIntegerWert", 42 ),
+					Property.Create( "BeliebigesDatum", new DateTime( 2012, 12, 21, 12, 02, 22, 123, CultureInfo.CurrentCulture.Calendar, DateTimeKind.Local ) ),
+					Property.Create( "BeliebigeZeitspanne", TimeSpan.FromTicks( 162351234 ) ),
+					Property.Create( "BeliebigerDoubleWert", Math.PI )
+				},
+				DefaultErrorScaling = Math.PI,
+				Tolerance = new Tolerance( null, 0.5 ),
+				Points = points,
+			};
+
+			TestPlot( plot );
+		}
+
+		[Test]
+		public void Test11_FormplotFiles()
 		{
 			var formplotFiles = Directory.GetFiles( GlobalSetup.SharedFiles, "*" + MimeTypes.FormplotFileExtension, SearchOption.AllDirectories )
 				.Concat( Directory.GetFiles( GlobalSetup.PiWebData, "*" + MimeTypes.FormplotFileExtension, SearchOption.AllDirectories ) );

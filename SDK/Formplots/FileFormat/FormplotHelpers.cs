@@ -498,6 +498,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new BorePatternPlot();
 				case FormplotTypes.CircleInProfile:
 					return new CircleInProfilePlot();
+				case FormplotTypes.Fourier:
+					return new FourierPlot();
 				default:
 					throw new ArgumentOutOfRangeException( nameof( type ), type, null );
 			}

@@ -55,6 +55,8 @@
     <Compile Include="Common\EnumParser.cs" />
     <Compile Include="FileFormat\EmptyPlot.cs" />
     <Compile Include="FileFormat\FormplotExtensions.cs" />
+    <Compile Include="FileFormat\FourierPlot.cs" />
+    <Compile Include="FileFormat\FourierPoint.cs" />
     <Compile Include="FileFormat\PitchPlot.cs" />
     <Compile Include="FileFormat\RoundnessPlot.cs" />
     <Compile Include="FileFormat\FlatnessPlot.cs" />
@@ -120,6 +122,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileFormat\Compatibility\Straightness_1.0.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileFormat\Compatibility\Fourier_1.0.xsl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="License.txt" />

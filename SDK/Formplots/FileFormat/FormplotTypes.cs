@@ -48,7 +48,11 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// CircleInProfile
 		/// </summary>
-		CircleInProfile
+		CircleInProfile,
+		/// <summary>
+		/// Fourier
+		/// </summary>
+		Fourier
 
 	}
 }
