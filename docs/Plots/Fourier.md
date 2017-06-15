@@ -35,5 +35,8 @@ for( uint harmonic = 1; harmonic <= count; harmonic++ )
 
 plot.Points = points;
 ```
+#### Remarks
+* Be aware that the harmonic is stored as an unsigned integer value in network byte order (big endian) and its value must be greater than 0
+* The amplitudes must be greater or equal to 0 
 <br/>
 <br/>
