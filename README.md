@@ -59,12 +59,12 @@ Following _element types_ with their respective _formplot types_ are supported b
 | ![][axiality]| [Axiality](docs/Plots/Axiality.md) | `Cylindricity` |
 | ![][circleinprofile]| [Circle in profile](docs/Plots/CircleInProfile.md) | `CircleInProfile` |  
 | ![][cylindricity]| [Cylindricity](docs/Plots/Cylindricity.md) |  `Cylindricity` |
-| ![][flatness]| [Plane](docs/Plots/Plane.md) |  `Flatness` |
 | ![][fourier]| [Fourier](docs/Plots/Fourier.md) |  `Fourier` |
 | ![][generatrix]| [Generatrix](docs/Plots/Generatrix.md) |  `Cylindricity` |
 | ![][lineprofile]| [Line profile](docs/Plots/LineProfile.md) |  `CurveProfile` |
 | ![][pattern]| [Pattern](docs/Plots/Pattern.md) |  `BorePattern` |
 | ![][pitch]| [Pitch](docs/Plots/Pitch.md) |  `Pitch` |
+| ![][flatness]| [Plane](docs/Plots/Plane.md) |  `Flatness` |
 | ![][roughness]| [Roughness](docs/Plots/Line.md) |  `Straightness` |
 | ![][roundness]| [Roundness](docs/Plots/Circle.md) |  `Roundness` |
 | ![][straightness]| [Straightness](docs/Plots/Line.md) |  `Straightness` |
