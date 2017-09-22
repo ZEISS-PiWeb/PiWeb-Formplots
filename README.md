@@ -14,7 +14,7 @@
 
 <br/>
 
-## PiWeb formplot library
+## PiWeb Formplot Library
 
 ![alt text][logo]
 
