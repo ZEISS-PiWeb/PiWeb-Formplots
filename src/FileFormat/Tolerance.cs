@@ -1,4 +1,4 @@
-#region copyright
+﻿#region copyright
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss IMT (IZfM Dresden)                   */
@@ -289,7 +289,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				return "Empty";
 
 			if( IsSymmetric )
-				return string.Format( CultureInfo.InvariantCulture, "�{0}", Upper );
+				return string.Format( CultureInfo.InvariantCulture, "±{0}", Upper );
 
 			if( ToleranceType == ToleranceType.Default )
 				return string.Format( CultureInfo.InvariantCulture, "{0}, {1}", Lower, Upper );
