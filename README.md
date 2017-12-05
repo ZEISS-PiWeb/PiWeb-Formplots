@@ -23,9 +23,9 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [Features](#features)
 - [Basic Usage](#basic-usage)
-- [Manual](#learn-more)
+- [Manual](#manual)
+-- [Formplot types](#formplot-types)
 
 ## Introduction
 
