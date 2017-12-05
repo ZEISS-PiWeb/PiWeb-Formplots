@@ -25,7 +25,9 @@
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
 - [Manual](#manual)
--- [Formplot types](#formplot-types)
+	- [Formplot types](#formplot-types)
+	- [Properties](#properties)
+	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
 
 ## Introduction
 
