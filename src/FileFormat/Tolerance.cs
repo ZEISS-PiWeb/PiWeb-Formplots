@@ -196,7 +196,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			}
 			else
 			{
-				while( reader.Read() && reader.NodeType != XmlNodeType.EndElement && toleranceType == ToleranceType.Default )
+				while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
 				{
 					if( reader.NodeType == XmlNodeType.Text )
 					{

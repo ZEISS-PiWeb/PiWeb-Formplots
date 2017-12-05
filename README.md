@@ -25,7 +25,7 @@
 - [Installation](#installation)
 - [Features](#features)
 - [Basic Usage](#basic-usage)
-- [Learn more](#learn-more)
+- [Manual](#learn-more)
 
 ## Introduction
 
@@ -50,26 +50,6 @@ Or compile the library by yourself. Requirements:
 * Microsoft Visual Studio 2015
 * Microsoft .NET Framework v4.5
 
-## Features
-
-Following _element types_ with their respective _formplot types_ are supported by the library:
-
-|  |Element type | Formplot type |
-|---|------------- |-------------|
-| ![][axiality]| [Axiality](docs/Plots/Axiality.md) | `Cylindricity` |
-| ![][circleinprofile]| [Circle in profile](docs/Plots/CircleInProfile.md) | `CircleInProfile` |  
-| ![][cylindricity]| [Cylindricity](docs/Plots/Cylindricity.md) |  `Cylindricity` |
-| ![][fourier]| [Fourier](docs/Plots/Fourier.md) |  `Fourier` |
-| ![][generatrix]| [Generatrix](docs/Plots/Generatrix.md) |  `Cylindricity` |
-| ![][lineprofile]| [Line profile](docs/Plots/LineProfile.md) |  `CurveProfile` |
-| ![][pattern]| [Pattern](docs/Plots/Pattern.md) |  `BorePattern` |
-| ![][pitch]| [Pitch](docs/Plots/Pitch.md) |  `Pitch` |
-| ![][flatness]| [Plane](docs/Plots/Plane.md) |  `Flatness` |
-| ![][roughness]| [Roughness](docs/Plots/Line.md) |  `Straightness` |
-| ![][roundness]| [Roundness](docs/Plots/Circle.md) |  `Roundness` |
-| ![][straightness]| [Straightness](docs/Plots/Line.md) |  `Straightness` |
-
-
 ## Basic Usage
 
 1. Create a plot of the desired plot type and a list of plot points
@@ -93,9 +73,77 @@ plot.Points = points;
 plot.WriteTo( outputStream );
 ```
 
-## Learn more
+## Manual
 
->Follow the links in the [features section](#features) for detailed plot descriptions.
+### Formplot types
+
+Following _element types_ with their respective _formplot types_ are supported by the library. Please use the links in the table for detailed information about certain plot types:
+
+|  |Element type | Formplot type |
+|---|------------- |-------------|
+| ![][axiality]| [Axiality](docs/Plots/Axiality.md) | `Cylindricity` |
+| ![][circleinprofile]| [Circle in profile](docs/Plots/CircleInProfile.md) | `CircleInProfile` |  
+| ![][cylindricity]| [Cylindricity](docs/Plots/Cylindricity.md) |  `Cylindricity` |
+| ![][fourier]| [Fourier](docs/Plots/Fourier.md) |  `Fourier` |
+| ![][generatrix]| [Generatrix](docs/Plots/Generatrix.md) |  `Cylindricity` |
+| ![][lineprofile]| [Line profile](docs/Plots/LineProfile.md) |  `CurveProfile` |
+| ![][pattern]| [Pattern](docs/Plots/Pattern.md) |  `BorePattern` |
+| ![][pitch]| [Pitch](docs/Plots/Pitch.md) |  `Pitch` |
+| ![][flatness]| [Plane](docs/Plots/Plane.md) |  `Flatness` |
+| ![][roughness]| [Roughness](docs/Plots/Line.md) |  `Straightness` |
+| ![][roundness]| [Roundness](docs/Plots/Circle.md) |  `Roundness` |
+| ![][straightness]| [Straightness](docs/Plots/Line.md) |  `Straightness` |
+
+### Properties
+
+Formplots may contain additional properties that are accessible by PiWeb. You can add properties to your plot like the following:
+
+```csharp
+plot.Properties.Add( Property.Create( "myPropertyKey", "myPropertyValue", "propertyDescription" ) );
+```
+The available datatypes are `string`, `long`, `double`, `DateTime` and `TimeSpan`. The description is optional.
+You can access the properties in PiWeb by using the following expression. 
+
+```csharp
+${Qdb.Property("My property")}
+```
+
+> The element must have its databinding set to the measurement value containing the formplot.
+
+### Writing plots into PiWeb
+
+You can either upload formplot files manually by using the PiWeb Planner, or by using the PiWeb API like the following:
+
+```csharp
+public static async Task WriteToDatabase( 
+	Formplot plot, 
+	RawDataServiceRestClient rawClient, 
+	Guid measurementUuid, 
+	Guid characteristicUuid )
+{
+	using( var stream = new MemoryStream() )
+	{
+		plot.WriteTo( stream );
+		var data = stream.ToArray();
+
+		var target = RawDataTargetEntity.CreateForValue( measurementUuid, characteristicUuid );
+
+		await rawClient.CreateRawData( new RawDataInformation
+		{
+			FileName = "plot.pltx",								
+			MimeType = "application/x-zeiss-piweb-formplot",
+			Key = -1,
+			Created = DateTime.Now,
+			LastModified = DateTime.Now,
+			MD5 = new Guid( MD5.Create().ComputeHash( data ) ),
+			Size = data.Length,
+			Target = target
+		}, data );
+	}
+}
+```
+
+>Please note that, in any case, The file extension and the mimetype are *mandatory*. Files with other mimetypes or extensions will not be recognized as formplot data.
 
 <br/>
 <br/>
