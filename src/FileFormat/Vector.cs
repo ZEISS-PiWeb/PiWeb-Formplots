@@ -129,17 +129,14 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		private static bool Equals( Vector a, Vector b )
 		{
 			if( ReferenceEquals( a, b ) )
-			{
 				return true;
-			}
-			else if( a != null && b != null )
-			{
-				return Math.Abs( a.X - b.X ) < double.Epsilon &&
-				       Math.Abs( a.Y - b.Y ) < double.Epsilon &&
-				       Math.Abs( a.Z - b.Z ) < double.Epsilon;
-			}
-
-			return false;
+			
+			if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+				return false;
+			
+			return Math.Abs(a.X - b.X) < double.Epsilon &&
+					Math.Abs(a.Y - b.Y) < double.Epsilon &&
+					Math.Abs(a.Z - b.Z) < double.Epsilon;
 		}
 
 

@@ -85,7 +85,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				case FormplotTypes.Cylindricity: return GeometryTypes.Cylinder;
 				case FormplotTypes.Pitch: return GeometryTypes.None;
 				case FormplotTypes.BorePattern: return GeometryTypes.Curve;
-				case FormplotTypes.CircleInProfile: return GeometryTypes.CircleInProfile;
+				case FormplotTypes.CircleInProfile: return GeometryTypes.CircleInProfile;				
+				case FormplotTypes.Defect: return GeometryTypes.None;
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}

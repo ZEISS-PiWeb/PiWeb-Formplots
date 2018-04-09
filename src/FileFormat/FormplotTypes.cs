@@ -52,7 +52,11 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Fourier
 		/// </summary>
-		Fourier
+		Fourier,
 
+		/// <summary>
+		/// Defect plot data
+		/// </summary>
+		Defect,
 	}
 }

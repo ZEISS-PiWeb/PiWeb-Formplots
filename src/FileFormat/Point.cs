@@ -104,6 +104,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return typeof( CircleInProfilePoint );
 				case FormplotTypes.Fourier:
 					return typeof( FourierPoint );
+				case FormplotTypes.Defect:
+					return typeof(Defect);
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}
@@ -134,6 +136,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new CircleInProfilePoint();
 				case FormplotTypes.Fourier:
 					return new FourierPoint();
+				case FormplotTypes.Defect:
+					return new Defect();
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}

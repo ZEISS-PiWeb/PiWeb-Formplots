@@ -500,6 +500,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new CircleInProfilePlot();
 				case FormplotTypes.Fourier:
 					return new FourierPlot();
+				case FormplotTypes.Defect:
+					return new DefectPlot();
 				default:
 					throw new ArgumentOutOfRangeException( nameof( type ), type, null );
 			}

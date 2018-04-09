@@ -26,6 +26,11 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Rectangular tolerance.
 		/// </summary>
-		Rectangular
+		Rectangular,
+
+		/// <summary>
+		/// Thee dimensional tolerance
+		/// </summary>
+		Spatial
 	}
 }

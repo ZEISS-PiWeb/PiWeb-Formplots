@@ -153,7 +153,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			{
 				return true;
 			}
-			else if( rangeA != null & rangeB != null )
+			else if( rangeA != null && rangeB != null )
 			{
 				return Equals( rangeA._Start, rangeB._Start ) &&
 				       Equals( rangeA._End, rangeB._End );

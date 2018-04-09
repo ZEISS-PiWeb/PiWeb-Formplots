@@ -95,6 +95,10 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public double? RectangleToleranceHeight { get; set; }
 
+		/// <summary>
+		/// Gets or sets the spatial tolerance.
+		/// </summary>
+		public Vector SpatialTolerance { get; set; }
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="Tolerance"/> instance has a appropriate values or not.
@@ -109,6 +113,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 						return !CircularToleranceRadius.HasValue;
 					case ToleranceType.Rectangular:
 						return !RectangleToleranceHeight.HasValue && !RectangleToleranceWidth.HasValue;
+					case ToleranceType.Spatial:
+						return SpatialTolerance != null;
 					default:
 						return !Lower.HasValue && !Upper.HasValue;
 				}
@@ -143,6 +149,17 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				if( RectangleToleranceWidth.HasValue )
 					writer.WriteAttributeString( "Width", XmlConvert.ToString( RectangleToleranceWidth.Value ) );
 			}
+			else if (ToleranceType == ToleranceType.Spatial)
+			{
+				writer.WriteAttributeString("Type", ToleranceType.ToString());
+
+				if( SpatialTolerance != null )
+				{
+					writer.WriteAttributeString("X", XmlConvert.ToString(SpatialTolerance.X));
+					writer.WriteAttributeString("Y", XmlConvert.ToString(SpatialTolerance.Y));
+					writer.WriteAttributeString("Z", XmlConvert.ToString(SpatialTolerance.Z));
+				}
+			}
 			else if( ToleranceType == ToleranceType.Default )
 			{
 				if( IsSymmetric )
@@ -172,8 +189,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			double? width = null;
 			double? lower = null;
 			double? upper = null;
+			Vector spatialTolerance = null;
 
-			if( !string.IsNullOrEmpty( toleranceTypeString ) )
+			if ( !string.IsNullOrEmpty( toleranceTypeString ) )
 			{
 				toleranceType = EnumParser<ToleranceType>.Parse( toleranceTypeString );
 
@@ -192,6 +210,26 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 						height = XmlConvert.ToDouble( rectangleHeightText );
 					if( !string.IsNullOrEmpty( rectangleWidthText ) )
 						width = XmlConvert.ToDouble( rectangleWidthText );
+				}
+				else if (toleranceType == ToleranceType.Spatial)
+				{
+					var xText = reader.GetAttribute("X");
+					var yText = reader.GetAttribute("Y");
+					var zText = reader.GetAttribute("Z");
+
+					double? x = null;
+					double? y = null;
+					double? z = null;
+
+					if (!string.IsNullOrEmpty(xText))
+						x = XmlConvert.ToDouble(xText);
+					if (!string.IsNullOrEmpty(yText))
+						y = XmlConvert.ToDouble(yText);
+					if (!string.IsNullOrEmpty(zText))
+						z= XmlConvert.ToDouble(zText);
+
+					if( x.HasValue && y.HasValue && z.HasValue )
+						spatialTolerance = new Vector( x.Value, y.Value, z.Value );
 				}
 			}
 			else
@@ -229,7 +267,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				ToleranceType = toleranceType,
 				CircularToleranceRadius = radius,
 				RectangleToleranceHeight = height,
-				RectangleToleranceWidth = width
+				RectangleToleranceWidth = width,
+				SpatialTolerance = spatialTolerance
 			};
 		}
 
@@ -299,6 +338,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 			if( ToleranceType == ToleranceType.Rectangular )
 				return string.Format( CultureInfo.InvariantCulture, "Rect {0}, {1}", RectangleToleranceWidth, RectangleToleranceHeight );
+
+			if (ToleranceType == ToleranceType.Spatial)
+				return string.Format(CultureInfo.InvariantCulture, "3D {0}, {1}, {2}", SpatialTolerance?.X, SpatialTolerance?.Y, SpatialTolerance?.Z);
 
 			return "";
 		}
