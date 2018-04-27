@@ -40,6 +40,10 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Circle in a profile
 		/// </summary>
-		CircleInProfile
+		CircleInProfile,
+		/// <summary>
+		/// Defect
+		/// </summary>
+		Defect,
 	}
 }

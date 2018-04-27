@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\EnumParser.cs" />
+    <Compile Include="FileFormat\DefectGeometry.cs" />
     <Compile Include="FileFormat\Defect.cs" />
     <Compile Include="FileFormat\DefectPlot.cs" />
     <Compile Include="FileFormat\EmptyPlot.cs" />

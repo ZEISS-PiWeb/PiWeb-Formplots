@@ -64,6 +64,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				case GeometryTypes.CircleInProfile:
 					return new CircleInProfileGeometry();
 
+				case GeometryTypes.Defect:
+					return new DefectGeometry();
 				default:
 					return null;
 			}
@@ -76,8 +78,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		{
 			switch( formplotType )
 			{
-				case FormplotTypes.None:
-				case FormplotTypes.Fourier: return GeometryTypes.None;
+				case FormplotTypes.None: return GeometryTypes.None;
 				case FormplotTypes.Roundness: return GeometryTypes.Circle;
 				case FormplotTypes.Flatness: return GeometryTypes.Plane;
 				case FormplotTypes.CurveProfile: return GeometryTypes.Curve;
@@ -86,7 +87,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				case FormplotTypes.Pitch: return GeometryTypes.None;
 				case FormplotTypes.BorePattern: return GeometryTypes.Curve;
 				case FormplotTypes.CircleInProfile: return GeometryTypes.CircleInProfile;				
-				case FormplotTypes.Defect: return GeometryTypes.None;
+				case FormplotTypes.Fourier: return GeometryTypes.None;			
+				case FormplotTypes.Defect: return GeometryTypes.Defect;
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );
 			}

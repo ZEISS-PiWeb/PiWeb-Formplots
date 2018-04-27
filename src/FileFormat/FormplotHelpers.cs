@@ -300,23 +300,92 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			{
 				var point = Point.Create( formplotType );
 				point.ReadFromStream( pointdataStream, index );
-
-				point.PropertyList = RangeList.GetKeysInRange( propertyLists, index );
-
-				var pointStates = RangeList.GetKeysInRange( statelists, index );
-
-				foreach( var pointState in pointStates )
-				{
-					point.State |= pointState;
-				}
-
-				point.Segment = RangeList.GetKeysInRange( segmentlists, index ).FirstOrDefault();
-				point.Tolerance = RangeList.GetKeysInRange( tolerancelists, index ).FirstOrDefault();
-
 				result.Add( point );
 			}
 
+			SetProperties( propertyLists, result );
+			SetStates( statelists, result );
+			SetSegment( segmentlists, result );
+			SetTolerance( tolerancelists, result );
 			return result.ToArray();
+		}
+		private static void SetProperties( Dictionary<Property, RangeList> propertyRangeLists, List<Point> points )
+		{
+			var propertyLists = new Dictionary<int, List<Property>>();
+
+			foreach (var propertyRange in propertyRangeLists)
+			{
+				var property = propertyRange.Key;
+				foreach (var range in propertyRange.Value)
+				{
+					for (var i = range.Start; i <= range.End; i++)
+					{
+						if( i < 0 || i >= points.Count )
+							throw new ArgumentOutOfRangeException( $"Invalid point index '{i}' on property '{property.Name}'" );
+						if (!propertyLists.TryGetValue(i, out var list))
+						{
+							list = new List<Property>();
+							propertyLists[i] = list;
+						}
+						list.Add(property);
+					}
+				}
+			}
+			foreach (var list in propertyLists)
+			{
+				points[ list.Key ].PropertyList = list.Value;
+			}
+		}
+		private static void SetStates(Dictionary<PointState, RangeList> stateRangeLists, List<Point> points)
+		{
+			foreach (var stateRange in stateRangeLists)
+			{
+				var state = stateRange.Key;
+				if (state == PointState.None)
+					continue;
+				foreach (var range in stateRange.Value)
+				{
+					for (var i = range.Start; i <= range.End; i++)
+					{
+						if (i < 0 || i >= points.Count)
+							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on state '{state}'");
+						points[i].State |= state;
+					}
+				}
+			}
+		}
+
+		private static void SetSegment(Dictionary<Segment, RangeList> segmentRangeLists, List<Point> points)
+		{
+			foreach (var segmentRange in segmentRangeLists)
+			{
+				var segment = segmentRange.Key;
+				foreach (var range in segmentRange.Value)
+				{
+					for (var i = range.Start; i <= range.End; i++)
+					{
+						if (i < 0 || i >= points.Count)
+							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on segment '{segment}'");
+						points[i].Segment = segment;
+					}
+				}
+			}
+		}
+		private static void SetTolerance(Dictionary<Tolerance, RangeList> toleranceRangeLists, List<Point> points)
+		{
+			foreach (var toleranceRange in toleranceRangeLists)
+			{
+				var tolerance = toleranceRange.Key;
+				foreach (var range in toleranceRange.Value)
+				{
+					for (var i = range.Start; i <= range.End; i++)
+					{
+						if (i < 0 || i >= points.Count)
+							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on tolerance '{tolerance}'");
+						points[i].Tolerance = tolerance;
+			}
+				}
+			}
 		}
 		
 		private static bool IsTruncationSafe( byte[] content )
