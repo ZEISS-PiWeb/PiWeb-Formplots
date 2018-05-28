@@ -11,11 +11,11 @@ The defect file format is used to transport information about one or more defect
 
 #### Point structure
 
-The format defines one point for every defect, which has a position and a size. Be aware, that the position refers to the corner of the defects bounding box, which has minimal values for every coordinate.
+The format defines one point for every defect, which has a `Position` and a `Size` parameter. Be aware, that the `Position` refers to the corner of the defects bounding box, which has closest to the point of origin.
 
 ![defect position](gfx/DefectPosition.png "Defect position")
 
-Besides the `Position` and `Size` parameters, every point contains an arbitrary number of voxels / pixels that define its shape. Be aware that both, the defect size and position als well as the voxel size and position must be either normalized to a range of [0..1] or you must specify the parameter `Size` on the **nominal** geometry.
+Besides the `Position` and `Size` parameters, every point contains an arbitrary number of `Voxels` that define its shape. Be aware that both, the defect `Size` and `Position` as well as the voxel `Size` and `Position` must be either normalized to a range of [0..1] **or** you must specify the parameter `Size` on the **nominal** geometry.
 
 * Position	
 * Size	
