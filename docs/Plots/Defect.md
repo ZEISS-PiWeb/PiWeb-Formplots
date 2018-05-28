@@ -39,41 +39,134 @@ public static Formplot Create( BitmapSource img )
 
 	plot.Nominal.Size = new Vector( img.PixelWidth, img.PixelHeight );
 
-	var data = new byte[img.PixelWidth * img.PixelHeight * 4];
+	var data = new byte[ img.PixelWidth * img.PixelHeight * 4 ];
 	img.CopyPixels( data, img.PixelWidth * 4, 0 );
 
-	var voxels = new List<Voxel>();
+	var done = new HashSet<int>();
 
 	for( var x = 0; x < img.PixelWidth; x++ )
 	{
 		for( var y = 0; y < img.PixelHeight; y++ )
 		{
-			var position = ( y * img.PixelWidth + x ) * 4;
-			var r = data[ position ];
-			var g = data[ position + 1 ];
-			var b = data[ position + 2 ];
-			var a = data[ position + 3 ];
+			var position = ( y * img.PixelWidth + x );
+			if( done.Contains( position ) )
+				continue;
 
-			//Let's say, everthing other than white is a defect
-			if( r != 255 || g != 255 || b != 255 || a != 255 )
-				voxels.Add( new Voxel( new Vector( x, y ), new Vector( 1, 1 ) ) );
+			if( IsDefect( position, data ) )
+				points.Add( DetectDefect( new Pixel( x, y ), data, img.PixelWidth, img.PixelHeight, done ) );
 		}
 	}
-
-	var bounds = GetBounds( voxels );
-	if( bounds != Rect.Empty )
-		points.Add( new Defect( 
-			new Segment( "All", SegmentTypes.None ),
-			new Vector( bounds.X, bounds.Y ), 
-			new Vector( bounds.Width, bounds.Height ) )
-		{
-			Voxels = voxels.ToArray()
-		} );
 
 	plot.Points = points;
 	return plot;
 }
 ```
+
+<details>
+<summary>Helper methods</summary>
+
+```csharp
+private static Defect DetectDefect( Pixel origin, byte[] data, int pixelWidth, int pixelHeight, HashSet<int> done )
+{
+	var found = new List<Pixel> { origin };
+	var newlyFound = new List<Pixel>( 4 ) { origin };
+
+	while( newlyFound.Count > 0 )
+	{
+		var pixels = newlyFound.ToArray();
+		newlyFound.Clear();
+		foreach( var pixel in pixels )
+		{
+			foreach( var neighbor in GetNeighbors( pixel, pixelWidth, pixelHeight ) )
+			{
+				var position = neighbor.Y * pixelWidth + neighbor.X;
+				if( done.Contains( position ) )
+					continue;
+
+				done.Add( position );
+
+				if( !IsDefect( position, data ) )
+					continue;
+
+				found.Add( neighbor );
+				newlyFound.Add( neighbor );
+			}
+		}
+	}
+
+	found.TrimExcess();
+
+	var voxels = found.Select( p => new Voxel( new Vector( p.X, p.Y ), new Vector( 1, 1 ) ) ).ToArray();
+	var bounds = GetBounds( voxels );
+	return new Defect( new Segment( "All", SegmentTypes.None ), new Vector( bounds.X, bounds.Y ), new Vector( bounds.Width, bounds.Height ) )
+	{
+		Voxels = voxels
+	};
+
+}
+
+private static IEnumerable<Pixel> GetNeighbors( Pixel p, int width, int height )
+{
+	if( p.X - 1 >= 0 )
+		yield return new Pixel( p.X - 1, p.Y );
+
+	if( p.X + 1 < width )
+		yield return new Pixel( p.X + 1, p.Y );
+
+	if( p.Y - 1 >= 0 )
+		yield return new Pixel( p.X, p.Y - 1 );
+
+	if( p.Y + 1 < height )
+		yield return new Pixel( p.X, p.Y + 1 );
+}
+
+private static bool IsDefect( int position, byte[] data )
+{
+
+	var r = data[ position * 4 ];
+	var g = data[ position * 4 + 1 ];
+	var b = data[ position * 4 + 2 ];
+	var a = data[ position * 4 + 3 ];
+
+	//Let's say, everthing other than white is a defect
+	return r != 255 || g != 255 || b != 255 || a != 255;
+}
+
+private static Rect GetBounds( IEnumerable<Voxel> voxels )
+{
+	double? minx = null, miny = null, maxx = null, maxy = null;
+	foreach( var voxel in voxels )
+	{
+		if( minx == null || voxel.Position.X < minx )
+			minx = voxel.Position.X;
+
+		if( miny == null || voxel.Position.Y < miny )
+			miny = voxel.Position.Y;
+
+		if( maxx == null || voxel.Position.X + voxel.Size.X > maxx )
+			maxx = voxel.Position.X + voxel.Size.X;
+
+		if( maxy == null || voxel.Position.Y + voxel.Size.Y > maxy )
+			maxy = voxel.Position.Y + voxel.Size.Y;
+	}
+
+	return minx.HasValue ? new Rect( minx.Value, miny.Value, maxx.Value - minx.Value, maxy.Value - miny.Value ) : Rect.Empty;
+}
+
+private struct Pixel
+{
+	public int X { get; }
+
+	public int Y { get; }
+
+	public Pixel( int x, int y )
+	{
+		X = x;
+		Y = y;
+	}
+}
+```
+</details>
 
 #### Remarks
 
