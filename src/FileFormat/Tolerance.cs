@@ -135,45 +135,46 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		internal void Serialize( XmlWriter writer )
 		{
-			if( ToleranceType == ToleranceType.Circular && CircularToleranceRadius.HasValue )
+			switch( ToleranceType )
 			{
-				writer.WriteAttributeString( "Type", ToleranceType.ToString() );
-				writer.WriteAttributeString( "Radius", XmlConvert.ToString( CircularToleranceRadius.Value ) );
-			}
-			else if( ToleranceType == ToleranceType.Rectangular )
-			{
-				writer.WriteAttributeString( "Type", ToleranceType.ToString() );
+				case ToleranceType.Circular when CircularToleranceRadius.HasValue:
+					writer.WriteAttributeString( "Type", ToleranceType.ToString() );
+					writer.WriteAttributeString( "Radius", XmlConvert.ToString( CircularToleranceRadius.Value ) );
+					break;
+				case ToleranceType.Rectangular:
+					writer.WriteAttributeString( "Type", ToleranceType.ToString() );
 
-				if( RectangleToleranceHeight.HasValue )
-					writer.WriteAttributeString( "Height", XmlConvert.ToString( RectangleToleranceHeight.Value ) );
-				if( RectangleToleranceWidth.HasValue )
-					writer.WriteAttributeString( "Width", XmlConvert.ToString( RectangleToleranceWidth.Value ) );
-			}
-			else if (ToleranceType == ToleranceType.Spatial)
-			{
-				writer.WriteAttributeString("Type", ToleranceType.ToString());
+					if( RectangleToleranceHeight.HasValue )
+						writer.WriteAttributeString( "Height", XmlConvert.ToString( RectangleToleranceHeight.Value ) );
+					if( RectangleToleranceWidth.HasValue )
+						writer.WriteAttributeString( "Width", XmlConvert.ToString( RectangleToleranceWidth.Value ) );
+					break;
+				case ToleranceType.Spatial:
+					writer.WriteAttributeString( "Type", ToleranceType.ToString() );
 
-				if( SpatialTolerance != null )
-				{
-					writer.WriteAttributeString("X", XmlConvert.ToString(SpatialTolerance.X));
-					writer.WriteAttributeString("Y", XmlConvert.ToString(SpatialTolerance.Y));
-					writer.WriteAttributeString("Z", XmlConvert.ToString(SpatialTolerance.Z));
-				}
-			}
-			else if( ToleranceType == ToleranceType.Default )
-			{
-				if( IsSymmetric )
-				{
-					if( Upper != null && Lower != null ) writer.WriteValue( XmlConvert.ToString( Upper.Value - Lower.Value ) );
-				}
-				else
-				{
-					if( Lower.HasValue )
-						writer.WriteElementString( "Lower", XmlConvert.ToString( Lower.Value ) );
+					if( SpatialTolerance != null )
+					{
+						writer.WriteAttributeString( "X", XmlConvert.ToString( SpatialTolerance.X ) );
+						writer.WriteAttributeString( "Y", XmlConvert.ToString( SpatialTolerance.Y ) );
+						writer.WriteAttributeString( "Z", XmlConvert.ToString( SpatialTolerance.Z ) );
+					}
 
-					if( Upper.HasValue )
-						writer.WriteElementString( "Upper", XmlConvert.ToString( Upper.Value ) );
-				}
+					break;
+				case ToleranceType.Default:
+					if( IsSymmetric )
+					{
+						if( Upper != null && Lower != null ) writer.WriteValue( XmlConvert.ToString( Upper.Value - Lower.Value ) );
+					}
+					else
+					{
+						if( Lower.HasValue )
+							writer.WriteElementString( "Lower", XmlConvert.ToString( Lower.Value ) );
+
+						if( Upper.HasValue )
+							writer.WriteElementString( "Upper", XmlConvert.ToString( Upper.Value ) );
+					}
+
+					break;
 			}
 		}
 
@@ -195,41 +196,41 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			{
 				toleranceType = EnumParser<ToleranceType>.Parse( toleranceTypeString );
 
-				if( toleranceType == ToleranceType.Circular )
+				switch( toleranceType )
 				{
-					var radiusText = reader.GetAttribute( "Radius" );
-					if( !string.IsNullOrEmpty( radiusText ) )
-						radius = XmlConvert.ToDouble( radiusText );
-				}
-				else if( toleranceType == ToleranceType.Rectangular )
-				{
-					var rectangleHeightText = reader.GetAttribute( "Height" );
-					var rectangleWidthText = reader.GetAttribute( "Width" );
+					case ToleranceType.Circular:
+						var radiusText = reader.GetAttribute( "Radius" );
+						if( !string.IsNullOrEmpty( radiusText ) )
+							radius = XmlConvert.ToDouble( radiusText );
+						break;
+					case ToleranceType.Rectangular:
+						var rectangleHeightText = reader.GetAttribute( "Height" );
+						var rectangleWidthText = reader.GetAttribute( "Width" );
 
-					if( !string.IsNullOrEmpty( rectangleHeightText ) )
-						height = XmlConvert.ToDouble( rectangleHeightText );
-					if( !string.IsNullOrEmpty( rectangleWidthText ) )
-						width = XmlConvert.ToDouble( rectangleWidthText );
-				}
-				else if (toleranceType == ToleranceType.Spatial)
-				{
-					var xText = reader.GetAttribute("X");
-					var yText = reader.GetAttribute("Y");
-					var zText = reader.GetAttribute("Z");
+						if( !string.IsNullOrEmpty( rectangleHeightText ) )
+							height = XmlConvert.ToDouble( rectangleHeightText );
+						if( !string.IsNullOrEmpty( rectangleWidthText ) )
+							width = XmlConvert.ToDouble( rectangleWidthText );
+						break;
+					case ToleranceType.Spatial:
+						var xText = reader.GetAttribute( "X" );
+						var yText = reader.GetAttribute( "Y" );
+						var zText = reader.GetAttribute( "Z" );
 
-					double? x = null;
-					double? y = null;
-					double? z = null;
+						double? x = null;
+						double? y = null;
+						double? z = null;
 
-					if (!string.IsNullOrEmpty(xText))
-						x = XmlConvert.ToDouble(xText);
-					if (!string.IsNullOrEmpty(yText))
-						y = XmlConvert.ToDouble(yText);
-					if (!string.IsNullOrEmpty(zText))
-						z= XmlConvert.ToDouble(zText);
+						if( !string.IsNullOrEmpty( xText ) )
+							x = XmlConvert.ToDouble( xText );
+						if( !string.IsNullOrEmpty( yText ) )
+							y = XmlConvert.ToDouble( yText );
+						if( !string.IsNullOrEmpty( zText ) )
+							z = XmlConvert.ToDouble( zText );
 
-					if( x.HasValue && y.HasValue && z.HasValue )
-						spatialTolerance = new Vector( x.Value, y.Value, z.Value );
+						if( x.HasValue && y.HasValue && z.HasValue )
+							spatialTolerance = new Vector( x.Value, y.Value, z.Value );
+						break;
 				}
 			}
 			else

@@ -58,8 +58,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public CircleInProfilePoint MaxGapPoint
 		{
-			get { return _MaxGapPoint; }
-			set { _MaxGapPoint = value ?? new CircleInProfilePoint(); }
+			get => _MaxGapPoint;
+			set => _MaxGapPoint = value ?? new CircleInProfilePoint();
 		}
 
 		/// <summary>
@@ -67,8 +67,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public CircleInProfilePoint FirstTouchingPoint
 		{
-			get { return _FirstTouchingPoint; }
-			set { _FirstTouchingPoint = value ?? new CircleInProfilePoint(); }
+			get => _FirstTouchingPoint;
+			set => _FirstTouchingPoint = value ?? new CircleInProfilePoint();
 		}
 
 		/// <summary>
@@ -76,8 +76,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public CircleInProfilePoint SecondTouchingPoint
 		{
-			get { return _SecondTouchingPoint; }
-			set { _SecondTouchingPoint = value ?? new CircleInProfilePoint(); }
+			get => _SecondTouchingPoint;
+			set => _SecondTouchingPoint = value ?? new CircleInProfilePoint();
 		}
 
 		#endregion
@@ -249,9 +249,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Returns a <see cref="System.String" /> that represents this instance.
 		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String" /> that represents this instance.
-		/// </returns>
 		public override string ToString()
 		{
 			return string.Format( CultureInfo.InvariantCulture, "Radius={0}, CoordinateSystem={{{1}}}", Radius, CoordinateSystem );

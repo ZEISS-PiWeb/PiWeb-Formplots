@@ -82,8 +82,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public ICollection<Property> Properties
 		{
-			get { return _Properties; }
-			set { _Properties = value ?? new List<Property>(); }
+			get => _Properties;
+			set => _Properties = value ?? new List<Property>();
 		}
 
 		/// <summary>
@@ -91,8 +91,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public Tolerance Tolerance
 		{
-			get { return _Tolerance; }
-			set { _Tolerance = value ?? new Tolerance(); }
+			get => _Tolerance;
+			set => _Tolerance = value ?? new Tolerance();
 		}
 
 		/// <summary>
@@ -100,8 +100,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public double? DefaultErrorScaling
 		{
-			get { return _DefaultErrorScaling; }
-			set { _DefaultErrorScaling = value.HasValue && value.Value > 0.0 ? value : null; }
+			get => _DefaultErrorScaling;
+			set => _DefaultErrorScaling = value.HasValue && value.Value > 0.0 ? value : null;
 		}
 
 		/// <summary>
@@ -114,7 +114,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public Geometry Nominal
 		{
-			get { return _Nominal; }
+			get => _Nominal;
 			set
 			{
 				if( value != null )
@@ -136,7 +136,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public Geometry Actual
 		{
-			get { return _Actual; }
+			get => _Actual;
 			set
 			{
 				if( value != null )
@@ -158,7 +158,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public IEnumerable<Point> Points
 		{
-			get { return _Points; }
+			get => _Points;
 			set
 			{
 				if( value != null )

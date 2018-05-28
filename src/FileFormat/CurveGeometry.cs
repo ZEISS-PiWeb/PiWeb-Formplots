@@ -22,12 +22,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public class CurveGeometry : Geometry
 	{
-		#region properties
-
-		
-
-		#endregion
-
 		#region methods
 		
 		/// <summary>

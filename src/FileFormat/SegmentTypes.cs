@@ -44,6 +44,23 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Axis
 		/// </summary>
-		Axis
+		Axis,
+		/// <summary>
+		/// Flush and gap reference profile (nominal)
+		/// </summary>
+		NominalReferenceProfile,
+		/// <summary>
+		/// Flush and gap measure profile (nominal)
+		/// </summary>
+		NominalMeasureProfile,
+		/// <summary>
+		/// Flush and gap reference profile (actual)
+		/// </summary>
+		ActualReferenceProfile,
+		/// <summary>
+		/// Flush and gap measure profile (actual)
+		/// </summary>
+		ActualMeasureProfile,
+
 	}
 }

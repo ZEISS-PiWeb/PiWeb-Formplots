@@ -126,52 +126,52 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				}
 			}
 
-			if( plot.FormplotType != FormplotTypes.None )
+			if( plot.FormplotType == FormplotTypes.None ) 
+				return;
+			
+			if( !plot.Tolerance.IsEmpty )
 			{
-				if( !plot.Tolerance.IsEmpty )
-				{
-					metaDataWriter.WriteStartElement( "Tolerance" );
-					plot.Tolerance.Serialize( metaDataWriter );
-					metaDataWriter.WriteEndElement();
-				}
-
-				if( plot.DefaultErrorScaling.HasValue )
-				{
-					metaDataWriter.WriteStartElement( "ErrorScaling" );
-					metaDataWriter.WriteValue( XmlConvert.ToString( plot.DefaultErrorScaling.Value ) );
-					metaDataWriter.WriteEndElement();
-				}
-
-				if( plot.FormplotType == FormplotTypes.Straightness && plot.ProjectionAxis != ProjectionAxis.None )
-				{
-					metaDataWriter.WriteStartElement( "ProjectionAxis" );
-					metaDataWriter.WriteValue( plot.ProjectionAxis.ToString() );
-					metaDataWriter.WriteEndElement();
-				}
-
-				if( plot.GeometryType != GeometryTypes.None )
-				{
-					metaDataWriter.WriteStartElement( "Geometry" );
-
-					{
-						metaDataWriter.WriteAttributeString( "Type", plot.GeometryType.ToString() );
-
-						metaDataWriter.WriteStartElement( "Nominal" );
-						plot.Nominal.Serialize( metaDataWriter );
-						metaDataWriter.WriteEndElement();
-
-						metaDataWriter.WriteStartElement( "Actual" );
-						plot.Actual.Serialize( metaDataWriter );
-						metaDataWriter.WriteEndElement();
-					}
-
-					metaDataWriter.WriteEndElement();
-				}
-
-				metaDataWriter.WriteStartElement( "Points" );
-				plot.WritePoints( metaDataWriter, pointDataStream );
+				metaDataWriter.WriteStartElement( "Tolerance" );
+				plot.Tolerance.Serialize( metaDataWriter );
 				metaDataWriter.WriteEndElement();
 			}
+
+			if( plot.DefaultErrorScaling.HasValue )
+			{
+				metaDataWriter.WriteStartElement( "ErrorScaling" );
+				metaDataWriter.WriteValue( XmlConvert.ToString( plot.DefaultErrorScaling.Value ) );
+				metaDataWriter.WriteEndElement();
+			}
+
+			if( plot.FormplotType == FormplotTypes.Straightness && plot.ProjectionAxis != ProjectionAxis.None )
+			{
+				metaDataWriter.WriteStartElement( "ProjectionAxis" );
+				metaDataWriter.WriteValue( plot.ProjectionAxis.ToString() );
+				metaDataWriter.WriteEndElement();
+			}
+
+			if( plot.GeometryType != GeometryTypes.None )
+			{
+				metaDataWriter.WriteStartElement( "Geometry" );
+
+				{
+					metaDataWriter.WriteAttributeString( "Type", plot.GeometryType.ToString() );
+
+					metaDataWriter.WriteStartElement( "Nominal" );
+					plot.Nominal.Serialize( metaDataWriter );
+					metaDataWriter.WriteEndElement();
+
+					metaDataWriter.WriteStartElement( "Actual" );
+					plot.Actual.Serialize( metaDataWriter );
+					metaDataWriter.WriteEndElement();
+				}
+
+				metaDataWriter.WriteEndElement();
+			}
+
+			metaDataWriter.WriteStartElement( "Points" );
+			plot.WritePoints( metaDataWriter, pointDataStream );
+			metaDataWriter.WriteEndElement();
 		}
 
 		/// <summary>
@@ -227,20 +227,20 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="lastPoint">The last point.</param>
 		private static void CollectTolerances( Point point, IDictionary<Tolerance, RangeList> tolerancelists, int index, Point lastPoint )
 		{
-			if( !point.Tolerance.IsEmpty )
+			if( point.Tolerance.IsEmpty ) 
+				return;
+			
+			if( !tolerancelists.ContainsKey( point.Tolerance ) )
+				tolerancelists.Add( point.Tolerance, new RangeList { new Range( index ) } );
+			else
 			{
-				if( !tolerancelists.ContainsKey( point.Tolerance ) )
-					tolerancelists.Add( point.Tolerance, new RangeList { new Range( index ) } );
+				if( lastPoint == null ) 
+					return;
+					
+				if( Tolerance.Equals( point.Tolerance, lastPoint.Tolerance ) )
+					tolerancelists[ point.Tolerance ].Last().End = index;
 				else
-				{
-					if( lastPoint != null )
-					{
-						if( Tolerance.Equals( point.Tolerance, lastPoint.Tolerance ) )
-							tolerancelists[ point.Tolerance ].Last().End = index;
-						else
-							tolerancelists[ point.Tolerance ].Add( new Range( index ) );
-					}
-				}
+					tolerancelists[ point.Tolerance ].Add( new Range( index ) );
 			}
 		}
 
@@ -253,20 +253,20 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="lastPoint">The last point.</param>
 		private static void CollectSegments( Point point, IDictionary<Segment, RangeList> segmentlists, int index, Point lastPoint )
 		{
-			if( point.Segment != null )
+			if( point.Segment == null ) 
+				return;
+			
+			if( !segmentlists.ContainsKey( point.Segment ) )
+				segmentlists.Add( point.Segment, new RangeList { new Range( index ) } );
+			else
 			{
-				if( !segmentlists.ContainsKey( point.Segment ) )
-					segmentlists.Add( point.Segment, new RangeList { new Range( index ) } );
+				if( lastPoint == null ) 
+					return;
+					
+				if( Equals( point.Segment, lastPoint.Segment ) )
+					segmentlists[ point.Segment ].Last().End = index;
 				else
-				{
-					if( lastPoint != null )
-					{
-						if( Equals( point.Segment, lastPoint.Segment ) )
-							segmentlists[ point.Segment ].Last().End = index;
-						else
-							segmentlists[ point.Segment ].Add( new Range( index ) );
-					}
-				}
+					segmentlists[ point.Segment ].Add( new Range( index ) );
 			}
 		}
 
@@ -279,20 +279,20 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="lastPoint">The last point.</param>
 		private static void CollectStates( Point point, IDictionary<PointState, RangeList> statelists, int index, Point lastPoint )
 		{
-			if( point.State != PointState.None )
+			if( point.State == PointState.None ) 
+				return;
+			
+			if( !statelists.ContainsKey( point.State ) )
+				statelists.Add( point.State, new RangeList { new Range( index ) } );
+			else
 			{
-				if( !statelists.ContainsKey( point.State ) )
-					statelists.Add( point.State, new RangeList { new Range( index ) } );
+				if( lastPoint == null ) 
+					return;
+				
+				if( point.State == lastPoint.State )
+					statelists[ point.State ].Last().End = index;
 				else
-				{
-					if( lastPoint != null )
-					{
-						if( point.State == lastPoint.State )
-							statelists[ point.State ].Last().End = index;
-						else
-							statelists[ point.State ].Add( new Range( index ) );
-					}
-				}
+					statelists[ point.State ].Add( new Range( index ) );
 			}
 		}
 
@@ -311,13 +311,13 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					propertyLists.Add( property, new RangeList { new Range( index ) } );
 				else
 				{
-					if( lastPoint != null )
-					{
-						if( lastPoint.PropertyList.Contains( property ) )
-							propertyLists[ property ].Last().End = index;
-						else
-							propertyLists[ property ].Add( new Range( index ) );
-					}
+					if( lastPoint == null ) 
+						continue;
+					
+					if( lastPoint.PropertyList.Contains( property ) )
+						propertyLists[ property ].Last().End = index;
+					else
+						propertyLists[ property ].Add( new Range( index ) );
 				}
 			}
 		}
@@ -329,19 +329,19 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="tolerancelists">The tolerances.</param>
 		private static void WriteTolerances( XmlWriter writer, IReadOnlyCollection<KeyValuePair<Tolerance, RangeList>> tolerancelists )
 		{
-			if( tolerancelists.Count > 0 )
-			{
-				writer.WriteStartElement( "Tolerances" );
+			if( tolerancelists.Count <= 0 ) 
+				return;
+			
+			writer.WriteStartElement( "Tolerances" );
 
-				foreach( var tolerancelist in tolerancelists )
-				{
-					writer.WriteStartElement( "Tolerance" );
-					writer.WriteAttributeString( "Points", tolerancelist.Value.ToString() );
-					tolerancelist.Key.Serialize( writer );
-					writer.WriteEndElement();
-				}
+			foreach( var tolerancelist in tolerancelists )
+			{
+				writer.WriteStartElement( "Tolerance" );
+				writer.WriteAttributeString( "Points", tolerancelist.Value.ToString() );
+				tolerancelist.Key.Serialize( writer );
 				writer.WriteEndElement();
 			}
+			writer.WriteEndElement();
 		}
 
 		/// <summary>
@@ -351,24 +351,24 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="segmentlists">The segmentlists.</param>
 		private static void WriteSegments( XmlWriter writer, IReadOnlyCollection<KeyValuePair<Segment, RangeList>> segmentlists )
 		{
-			if( segmentlists.Count > 0 )
+			if( segmentlists.Count <= 0 ) 
+				return;
+			
+			writer.WriteStartElement( "Segments" );
+
+			foreach( var segment in segmentlists )
 			{
-				writer.WriteStartElement( "Segments" );
+				writer.WriteStartElement( "Segment" );
+				writer.WriteAttributeString( "Points", segment.Value.ToString() );
 
-				foreach( var segment in segmentlists )
-				{
-					writer.WriteStartElement( "Segment" );
-					writer.WriteAttributeString( "Points", segment.Value.ToString() );
+				if( segment.Key.SegmentType != SegmentTypes.None )
+					writer.WriteAttributeString( "Type", segment.Key.SegmentType.ToString() );
 
-					if( segment.Key.SegmentType != SegmentTypes.None )
-						writer.WriteAttributeString( "Type", segment.Key.SegmentType.ToString() );
-
-					writer.WriteValue( segment.Key.Name );
-					writer.WriteEndElement();
-				}
-
+				writer.WriteValue( segment.Key.Name );
 				writer.WriteEndElement();
 			}
+
+			writer.WriteEndElement();
 		}
 
 		/// <summary>
@@ -378,20 +378,20 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="statelists">The statelists.</param>
 		private static void WriteStates( XmlWriter writer, IReadOnlyCollection<KeyValuePair<PointState, RangeList>> statelists )
 		{
-			if( statelists.Count > 0 )
+			if( statelists.Count <= 0 ) 
+				return;
+			
+			writer.WriteStartElement( "States" );
+
+			foreach( var statelist in statelists )
 			{
-				writer.WriteStartElement( "States" );
-
-				foreach( var statelist in statelists )
-				{
-					writer.WriteStartElement( "State" );
-					writer.WriteAttributeString( "Points", statelist.Value.ToString() );
-					writer.WriteValue( statelist.Key.ToString() );
-					writer.WriteEndElement();
-				}
-
+				writer.WriteStartElement( "State" );
+				writer.WriteAttributeString( "Points", statelist.Value.ToString() );
+				writer.WriteValue( statelist.Key.ToString() );
 				writer.WriteEndElement();
 			}
+
+			writer.WriteEndElement();
 		}
 
 		/// <summary>
@@ -401,20 +401,20 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="propertyLists">The property lists.</param>
 		private static void WriteMetaData( XmlWriter writer, IReadOnlyCollection<KeyValuePair<Property, RangeList>> propertyLists )
 		{
-			if( propertyLists.Count > 0 )
+			if( propertyLists.Count <= 0 ) 
+				return;
+			
+			writer.WriteStartElement( "Properties" );
+
+			foreach( var propertyList in propertyLists )
 			{
-				writer.WriteStartElement( "Properties" );
-
-				foreach( var propertyList in propertyLists )
-				{
-					writer.WriteStartElement( "Property" );
-					writer.WriteAttributeString( "Points", propertyList.Value.ToString() );
-					propertyList.Key.Serialize( writer );
-					writer.WriteEndElement();
-				}
-
+				writer.WriteStartElement( "Property" );
+				writer.WriteAttributeString( "Points", propertyList.Value.ToString() );
+				propertyList.Key.Serialize( writer );
 				writer.WriteEndElement();
 			}
+
+			writer.WriteEndElement();
 		}
 
 		#endregion

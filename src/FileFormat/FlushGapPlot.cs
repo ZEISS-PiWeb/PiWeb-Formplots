@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss IMT (IZfM Dresden)                   */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2018                             */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -18,17 +18,17 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Contains defects
+	/// Similar to a curve plot, but with additional geometry features.
 	/// </summary>
 	/// <seealso cref="Zeiss.IMT.PiWeb.Formplot.FileFormat.Formplot" />
-	public class DefectPlot : Formplot
+	public class FlushGapPlot : Formplot
 	{
 		#region constructors
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DefectPlot"/> class.
+		/// Initializes a new instance of the <see cref="FlushGapPlot"/> class.
 		/// </summary>
-		public DefectPlot() : base( FormplotTypes.Defect )
+		public FlushGapPlot() : base( FormplotTypes.FlushGap )
 		{
 		}
 
@@ -36,31 +36,30 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 		#region properties
 
-
 		/// <summary>
 		/// Gets or sets the nominal geometry.
 		/// </summary>
-		public new DefectGeometry Nominal
+		public new FlushGapGeometry Nominal
 		{
-			get => base.Nominal as DefectGeometry;
+			get => base.Nominal as FlushGapGeometry;
 			set => base.Nominal = value;
 		}
 
 		/// <summary>
 		/// Gets or sets the actual geometry.
 		/// </summary>
-		public new DefectGeometry Actual
+		public new FlushGapGeometry Actual
 		{
-			get => base.Actual as DefectGeometry;
+			get => base.Actual as FlushGapGeometry;
 			set => base.Actual = value;
 		}
 
 		/// <summary>
 		/// Gets or sets the plot points.
 		/// </summary>
-		public new IEnumerable<Defect> Points
+		public new IEnumerable<FlushGapPoint> Points
 		{
-			get => base.Points.Cast<Defect>();
+			get => base.Points.Cast<FlushGapPoint>();
 			set => base.Points = value;
 		}
 

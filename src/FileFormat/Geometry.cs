@@ -36,8 +36,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public CoordinateSystem CoordinateSystem
 		{
-			get { return _CoordinateSystem; }
-			set { _CoordinateSystem = value ?? new CoordinateSystem(); }
+			get => _CoordinateSystem;
+			set => _CoordinateSystem = value ?? new CoordinateSystem();
 		}
 
 		#endregion
@@ -63,7 +63,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new CylinderGeometry();
 				case GeometryTypes.CircleInProfile:
 					return new CircleInProfileGeometry();
-
+				case GeometryTypes.FlushGap:
+					return new FlushGapGeometry();
 				case GeometryTypes.Defect:
 					return new DefectGeometry();
 				default:
@@ -86,8 +87,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				case FormplotTypes.Cylindricity: return GeometryTypes.Cylinder;
 				case FormplotTypes.Pitch: return GeometryTypes.None;
 				case FormplotTypes.BorePattern: return GeometryTypes.Curve;
-				case FormplotTypes.CircleInProfile: return GeometryTypes.CircleInProfile;				
-				case FormplotTypes.Fourier: return GeometryTypes.None;			
+				case FormplotTypes.CircleInProfile: return GeometryTypes.CircleInProfile;
+				case FormplotTypes.Fourier: return GeometryTypes.None;
+				case FormplotTypes.FlushGap: return GeometryTypes.FlushGap;
 				case FormplotTypes.Defect: return GeometryTypes.Defect;
 				default:
 					throw new ArgumentOutOfRangeException( nameof( formplotType ), formplotType, null );

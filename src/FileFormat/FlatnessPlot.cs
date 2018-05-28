@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new PlaneGeometry Nominal
 		{
-			get { return base.Nominal as PlaneGeometry; }
-			set { base.Nominal = value; }
+			get => base.Nominal as PlaneGeometry;
+			set => base.Nominal = value;
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new PlaneGeometry Actual
 		{
-			get { return base.Actual as PlaneGeometry; }
-			set { base.Actual = value; }
+			get => base.Actual as PlaneGeometry;
+			set => base.Actual = value;
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<PlanePoint> Points
 		{
-			get { return base.Points.Cast<PlanePoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<PlanePoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

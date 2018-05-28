@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CylinderGeometry Nominal
 		{
-			get { return base.Nominal as CylinderGeometry; }
-			set { base.Nominal = value; }
+			get => base.Nominal as CylinderGeometry;
+			set => base.Nominal = value;
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CylinderGeometry Actual
 		{
-			get { return base.Actual as CylinderGeometry; }
-			set { base.Actual = value; }
+			get => base.Actual as CylinderGeometry;
+			set => base.Actual = value;
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<CylinderPoint> Points
 		{
-			get { return base.Points.Cast<CylinderPoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<CylinderPoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

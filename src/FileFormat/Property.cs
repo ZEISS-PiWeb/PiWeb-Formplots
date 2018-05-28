@@ -148,10 +148,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		{
 			if( string.IsNullOrWhiteSpace( value ) ) return new Property( name, DataTypeId.String, value, description );
 
-			var dateTimeValue = ObjectToNullableDateTime( value, CultureInfo.InvariantCulture );
-
-			if( !dateTimeValue.HasValue )
-				dateTimeValue = ObjectToNullableDateTime( value );
+			var dateTimeValue = ObjectToNullableDateTime( value, CultureInfo.InvariantCulture ) ?? ObjectToNullableDateTime( value );
 
 			if( dateTimeValue.HasValue )
 			{
@@ -162,35 +159,23 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return Create( name, dateTimeValue.Value, description );
 			}
 
-			var longValue = ObjectToNullableInt64( value, CultureInfo.InvariantCulture );
-
-			if( !longValue.HasValue )
-				longValue = ObjectToNullableInt64( value );
+			var longValue = ObjectToNullableInt64( value, CultureInfo.InvariantCulture ) ?? ObjectToNullableInt64( value );
 
 			if( longValue.HasValue )
 			{
 				return Create( name, longValue.Value, description );
 			}
 
-			var doubleValue = ObjectToNullableDouble( value, CultureInfo.InvariantCulture );
-
-			if( !doubleValue.HasValue )
-				doubleValue = ObjectToNullableDouble( value );
+			var doubleValue = ObjectToNullableDouble( value, CultureInfo.InvariantCulture ) ?? ObjectToNullableDouble( value );
 
 			if( doubleValue.HasValue )
 			{
 				return Create( name, doubleValue.Value, description );
 			}
 
-			var timeSpanValue = ObjectToNullableTimeSpan( value, CultureInfo.InvariantCulture );
+			var timeSpanValue = ObjectToNullableTimeSpan( value, CultureInfo.InvariantCulture ) ?? ObjectToNullableTimeSpan( value );
 
-			if( !timeSpanValue.HasValue )
-				timeSpanValue = ObjectToNullableTimeSpan( value );
-
-			if( timeSpanValue.HasValue )
-				return Create( name, timeSpanValue.Value, description );
-
-			return new Property( name, DataTypeId.String, value, description );
+			return timeSpanValue.HasValue ? Create( name, timeSpanValue.Value, description ) : new Property( name, DataTypeId.String, value, description );
 		}
 
 		/// <summary>
@@ -332,26 +317,22 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 		private static DateTime? ObjectToNullableDateTime( string stringValue, IFormatProvider provider = null, DateTimeStyles style = DateTimeStyles.RoundtripKind )
 		{
-			DateTime result;
-			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out result ) ? ( DateTime? ) result : null;
+			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out var result ) ? ( DateTime? ) result : null;
 		}
 
 		private static long? ObjectToNullableInt64( string stringValue, IFormatProvider provider = null, NumberStyles style = NumberStyles.Integer )
 		{
-			long result;
-			return long.TryParse( stringValue, style, provider, out result ) ? ( long? ) result : null;
+			return long.TryParse( stringValue, style, provider, out var result ) ? ( long? ) result : null;
 		}
 
 		internal static double? ObjectToNullableDouble( string stringValue, IFormatProvider provider = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands )
 		{
-			double result;
-			return double.TryParse( stringValue, style, provider, out result ) ? ( double? ) result : null;
+			return double.TryParse( stringValue, style, provider, out var result ) ? ( double? ) result : null;
 		}
 
 		private static TimeSpan? ObjectToNullableTimeSpan( string stringValue, IFormatProvider provider = null )
 		{
-			TimeSpan result;
-			if( TimeSpan.TryParse( stringValue, provider, out result ) ) return result;
+			if( TimeSpan.TryParse( stringValue, provider, out var result ) ) return result;
 			if( TryXmlConvertToTimeSpan( stringValue, out result ) ) return result;
 			return null;
 		}

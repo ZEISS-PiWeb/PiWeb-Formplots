@@ -40,10 +40,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// Initializes a new instance of the <see cref="Point"/> class.
 		/// </summary>
 		/// <param name="segment">The segment.</param>
-		protected internal Point( Segment segment )
-		{
-			Segment = segment;
-		}
+		protected internal Point( Segment segment ) => Segment = segment;
 
 		#endregion
 
@@ -54,8 +51,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public IEnumerable<Property> PropertyList
 		{
-			get { return _PropertyList; }
-			set { _PropertyList = value?.ToArray() ?? new Property[ 0 ]; }
+			get => _PropertyList;
+			set => _PropertyList = value?.ToArray() ?? new Property[ 0 ];
 		}
 
 		/// <summary>
@@ -74,8 +71,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public Tolerance Tolerance
 		{
-			get { return _Tolerance; }
-			set { _Tolerance = value ?? new Tolerance(); }
+			get => _Tolerance;
+			set => _Tolerance = value ?? new Tolerance();
 		}
 
 		#endregion
@@ -104,6 +101,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return typeof( CircleInProfilePoint );
 				case FormplotTypes.Fourier:
 					return typeof( FourierPoint );
+				case FormplotTypes.FlushGap:
+					return typeof(FlushGapPoint);
 				case FormplotTypes.Defect:
 					return typeof(Defect);
 				default:
@@ -136,6 +135,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new CircleInProfilePoint();
 				case FormplotTypes.Fourier:
 					return new FourierPoint();
+				case FormplotTypes.FlushGap:
+					return new FlushGapPoint();
 				case FormplotTypes.Defect:
 					return new Defect();
 				default:

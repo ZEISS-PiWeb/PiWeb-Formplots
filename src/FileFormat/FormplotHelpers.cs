@@ -112,7 +112,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					if( version > targetVersion )
 						throw new NotSupportedException( $"Version {version} isn't supported" );
 
-					string upgradeResourceName = typeof( Formplot ).Namespace + ".Compatibility." + plotType + "_" + version.ToString( 2 ) + ".xsl";
+					var upgradeResourceName = typeof( Formplot ).Namespace + ".Compatibility." + plotType + "_" + version.ToString( 2 ) + ".xsl";
 
 					if( version != targetVersion && !UpgradeResourceNames.Contains( upgradeResourceName ) )
 					{
@@ -295,7 +295,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			}
 
 			var result = new List<Point>();
-
+			
 			for( var index = 0; index < count; index++ )
 			{
 				var point = Point.Create( formplotType );
@@ -307,8 +307,10 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			SetStates( statelists, result );
 			SetSegment( segmentlists, result );
 			SetTolerance( tolerancelists, result );
+
 			return result.ToArray();
 		}
+
 		private static void SetProperties( Dictionary<Property, RangeList> propertyRangeLists, List<Point> points )
 		{
 			var propertyLists = new Dictionary<int, List<Property>>();
@@ -322,20 +324,24 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					{
 						if( i < 0 || i >= points.Count )
 							throw new ArgumentOutOfRangeException( $"Invalid point index '{i}' on property '{property.Name}'" );
+
 						if (!propertyLists.TryGetValue(i, out var list))
 						{
 							list = new List<Property>();
 							propertyLists[i] = list;
 						}
+
 						list.Add(property);
 					}
 				}
 			}
+
 			foreach (var list in propertyLists)
 			{
 				points[ list.Key ].PropertyList = list.Value;
 			}
 		}
+
 		private static void SetStates(Dictionary<PointState, RangeList> stateRangeLists, List<Point> points)
 		{
 			foreach (var stateRange in stateRangeLists)
@@ -343,12 +349,14 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 				var state = stateRange.Key;
 				if (state == PointState.None)
 					continue;
+
 				foreach (var range in stateRange.Value)
 				{
 					for (var i = range.Start; i <= range.End; i++)
 					{
 						if (i < 0 || i >= points.Count)
 							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on state '{state}'");
+
 						points[i].State |= state;
 					}
 				}
@@ -366,11 +374,13 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					{
 						if (i < 0 || i >= points.Count)
 							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on segment '{segment}'");
+
 						points[i].Segment = segment;
 					}
 				}
 			}
 		}
+
 		private static void SetTolerance(Dictionary<Tolerance, RangeList> toleranceRangeLists, List<Point> points)
 		{
 			foreach (var toleranceRange in toleranceRangeLists)
@@ -382,12 +392,13 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					{
 						if (i < 0 || i >= points.Count)
 							throw new ArgumentOutOfRangeException($"Invalid point index '{i}' on tolerance '{tolerance}'");
+
 						points[i].Tolerance = tolerance;
-			}
+					}
 				}
 			}
 		}
-		
+
 		private static bool IsTruncationSafe( byte[] content )
 		{
 			// check if first few bytes correspond to ascii "<?xml"
@@ -396,7 +407,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 		private static int FindEndOfContent( byte[] content )
 		{
-			int i = content.Length - 1;
+			var i = content.Length - 1;
 			while( i > -1 && content[ i ] == 0 )
 				--i;
 
@@ -412,11 +423,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			if( xdoc.Root != null && xdoc.Root.Name.LocalName == FormplotRootTag && xdoc.Root.HasAttributes )
 			{
 				var attr = xdoc.Root.Attribute( XName.Get( "Type" ) );
-				if( attr != null )
-				{
-					if( !Enum.TryParse( attr.Value, out result ) )
-						result = FormplotTypes.None;
-				}
+				if( attr != null && !Enum.TryParse( attr.Value, out result ) ) 
+					result = FormplotTypes.None;
 			}
 
 			// requires CanSeek on stream
@@ -462,8 +470,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			var actual = default ( Geometry );
 			var points = default ( Point[] );
 
-			FormplotTypes formplotType;
-			Enum.TryParse( metaDataReader.GetAttribute( "Type" ), out formplotType );
+			Enum.TryParse( metaDataReader.GetAttribute( "Type" ), out FormplotTypes formplotType );
 
 			while( metaDataReader.Read() && metaDataReader.NodeType != XmlNodeType.EndElement )
 			{
@@ -492,8 +499,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 						break;
 					case "Geometry":
 						var geometryString = metaDataReader.GetAttribute( "Type" );
-						GeometryTypes geometryType;
-						if( EnumParser<GeometryTypes>.TryParse( geometryString, out geometryType ) )
+						if( EnumParser<GeometryTypes>.TryParse( geometryString, out var geometryType ) )
 						{
 							if( geometryType != Geometry.GetGeometryTypeFromFormplotType( formplotType ) )
 							{
@@ -569,6 +575,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					return new CircleInProfilePlot();
 				case FormplotTypes.Fourier:
 					return new FourierPlot();
+				case FormplotTypes.FlushGap:
+					return new FlushGapPlot();
 				case FormplotTypes.Defect:
 					return new DefectPlot();
 				default:

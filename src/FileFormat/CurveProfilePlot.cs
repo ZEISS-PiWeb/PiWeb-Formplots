@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CurveGeometry Nominal
 		{
-			get { return base.Nominal as CurveGeometry; }
-			set { base.Nominal = value; }
+			get => base.Nominal as CurveGeometry;
+			set => base.Nominal = value;
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CurveGeometry Actual
 		{
-			get { return base.Actual as CurveGeometry; }
-			set { base.Actual = value; }
+			get => base.Actual as CurveGeometry;
+			set => base.Actual = value;
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<CurvePoint> Points
 		{
-			get { return base.Points.Cast<CurvePoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<CurvePoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

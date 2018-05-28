@@ -69,7 +69,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			{
 				return true;
 			}
-			else if( a != null && b != null )
+			
+			if( a != null && b != null )
 			{
 				return a.SegmentType == b.SegmentType &&
 				       Equals( a.Name, b.Name );

@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CircleInProfileGeometry Nominal
 		{
-			get { return base.Nominal as CircleInProfileGeometry; }
-			set { base.Nominal = value; }
+			get => base.Nominal as CircleInProfileGeometry;
+			set => base.Nominal = value;
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new CircleInProfileGeometry Actual
 		{
-			get { return base.Actual as CircleInProfileGeometry; }
-			set { base.Actual = value; }
+			get => base.Actual as CircleInProfileGeometry;
+			set => base.Actual = value;
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<CircleInProfilePoint> Points
 		{
-			get { return base.Points.Cast<CircleInProfilePoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<CircleInProfilePoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

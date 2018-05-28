@@ -58,7 +58,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public int Start
 		{
-			get { return _Start; }
+			get => _Start;
 			set
 			{
 				VerifyRange( value, _End );
@@ -71,7 +71,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public int End
 		{
-			get { return _End; }
+			get => _End;
 			set
 			{
 				VerifyRange( _Start, value );
@@ -103,9 +103,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 
 				if( index == -1 )
 				{
-					int value;
-
-					if( int.TryParse( rangeString, NumberStyles.Integer, CultureInfo.InvariantCulture, out value ) )
+					if( int.TryParse( rangeString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value ) )
 					{
 						return new Range( value );
 					}
@@ -115,16 +113,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					var startString = rangeString.Substring( 0, index );
 					var endString = rangeString.Substring( index + 1 );
 
-					int start, end;
-
-					if( int.TryParse( startString, NumberStyles.Integer, CultureInfo.InvariantCulture, out start ) &&
-					    int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out end ) )
-					{
-						if( IsValidRange( start, end ) )
-						{
-							return new Range( start, end );
-						}
-					}
+					if( int.TryParse( startString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var start ) &&
+					    int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var end ) && IsValidRange( start, end ) )
+						return new Range( start, end );
 				}
 			}
 
@@ -153,15 +144,14 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			{
 				return true;
 			}
-			else if( rangeA != null && rangeB != null )
+			
+			if( rangeA != null && rangeB != null )
 			{
 				return Equals( rangeA._Start, rangeB._Start ) &&
 				       Equals( rangeA._End, rangeB._End );
 			}
-			else
-			{
-				return false;
-			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -190,9 +180,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Returns a <see cref="System.String" /> that represents this instance.
 		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String" /> that represents this instance.
-		/// </returns>
 		public override string ToString()
 		{
 			return _Start == _End ? _Start.ToString( CultureInfo.InvariantCulture ) : string.Format( CultureInfo.InvariantCulture, "{0}-{1}", _Start, _End );

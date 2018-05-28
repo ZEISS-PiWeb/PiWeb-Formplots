@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<PitchPoint> Points
 		{
-			get { return base.Points.Cast<PitchPoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<PitchPoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

@@ -42,6 +42,10 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		CircleInProfile,
 		/// <summary>
+		/// Flush and Gap
+		/// </summary>
+		FlushGap,
+		/// <summary>
 		/// Defect
 		/// </summary>
 		Defect,

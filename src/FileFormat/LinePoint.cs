@@ -63,9 +63,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// <param name="stream"></param>
 		internal override void WriteToStream( Stream stream )
 		{
-			byte[] buffer = BitConverter.GetBytes( Position );
+			var buffer = BitConverter.GetBytes( Position );
 			stream.Write( buffer, 0, buffer.Length );
-
 			buffer = BitConverter.GetBytes( Deviation );
 			stream.Write( buffer, 0, buffer.Length );
 		}
@@ -78,7 +77,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		internal override void ReadFromStream( Stream stream, int index )
 		{
 			var buffer = GetBuffer( stream, 2 * sizeof( double ) );
-
 			var posX = BitConverter.ToDouble( buffer, 0 * sizeof( double ) );
 			var deviation = BitConverter.ToDouble( buffer, 1 * sizeof( double ) );
 

@@ -56,7 +56,12 @@
     <Compile Include="FileFormat\DefectGeometry.cs" />
     <Compile Include="FileFormat\Defect.cs" />
     <Compile Include="FileFormat\DefectPlot.cs" />
+    <Compile Include="FileFormat\FlushGapConnectionType.cs" />
+    <Compile Include="FileFormat\FlushGapPlot.cs" />
     <Compile Include="FileFormat\EmptyPlot.cs" />
+    <Compile Include="FileFormat\FlushGapGeometry.cs" />
+    <Compile Include="FileFormat\FlushGapPoint.cs" />
+    <Compile Include="FileFormat\FlushGapProfile.cs" />
     <Compile Include="FileFormat\FormplotExtensions.cs" />
     <Compile Include="FileFormat\FourierPlot.cs" />
     <Compile Include="FileFormat\FourierPoint.cs" />
@@ -133,6 +138,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Formplot.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FileFormat\Compatibility\FlushGap_1.0.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

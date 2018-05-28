@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<FourierPoint> Points
 		{
-			get { return base.Points.Cast<FourierPoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<FourierPoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

@@ -39,8 +39,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new LineGeometry Nominal
 		{
-			get { return base.Nominal as LineGeometry; }
-			set { base.Nominal = value; }
+			get => base.Nominal as LineGeometry;
+			set => base.Nominal = value;
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new LineGeometry Actual
 		{
-			get { return base.Actual as LineGeometry; }
-			set { base.Actual = value; }
+			get => base.Actual as LineGeometry;
+			set => base.Actual = value;
 		}
 
 		/// <summary>
@@ -57,8 +57,8 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// </summary>
 		public new IEnumerable<LinePoint> Points
 		{
-			get { return base.Points.Cast<LinePoint>(); }
-			set { base.Points = value; }
+			get => base.Points.Cast<LinePoint>();
+			set => base.Points = value;
 		}
 
 		#endregion

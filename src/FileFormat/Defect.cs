@@ -13,7 +13,6 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 	#region usings
 
 	using System;
-	using System.Collections.Generic;
 	using System.IO;
 
 	#endregion

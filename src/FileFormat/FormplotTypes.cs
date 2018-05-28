@@ -53,10 +53,15 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 		/// Fourier
 		/// </summary>
 		Fourier,
+		/// <summary>
+		/// Flush and Gap plot
+		/// </summary>
+		FlushGap,
 
 		/// <summary>
 		/// Defect plot data
 		/// </summary>
 		Defect,
+
 	}
 }
