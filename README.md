@@ -11,6 +11,7 @@
 [roughness]: docs/gfx/32px/RoughnessplotElement.png "Roughness plot"
 [generatrix]: docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
 [fourier]: docs/gfx/32px/FourierplotElement.png "Fourier plot"
+[defect]: docs/gfx/32px/DefectElement.png "Defect image"
 
 <br/>
 
@@ -95,6 +96,7 @@ Following _element types_ with their respective _formplot types_ are supported b
 | ![][roughness]| [Roughness](docs/Plots/Line.md) |  `Straightness` |
 | ![][roundness]| [Roundness](docs/Plots/Circle.md) |  `Roundness` |
 | ![][straightness]| [Straightness](docs/Plots/Line.md) |  `Straightness` |
+| ![][defect]| [Defect](docs/Plots/Defect.md) |  `Defect` |
 
 ### Properties
 
