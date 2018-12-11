@@ -11,7 +11,7 @@ The defect file format is used to transport information about one or more defect
 
 #### Point structure
 
-The format defines one point for every defect, which has a `Position` and a `Size` parameter. Be aware, that the `Position` refers to the corner of the defects bounding box, which has closest to the point of origin.
+The format defines one point for every defect, which has a `Position` and a `Size` parameter. Be aware, that the `Position` refers to the corner of the defects bounding box, which is closest to the point of origin.
 
 ![defect position](gfx/DefectPosition.png "Defect position")
 
