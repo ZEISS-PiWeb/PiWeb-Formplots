@@ -15,7 +15,7 @@ The format defines one point for every defect, which has a `Position` and a `Siz
 
 ![defect position](gfx/DefectPosition.png "Defect position")
 
-Besides the `Position` and `Size` parameters, every point contains an arbitrary number of `Voxels` that define its shape. Be aware that both, the defect `Size` and `Position` as well as the voxel `Size` and `Position` must be either normalized to a range of [0..1] **or** you must specify the parameter `Size` on the **nominal** geometry.
+Besides the `Position` and `Size` parameters, every point contains an arbitrary number of `Voxels` that define its shape. Be aware that both, the defect `Size` and `Position` as well as the voxel `Size` and `Position` are double values. We suggest to specify all positions and sizes in voxel coordinates and to specify the properties described in the [Geometry](#geometry) section.
 
 * Position	
 * Size	
@@ -27,7 +27,13 @@ Besides the `Position` and `Size` parameters, every point contains an arbitrary 
 
 #### Geometry
 
-The defect geometry contains a parameter named `Size`, which is only relevant on the **nominal** geometry. This is the size of the image or geometry from which the defect positions and sizes originate from. PiWeb **will not** assume this size from any provided image or geometry that is used in the report.
+To allow PiWeb to create various visualizations of your data, you can specify additional information that helps to join the defect data with images, volumes and CAD models. All the following properties are only relevant on the `Nominal` geometry.
+
+* `Size:` The size of the image or volume from which the defect positions and sizes originate from. PiWeb **will not** assume this size from any provided image or volume that is used in the report. We suggest to enter the size in voxels or pixels.
+
+* `VoxelSize:` The voxel size defaults to 1 in each dimension of not set. We need this to create a discrete rasterization of the voxel data for some visualizations in PiWeb.
+
+* `ElementSystem:` Describes the transformation from real coordinates to your defect and voxel coordinates. We need this information to display the defects in a CAD model.
 
 #### Example
 
@@ -170,18 +176,24 @@ private struct Pixel
 
 #### Remarks
 
-To add additional information to each defect, you can use the parameter `PropertyList`. You can access the properties, as well as the size and position of the defect, with new system variables:
+To add additional information to each defect, you can use the parameter `PropertyList`. You can access the properties, as well as the size and position of the defect, with the following variables in PiWeb:
 
-| Name						| Description 													|
-|---------------------------|---------------------------------------------------------------|
-|`${DefectIndex}`			|Index of the defect in the defect file							|
-|`${DefectPosition.X}`		|Position of the defect in the specified dimension				|
-|`${DefectSize.X}`			|Size of the defect in the specified dimension					|
-|`${DefectReferenceSize.X}`	|Reference size in the specified dimension						|
-|`${DefectSegmentName}`		|Name of the segment to which the defect is attached			|
-|`${DefectSegmentType}`		|Type of the segment to which the defect is attached			|
-|`${DefectTolerance.X}`		|Tolerance of the defect in the specified dimension				|
-|`${DefectProperty("Key")}`	|Value of the property with the specified key					|
+| Name									| Description 													|
+|---------------------------------------|---------------------------------------------------------------|
+|`${DefectCount}`						|Number of defects that are bound to the element				|
+|`${Defect.Index}`						|Index of the defect in the defect file							|
+|`${Defect.VoxelPosition(Dimension)}`	|Voxel position of the defect in the specified dimension		|
+|`${Defect.VoxelSize(Dimension)}`		|Voxel size of the defect in the specified dimension			|
+|`${Defect.ActualPosition(Dimension)}`	|Real Ppsition of the defect in the specified dimension			|
+|`${Defect.ActualSize(Dimension)}`		|Real size of the defect in the specified dimension				|
+|`${Defect.Tolerance(Dimension)}`		|Tolerance of the defect in the specified dimension				|
+|`${Defect.SegmentName}`				|Name of the segment to which the defect is attached			|
+|`${Defect.SegmentType}`				|Type of the segment to which the defect is attached			|
+|`${Defect.Property("Key")}`			|Value of the property with the specified key					|
+|`${Defect.PropertyDescription("Key")}`	|Description of the property with the specified key				|
+|`${DefectPlot.ReferenceSize}`			|Reference size in the specified dimension						|
+
+The variable names have changed in PiWeb 7.4. Older reports are converted automatically when opened with PiWeb 7.4 or newer.
 
 The defect plot introduces a spatial tolerance type. Since there are a lot of different ways on how to interpret these tolerances, there's no built in way to evaluate tolerance usage or tolerance overrun of defects. In all report elements related to defects, you have the possiblity to use system variable expressions to filter or colorize the defects.
 
