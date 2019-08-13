@@ -184,7 +184,7 @@ To add additional information to each defect, you can use the parameter `Propert
 |`${Defect.Index}`						|Index of the defect in the defect file							|
 |`${Defect.VoxelPosition(Dimension)}`	|Voxel position of the defect in the specified dimension		|
 |`${Defect.VoxelSize(Dimension)}`		|Voxel size of the defect in the specified dimension			|
-|`${Defect.ActualPosition(Dimension)}`	|Real Ppsition of the defect in the specified dimension			|
+|`${Defect.ActualPosition(Dimension)}`	|Real position of the defect in the specified dimension			|
 |`${Defect.ActualSize(Dimension)}`		|Real size of the defect in the specified dimension				|
 |`${Defect.Tolerance(Dimension)}`		|Tolerance of the defect in the specified dimension				|
 |`${Defect.SegmentName}`				|Name of the segment to which the defect is attached			|
@@ -192,6 +192,7 @@ To add additional information to each defect, you can use the parameter `Propert
 |`${Defect.Property("Key")}`			|Value of the property with the specified key					|
 |`${Defect.PropertyDescription("Key")}`	|Description of the property with the specified key				|
 |`${DefectPlot.ReferenceSize}`			|Reference size in the specified dimension						|
+|`${DefectPlot.VoxelSize}`				|Size of a single voxel in the specified dimension				|
 
 The variable names have changed in PiWeb 7.4. Older reports are converted automatically when opened with PiWeb 7.4 or newer.
 
