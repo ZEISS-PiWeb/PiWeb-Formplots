@@ -31,7 +31,7 @@ To allow PiWeb to create various visualizations of your data, you can specify ad
 
 * `Size:` The size of the image or volume from which the defect positions and sizes originate from. PiWeb **will not** assume this size from any provided image or volume that is used in the report. We suggest to enter the size in voxels or pixels.
 
-* `VoxelSize:` The voxel size defaults to 1 in each dimension of not set. We need this to create a discrete rasterization of the voxel data for some visualizations in PiWeb.
+* `VoxelSize:` The voxel size defaults to 1 in each dimension if not set. We need this to create a discrete rasterization of the voxel data for some visualizations in PiWeb.
 
 * `ElementSystem:` Describes the transformation from real coordinates to your defect and voxel coordinates. We need this information to display the defects in a CAD model.
 
