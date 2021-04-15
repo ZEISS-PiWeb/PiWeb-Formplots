@@ -1,22 +1,23 @@
 ﻿#region copyright
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
-/* Carl Zeiss IMT (IZfM Dresden)                   */
+/* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013                             */
+/* (c) Carl Zeiss 2013-2021                        */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
 
-namespace Zeiss.PiWeb.Formplots.Tests.FileFormat
+using System;
+using System.IO;
+using System.Linq;
+using NUnit.Framework;
+using Zeiss.PiWeb.Formplot.FileFormat;
+using Zeiss.PiWeb.Formplots.Tests;
+
+namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 {
 	#region usings
-
-	using System;
-	using System.IO;
-	using System.Linq;
-	using NUnit.Framework;
-	using Zeiss.PiWeb.Formplot.FileFormat;
 
 	#endregion
 
@@ -348,14 +349,14 @@ namespace Zeiss.PiWeb.Formplots.Tests.FileFormat
 			ComparePoint( clonePoint, point );
 		}
 
-		private static void ComparePlot( Formplot actual, Formplot expected )
+		private static void ComparePlot( Formplot.FileFormat.Formplot actual, Formplot.FileFormat.Formplot expected )
 		{
 			CompareBasicProperties( actual, expected );
 			CompareProperties( expected.Properties, actual.Properties );
 			CompareSegment( expected.Segments.FirstOrDefault(), actual.Segments.FirstOrDefault() );
 		}
 
-		private static void CompareBasicProperties( Formplot actual, Formplot expected )
+		private static void CompareBasicProperties( Formplot.FileFormat.Formplot actual, Formplot.FileFormat.Formplot expected )
 		{
 			Assert.That( actual.CreatorSoftware, Is.EqualTo( expected.CreatorSoftware ) );
 			Assert.That( actual.CreatorSoftwareVersion, Is.EqualTo( expected.CreatorSoftwareVersion ) );
@@ -501,7 +502,7 @@ namespace Zeiss.PiWeb.Formplots.Tests.FileFormat
 			}
 		}
 
-		private static void GenerateExampleProperties( Formplot plot )
+		private static void GenerateExampleProperties( Formplot.FileFormat.Formplot plot )
 		{
 			plot.Properties.Add( Property.Create( "TestLong", 0, "Test-Long" ) );
 			plot.Properties.Add( Property.Create( "TestDouble", 0.0, "Test-Double" ) );

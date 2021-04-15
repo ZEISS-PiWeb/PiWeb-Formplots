@@ -1,9 +1,9 @@
 ﻿#region copyright
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
-/* Carl Zeiss IMT (IZfM Dresden)                   */
+/* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2020                             */
+/* (c) Carl Zeiss 20120-2021                        */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
