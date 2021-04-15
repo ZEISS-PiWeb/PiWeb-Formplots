@@ -1,4 +1,14 @@
-﻿namespace Zeiss.PiWeb.Formplots.Tests
+﻿#region copyright
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+/* Carl Zeiss Industrielle Messtechnik GmbH        */
+/* Softwaresystem PiWeb                            */
+/* (c) Carl Zeiss 2021                             */
+/* * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#endregion
+
+namespace Zeiss.PiWeb.Formplot.Tests
 {
     public static class MimeTypes
     {

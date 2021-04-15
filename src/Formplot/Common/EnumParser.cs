@@ -18,7 +18,7 @@ namespace Zeiss.PiWeb.Formplot.Common
 	#endregion
 
 	/// <summary>
-	/// Helferklasse zum Parsen von Enums.
+	/// Responsible for parsing enums.
 	/// </summary>
 	internal static class EnumParser<T> where T : struct
 	{

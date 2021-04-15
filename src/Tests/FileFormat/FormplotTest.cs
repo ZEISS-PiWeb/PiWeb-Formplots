@@ -13,7 +13,6 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using Zeiss.PiWeb.Formplot.FileFormat;
-using Zeiss.PiWeb.Formplots.Tests;
 
 namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 {

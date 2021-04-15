@@ -17,13 +17,14 @@ namespace Zeiss.PiWeb.Formplot.Common
 	#endregion
 
 	/// <summary>
-	/// Klasse mit Hilfsmethoden für Vergleiche von Fließkommazahlen.
-	/// (siehe https://msdn.microsoft.com/en-us/library/ya2zha7s(v=vs.110).aspx, Technik 1).
-	/// 
-	/// Der Vergleich von Nullables erfolgt analog .Net Framework:
+	/// Class containing helper methods for comparing doubles.
+	/// (see https://msdn.microsoft.com/en-us/library/ya2zha7s(v=vs.110).aspx, Technique 1).
+	///
+	/// Comparing Nullables is done like in .NET Framework:
 	/// https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/nullable-types/using-nullable-types
+	///
+	/// Comparing nullables returns:
 	/// 
-	/// Der Vergleich von Nullables liefert folgende Ergebnisse:
 	/// double? num1 = 10;
 	/// double? num2 = null;
 	/// double? num3 = null;
@@ -53,14 +54,14 @@ namespace Zeiss.PiWeb.Formplot.Common
 		#region methods
 
 		/// <summary>
-		/// Prüft, ob die angegebenen Fließkommazahlen unter Berücksichtigung der angegebenen Toleranz
-		/// als 'gleich' eingestuft werden können.
+		/// Checks if the given doubles can be considered "equal" under the given tolerance.
 		/// </summary>
-		/// <param name="x">Die erste Fließkommazahl.</param>
-		/// <param name="y">Die zweite Fließkommazahl.</param>
-		/// <param name="tolerance">Die Toleranz für den Vergleich.</param>
-		/// <returns><code>True</code>, wenn der Abstand zw. den beiden Fließkommazahlen
-		/// die angegebene Toleranz nicht übersteigt, ansonsten <code>false</code>.</returns>
+		/// <param name="x">First value.</param>
+		/// <param name="y">Second value.</param>
+		/// <param name="tolerance">Equality tolerance.</param>
+		/// <returns>
+		/// True if the distance between both values is smaller than the given tolerance. Otherwise false.
+		/// </returns>
 		internal static bool IsCloseTo( this double x, double y, double tolerance = DefaultPrecision )
 		{
 			// ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -68,15 +69,14 @@ namespace Zeiss.PiWeb.Formplot.Common
 		}
 		
 		/// <summary>
-		/// Prüft, ob die angegebenen Fließkommazahlen unter Berücksichtigung der angegebenen Toleranz
-		/// als 'gleich' eingestuft werden können.
+		/// Checks if the given doubles can be considered "equal" under the given tolerance.
 		/// </summary>
-		/// <param name="x">Die erste Fließkommazahl.</param>
-		/// <param name="y">Die zweite Fließkommazahl.</param>
-		/// <param name="tolerance">Die Toleranz für den Vergleich.</param>
-		/// <returns><code>True</code>, wenn beide Fließkommazahlen keinen Wert haben oder
-		/// der Abstand zw. den beiden Fließkommazahlen die angegebene Toleranz nicht übersteigt,
-		/// ansonsten <code>false</code>.</returns>
+		/// <param name="x">First value.</param>
+		/// <param name="y">Second value.</param>
+		/// <param name="tolerance">Equality tolerance.</param>
+		/// <returns>
+		/// True if both are null or the distance between them is smaller than the given tolerance. Otherwise false.
+		/// </returns>
 		internal static bool IsCloseTo( this double? x, double? y, double tolerance = DefaultPrecision )
 		{
 			if( !x.HasValue && !y.HasValue )
