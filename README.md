@@ -17,7 +17,7 @@
 
 ## PiWeb Formplot Library
 
-![alt text][logo]
+![Zeiss IQS Logo](gfx/logo_128x128.png)
 
 
 ## Overview

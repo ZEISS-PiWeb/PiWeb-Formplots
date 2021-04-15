@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>PiWeb.Formplot</AssemblyName>
+    <RootNamespace>Zeiss.PiWeb.Formplot</RootNamespace>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
+    <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
+    <Authors>$(Company)</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet package specifications">
+    <ProductName>PiWeb Formplot Library</ProductName>
+    <Description>
+      An API to read and write plot data for the ZEISS PiWeb quality data management system.
+    </Description>
+    <PackageId>Zeiss.PiWeb.Formplot</PackageId>
+    <Version>2.0.0</Version>
+    <PackageIcon>logo_128x128.png</PackageIcon>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/ZEISS-PiWeb/PiWeb-Formplots</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/ZEISS-PiWeb/PiWeb-Formplots.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DocumentationFile>bin\Release\Formplot.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="FileFormat\Compatibility\*.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+    <None Include="..\..\docs\gfx\logo_128x128.png" Pack="true" PackagePath="logo_128x128.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties" />
+  </ItemGroup>
+</Project>
