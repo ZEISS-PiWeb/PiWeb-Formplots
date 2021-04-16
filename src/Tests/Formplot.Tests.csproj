@@ -29,5 +29,10 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content CopyToOutputDirectory="PreserveNewest" Include="TestData\prpx\*.prpx" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="TestData\pltx\*.pltx" />
+  </ItemGroup>
   
 </Project>

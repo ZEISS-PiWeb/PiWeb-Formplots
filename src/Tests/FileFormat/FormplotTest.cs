@@ -8,15 +8,15 @@
 
 #endregion
 
-using System;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
-using Zeiss.PiWeb.Formplot.FileFormat;
-
 namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 {
 	#region usings
+	
+	using System;
+	using System.IO;
+	using System.Linq;
+	using NUnit.Framework;
+	using Zeiss.PiWeb.Formplot.FileFormat;
 
 	#endregion
 
@@ -25,49 +25,48 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 	{
 		#region members
 
-		private static readonly string TestDataDirectory = Path.Combine($@"{TestContext.CurrentContext.TestDirectory}", "TestData");
+		private static readonly string TestDataDirectory = Path.Combine( TestContext.CurrentContext.TestDirectory, "TestData");
 		private static readonly string[] AllFormplotFiles = Directory.GetFiles( TestDataDirectory, "*" + MimeTypes.FormplotFileExtension, SearchOption.AllDirectories );
 		private static readonly string[] AllPropertyFiles = Directory.GetFiles( TestDataDirectory, "*" + MimeTypes.PropertiesFileExtension, SearchOption.AllDirectories );
 
 		private static readonly Tolerance[] TestTolerances =
 		{
-			new Tolerance(),
-			new Tolerance( 77 ),
-			new Tolerance( null, 77 ),
-			new Tolerance { ToleranceType = ToleranceType.Spatial, SpatialTolerance = new Vector( 1, 2, 3 ) },
-			new Tolerance { ToleranceType = ToleranceType.Rectangular, RectangleToleranceHeight = 2, RectangleToleranceWidth = 3 },
-			new Tolerance { ToleranceType = ToleranceType.Circular, CircularToleranceRadius = 7.5 },
-			new Tolerance( 12, 13 ) { WarningLevel = 99 },
-			new Tolerance( 12, 13 ) { WarningLevel = 12 },
-			new Tolerance( 12, 13 ) { RectangleToleranceWidth = 134 },
-			new Tolerance( 12, 13 ) { RectangleToleranceHeight = 134 },
-			new Tolerance( 12, 13 ) { RectangleToleranceWidth = 234, RectangleToleranceHeight = 134 },
-			new Tolerance( 12, 13 ) { SpatialTolerance = new Vector( 1, 2, 3 ) }
+			new(),
+			new( 77 ),
+			new( null, 77 ),
+			new() { ToleranceType = ToleranceType.Spatial, SpatialTolerance = new Vector( 1, 2, 3 ) },
+			new() { ToleranceType = ToleranceType.Rectangular, RectangleToleranceHeight = 2, RectangleToleranceWidth = 3 },
+			new() { ToleranceType = ToleranceType.Circular, CircularToleranceRadius = 7.5 },
+			new( 12, 13 ) { WarningLevel = 99 },
+			new( 12, 13 ) { WarningLevel = 12 },
+			new( 12, 13 ) { RectangleToleranceWidth = 134 },
+			new( 12, 13 ) { RectangleToleranceHeight = 134 },
+			new( 12, 13 ) { RectangleToleranceWidth = 234, RectangleToleranceHeight = 134 },
+			new( 12, 13 ) { SpatialTolerance = new Vector( 1, 2, 3 ) }
 		};
 
 		#endregion
 
 		#region methods
 
-		// TODO Re-enable.
-		// [Test, TestCaseSource( nameof( AllFormplotFiles ) )]
-		// public void BatchTest_FormplotFiles( string formplotFile )
-		// {
-		// 	using var stream = File.OpenRead( formplotFile );
-		// 	Assert.That( Formplot.ReadFrom( stream ), Is.Not.Null );
-		// }
+		[Test, TestCaseSource( nameof( AllFormplotFiles ) )]
+		public void BatchTest_FormplotFiles( string formplotFile )
+		{
+			using var stream = File.OpenRead( formplotFile );
+			Assert.That( Formplot.ReadFrom( stream ), Is.Not.Null );
+		}
 
-		// TODO Re-enable.
-		// [Test, TestCaseSource( nameof( AllPropertyFiles ) )]
-		// public void BatchTest_PropertyFiles( string propertyFile )
-		// {
-		// 	using var stream = File.OpenRead( propertyFile );
-		// 	Assert.That( Formplot.ReadFrom( stream ), Is.Not.Null );
-		// }
+		[Test, TestCaseSource( nameof( AllPropertyFiles ) )]
+		public void BatchTest_PropertyFiles( string propertyFile )
+		{
+			using var stream = File.OpenRead( propertyFile );
+			Assert.That( Formplot.ReadFrom( stream ), Is.Not.Null );
+		}
 
 		[Test]
 		public void Test_Property_Serialization()
 		{
+			var i = 0;
 			var plot = new EmptyPlot();
 			GenerateExampleProperties( plot );
 
@@ -94,15 +93,14 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			CompareBasicProperties( clone, plot );
 		}
 
-		// TODO Re-enable.
-		// [Test, TestCaseSource( nameof( TestTolerances ) )]
-		// public void Test_Tolerance_Serialization( Tolerance tolerance )
-		// {
-		// 	var plot = new DefectPlot { Tolerance = tolerance };
-		// 	var clone = plot.Clone();
-		//
-		// 	Assert.That( clone.Tolerance, Is.EqualTo( tolerance ) );
-		// }
+		[Test, TestCaseSource( nameof( TestTolerances ) )]
+		public void Test_Tolerance_Serialization( Tolerance tolerance )
+		{
+			var plot = new DefectPlot { Tolerance = tolerance };
+			var clone = plot.Clone();
+		
+			Assert.That( clone.Tolerance, Is.EqualTo( tolerance ) );
+		}
 
 		[Test]
 		public void SerializationSmokeTest_DefectPlot()
@@ -348,14 +346,14 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			ComparePoint( clonePoint, point );
 		}
 
-		private static void ComparePlot( Formplot.FileFormat.Formplot actual, Formplot.FileFormat.Formplot expected )
+		private static void ComparePlot( Formplot actual, Formplot expected )
 		{
 			CompareBasicProperties( actual, expected );
 			CompareProperties( expected.Properties, actual.Properties );
 			CompareSegment( expected.Segments.FirstOrDefault(), actual.Segments.FirstOrDefault() );
 		}
 
-		private static void CompareBasicProperties( Formplot.FileFormat.Formplot actual, Formplot.FileFormat.Formplot expected )
+		private static void CompareBasicProperties( Formplot actual, Formplot expected )
 		{
 			Assert.That( actual.CreatorSoftware, Is.EqualTo( expected.CreatorSoftware ) );
 			Assert.That( actual.CreatorSoftwareVersion, Is.EqualTo( expected.CreatorSoftwareVersion ) );
@@ -501,7 +499,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			}
 		}
 
-		private static void GenerateExampleProperties( Formplot.FileFormat.Formplot plot )
+		private static void GenerateExampleProperties( Formplot plot )
 		{
 			plot.Properties.Add( Property.Create( "TestLong", 0, "Test-Long" ) );
 			plot.Properties.Add( Property.Create( "TestDouble", 0.0, "Test-Double" ) );

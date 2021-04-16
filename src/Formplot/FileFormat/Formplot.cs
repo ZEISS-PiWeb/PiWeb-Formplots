@@ -20,7 +20,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Base class for all kinds of formplots
+	/// Base class for all kinds of formplots.
 	/// </summary>
 	public abstract class Formplot
 	{
