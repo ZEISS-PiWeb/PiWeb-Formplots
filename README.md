@@ -13,14 +13,14 @@
 [fourier]: docs/gfx/32px/FourierplotElement.png "Fourier plot"
 [defect]: docs/gfx/32px/DefectElement.png "Defect image"
 
-<br/>
 
-## PiWeb Formplot Library
+# PiWeb Formplot Library
 
-![alt text][logo]
+| ![Zeiss IQS Logo](docs/gfx/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing PiWeb formplot data. |
+|-|:-|
 
 
-## Overview
+# Overview
 
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -30,9 +30,10 @@
 	- [Properties](#properties)
 	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
 
-## Introduction
 
-The **PiWeb formplot library** provides an easy to use interface for reading and especially writing PiWeb formplot data. PiWeb formplot files are zip-compressed archives, containing three files:
+# Introduction
+
+PiWeb formplot files are zip-compressed archives, containing three files:
 
 * *fileversion.txt*: Contains the formplot **file version**.
 * *header.xml*: Contains **structural information**, such as geometry, tolerances, segments and the plots element system.
@@ -41,19 +42,39 @@ The **PiWeb formplot library** provides an easy to use interface for reading and
 To simplify and shorten the progress of writing formplot files, we published the formplot library!
 
 
-## Installation
+# Installation
 
-The **PiWeb Formplot library** is available via [NuGet](https://www.nuget.org/packages/Zeiss.IMT.PiWeb.Formplots/):
+The **PiWeb Formplot library** is available via NuGet.
+
+
+## Versions >= 2.0.0
+
+Get it at [NuGet.org](https://www.nuget.org/packages/Zeiss.PiWeb.Formplot/).
+
+```cmd
+PM> Install-Package Zeiss.PiWeb.Formplot
+```
+
+Or compile the library by yourself. Requirements:
+
+* Microsoft Visual Studio 2019
+* Microsoft .NET Standard 2.0
+
+
+## Older versions
+
+Get it at [NuGet](https://www.nuget.org/packages/Zeiss.IMT.PiWeb.Formplots/).
 
 ```
 PM> Install-Package Zeiss.IMT.PiWeb.Formplots
 ```
+
 Or compile the library by yourself. Requirements:
 
 * Microsoft Visual Studio 2015
 * Microsoft .NET Framework v4.5
 
-## Basic Usage
+# Basic Usage
 
 1. Create a plot of the desired plot type and a list of plot points
 ```csharp
@@ -76,9 +97,9 @@ plot.Points = points;
 plot.WriteTo( outputStream );
 ```
 
-## Manual
+# Manual
 
-### Formplot types
+## Formplot types
 
 Following _element types_ with their respective _formplot types_ are supported by the library. Please use the links in the table for detailed information about certain plot types:
 
@@ -98,7 +119,7 @@ Following _element types_ with their respective _formplot types_ are supported b
 | ![][straightness]| [Straightness](docs/Plots/Line.md) |  `Straightness` |
 | ![][defect]| [Defect](docs/Plots/Defect.md) |  `Defect` |
 
-### Properties
+## Properties
 
 Formplots may contain additional properties that are accessible by PiWeb. You can add properties to your plot like the following:
 
@@ -114,7 +135,7 @@ ${Qdb.Property("My property")}
 
 > The element must have its databinding set to the measurement value containing the formplot.
 
-### Writing plots into PiWeb
+## Writing plots into PiWeb
 
 You can either upload formplot files manually by using the PiWeb Planner, or by using the PiWeb API like the following:
 
@@ -149,5 +170,3 @@ public static async Task WriteToDatabase(
 
 >Please note that, in any case, The file extension and the mimetype are *mandatory*. Files with other mimetypes or extensions will not be recognized as formplot data.
 
-<br/>
-<br/>

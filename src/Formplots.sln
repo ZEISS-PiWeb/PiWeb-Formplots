@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formplot", "Formplot\Formplot.csproj", "{E71257FE-AA5B-468E-8514-7400D1D1118B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formplot.Tests", "Tests\Formplot.Tests.csproj", "{0450FEAA-C853-4A88-94FE-8280CD1C696C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E71257FE-AA5B-468E-8514-7400D1D1118B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71257FE-AA5B-468E-8514-7400D1D1118B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71257FE-AA5B-468E-8514-7400D1D1118B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71257FE-AA5B-468E-8514-7400D1D1118B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0450FEAA-C853-4A88-94FE-8280CD1C696C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0450FEAA-C853-4A88-94FE-8280CD1C696C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0450FEAA-C853-4A88-94FE-8280CD1C696C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0450FEAA-C853-4A88-94FE-8280CD1C696C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
