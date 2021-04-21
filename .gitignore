@@ -1,4 +1,7 @@
+.idea
 *.suo
 *.dll
 *.xml
-/SDK/Formplots/*.user
+bin
+obj
+*.DotSettings.user
