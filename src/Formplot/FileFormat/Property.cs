@@ -316,25 +316,47 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return sb.ToString();
 		}
 
-		private static DateTime? ObjectToNullableDateTime( string stringValue, IFormatProvider? provider = null, DateTimeStyles style = DateTimeStyles.RoundtripKind )
+		private static DateTime? ObjectToNullableDateTime( string? stringValue, IFormatProvider? provider = null, DateTimeStyles style = DateTimeStyles.RoundtripKind )
 		{
-			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out var result ) ? (DateTime?)result : null;
+			if( stringValue == null )
+				return null;
+
+			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out var result )
+				? (DateTime?)result
+				: null;
 		}
 
-		private static long? ObjectToNullableInt64( string stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Integer )
+		private static long? ObjectToNullableInt64( string? stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Integer )
 		{
-			return long.TryParse( stringValue, style, provider, out var result ) ? (long?)result : null;
+			if( stringValue == null )
+				return null;
+
+			return long.TryParse( stringValue, style, provider, out var result )
+				? (long?)result
+				: null;
 		}
 
-		internal static double? ObjectToNullableDouble( string stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands )
+		internal static double? ObjectToNullableDouble( string? stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands )
 		{
-			return double.TryParse( stringValue, style, provider, out var result ) ? (double?)result : null;
+			if( stringValue == null )
+				return null;
+
+			return double.TryParse( stringValue, style, provider, out var result )
+				? (double?)result
+				: null;
 		}
 
-		private static TimeSpan? ObjectToNullableTimeSpan( string stringValue, IFormatProvider? provider = null )
+		private static TimeSpan? ObjectToNullableTimeSpan( string? stringValue, IFormatProvider? provider = null )
 		{
-			if( TimeSpan.TryParse( stringValue, provider, out var result ) ) return result;
-			if( TryXmlConvertToTimeSpan( stringValue, out result ) ) return result;
+			if( stringValue == null )
+				return null;
+
+			if( TimeSpan.TryParse( stringValue, provider, out var result ) )
+				return result;
+
+			if( TryXmlConvertToTimeSpan( stringValue, out result ) )
+				return result;
+
 			return null;
 		}
 

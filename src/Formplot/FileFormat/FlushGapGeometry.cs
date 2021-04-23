@@ -29,17 +29,17 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public override GeometryTypes GeometryType { get; } = GeometryTypes.FlushGap;
 
 		/// <summary>
-		/// Get or set the reference profile for geometry of Flush- and Gapplot
+		/// Get or set the reference profile for geometry of Flush- and Gap plot
 		/// </summary>
 		public FlushGapProfile ReferenceProfile { get; private set; } = new FlushGapProfile();
 
 		/// <summary>
-		/// Get or set the measure profile  for geometry of Flush- and Gapplot
+		/// Get or set the measure profile  for geometry of Flush- and Gap plot
 		/// </summary>
 		public FlushGapProfile MeasureProfile { get; private set; } = new FlushGapProfile();
 
 		/// <summary>
-		/// Get or set the value for the Flush of Flush- and Gapplot
+		/// Get or set the value for the Flush of Flush- and Gap plot
 		/// </summary>
 		public double FlushValue { get; set; }
 
@@ -49,7 +49,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public FlushPointConnectionType FlushConnectionType { get; set; } = FlushPointConnectionType.Orthogonal;
 
 		/// <summary>
-		/// Get or set the value for the Gap of Flush- and Gapplot
+		/// Get or set the value for the Gap of Flush- and Gap plot
 		/// </summary>
 		public double GapValue { get; set; }
 
