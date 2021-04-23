@@ -32,7 +32,7 @@ namespace Zeiss.PiWeb.Formplot.Common
 		#region methods
 
 		/// <summary>
-		/// Alternative to <see cref="System.Enum.Parse(System.Type,string)"/>. Prevents double writing of class name.
+		/// Equivalent to <see cref="Enum.Parse(System.Type,string)"/>.
 		/// </summary>
 		internal static T Parse( string value )
 		{
@@ -46,7 +46,7 @@ namespace Zeiss.PiWeb.Formplot.Common
 		}
 
 		/// <summary>
-		/// Alternative to <see cref="System.Enum.Parse(System.Type,string)"/>. Prevents double writing of class name.
+		/// Equivalent to <see cref="System.Enum.TryParse{TEnum}(string?,bool,out TEnum)"/>.
 		/// </summary>
 		internal static bool TryParse( string value, out T enumValue )
 		{
