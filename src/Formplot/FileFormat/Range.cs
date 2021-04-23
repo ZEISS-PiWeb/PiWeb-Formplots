@@ -112,7 +112,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					var endString = rangeString.Substring( index + 1 );
 
 					if( int.TryParse( startString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var start ) &&
-					    int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var end ) && IsValidRange( start, end ) )
+						int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var end ) && IsValidRange( start, end ) )
 						return new Range( start, end );
 				}
 			}
@@ -129,7 +129,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		{
 			if( !IsValidRange( start, end ) )
 			{
-				throw new ArgumentOutOfRangeException( "start is greater then end", default ( Exception ) );
+				throw new ArgumentOutOfRangeException( "start is greater then end", default( Exception ) );
 			}
 		}
 
@@ -146,7 +146,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			if( rangeA != null && rangeB != null )
 			{
 				return Equals( rangeA._Start, rangeB._Start ) &&
-				       Equals( rangeA._End, rangeB._End );
+						Equals( rangeA._End, rangeB._End );
 			}
 
 			return false;

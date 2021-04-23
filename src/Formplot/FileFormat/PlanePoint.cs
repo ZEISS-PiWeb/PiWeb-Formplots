@@ -19,12 +19,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point on a plane.
 	/// </summary>
-	public sealed class PlanePoint : Point<PlanePoint,PlaneGeometry>
+	public sealed class PlanePoint : Point<PlanePoint, PlaneGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public PlanePoint( ){}
+		public PlanePoint() { }
 
 		//// <summary>Constructor.</summary>
 		/// <param name="coordinate1">The coordinate in the first plane axis direction.</param>

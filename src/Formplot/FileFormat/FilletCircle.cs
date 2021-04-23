@@ -24,7 +24,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region constructors
 
 		internal FilletCircle()
-		{}
+		{ }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="radius">The radius.</param>

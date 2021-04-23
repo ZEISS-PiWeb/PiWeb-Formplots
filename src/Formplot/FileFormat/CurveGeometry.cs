@@ -15,7 +15,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public class CurveGeometry : Geometry
 	{
+		#region properties
+
 		/// <inheritdoc />
 		public override GeometryTypes GeometryType { get; } = GeometryTypes.Curve;
+
+		#endregion
 	}
 }

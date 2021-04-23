@@ -11,7 +11,7 @@
 namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 {
 	#region usings
-	
+
 	using System;
 	using System.IO;
 	using System.Linq;
@@ -25,7 +25,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 	{
 		#region members
 
-		private static readonly string TestDataDirectory = Path.Combine( TestContext.CurrentContext.TestDirectory, "TestData");
+		private static readonly string TestDataDirectory = Path.Combine( TestContext.CurrentContext.TestDirectory, "TestData" );
 		private static readonly string[] AllFormplotFiles = Directory.GetFiles( TestDataDirectory, "*" + MimeTypes.FormplotFileExtension, SearchOption.AllDirectories );
 		private static readonly string[] AllPropertyFiles = Directory.GetFiles( TestDataDirectory, "*" + MimeTypes.PropertiesFileExtension, SearchOption.AllDirectories );
 
@@ -98,7 +98,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			var plot = new DefectPlot { Tolerance = tolerance };
 			var clone = plot.Clone();
-		
+
 			Assert.That( clone.Tolerance, Is.EqualTo( tolerance ) );
 		}
 
@@ -478,7 +478,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			Assert.That( actual.Deviation, Is.EqualTo( expected.Deviation ) );
 		}
 
-		private static void CompareSegment( Segment expected, Segment actual  )
+		private static void CompareSegment( Segment expected, Segment actual )
 		{
 			Assert.That( actual, Is.Not.Null );
 			Assert.That( actual.Name, Is.EqualTo( expected.Name ) );
@@ -486,6 +486,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			Assert.That( actual.Position, Is.EqualTo( expected.Position ) );
 			Assert.That( actual.Points, Has.Exactly( expected.Points.Count ).Items );
 		}
+
 		private static void CompareProperties( PropertyCollection expectedProperties, PropertyCollection actualProperties )
 		{
 			foreach( var expected in expectedProperties )

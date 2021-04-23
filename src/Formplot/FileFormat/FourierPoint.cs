@@ -20,12 +20,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point of a Fourier plot
 	/// </summary>
-	public sealed class FourierPoint : Point<FourierPoint,EmptyGeometry>
+	public sealed class FourierPoint : Point<FourierPoint, EmptyGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public FourierPoint( ) { }
+		public FourierPoint() { }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="harmonic">The harmonic of fundamental frequency.</param>

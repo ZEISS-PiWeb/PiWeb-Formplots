@@ -132,7 +132,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 						radius = Property.ObjectToNullableDouble( reader.ReadString(), CultureInfo.InvariantCulture ) ?? 0.0;
 						break;
 					case "Center":
-						 center = DeserializePoint( reader );
+						center = DeserializePoint( reader );
 						break;
 				}
 			}
@@ -157,7 +157,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			if( Outlet != null )
 				SerializePoint( writer, Outlet, "Outlet" );
-
 		}
 
 		/// <inheritdoc />

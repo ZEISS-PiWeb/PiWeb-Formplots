@@ -13,8 +13,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Determines what kind of deviation is stored.
 	/// </summary>
-	public enum DeviationTypes {
-
+	public enum DeviationTypes
+	{
 		/// <summary>
 		/// Length in mm.
 		/// </summary>

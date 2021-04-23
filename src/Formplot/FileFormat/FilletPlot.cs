@@ -15,9 +15,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public sealed class FilletPlot : Formplot<FilletPoint, FilletGeometry>
 	{
+		#region constructors
+
 		/// <summary>Constructor.</summary>
 		public FilletPlot() : base( FormplotTypes.Fillet )
-		{
-		}
+		{ }
+
+		#endregion
 	}
 }

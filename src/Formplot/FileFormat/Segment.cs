@@ -20,8 +20,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a segment of points.
 	/// </summary>
-	public sealed class Segment<TPoint,TGeometry> : Segment, IEquatable<Segment<TPoint,TGeometry>>
-		where TPoint : Point<TPoint,TGeometry>, new()
+	public sealed class Segment<TPoint, TGeometry> : Segment, IEquatable<Segment<TPoint, TGeometry>>
+		where TPoint : Point<TPoint, TGeometry>, new()
 		where TGeometry : Geometry, new()
 	{
 		#region constructors
@@ -41,12 +41,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets the points
 		/// </summary>
-		public new PointCollection<TPoint,TGeometry> Points { get; }
+		public new PointCollection<TPoint, TGeometry> Points { get; }
 
 		/// <summary>
 		/// The plot to which this segment belongs.
 		/// </summary>
-		public new Formplot<TPoint,TGeometry>? Formplot { get; internal set; }
+		public new Formplot<TPoint, TGeometry>? Formplot { get; internal set; }
 
 		/// <inheritdoc />
 		internal override Formplot? AbstractFormplot => Formplot;
@@ -58,7 +58,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
-		private static bool Equals( Segment<TPoint,TGeometry> a, Segment<TPoint,TGeometry> b )
+		private static bool Equals( Segment<TPoint, TGeometry> a, Segment<TPoint, TGeometry> b )
 		{
 			return Segment.Equals( a, b );
 		}
@@ -71,10 +71,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#endregion
 
-		#region interface IEquatable<Segment<TPoint>>
+		#region interface IEquatable<Segment<TPoint,TGeometry>>
 
 		/// <inheritdoc />
-		public bool Equals( Segment<TPoint,TGeometry> other )
+		public bool Equals( Segment<TPoint, TGeometry> other )
 		{
 			return Equals( this, other );
 		}

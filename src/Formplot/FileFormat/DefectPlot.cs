@@ -13,15 +13,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Contains defects.
 	/// </summary>
-	public sealed class DefectPlot : Formplot<Defect,DefectGeometry>
+	public sealed class DefectPlot : Formplot<Defect, DefectGeometry>
 	{
 		#region constructors
 
 		/// <summary>Constructor.</summary>
 		public DefectPlot() : base( FormplotTypes.Defect )
-		{
-
-		}
+		{ }
 
 		#endregion
 	}

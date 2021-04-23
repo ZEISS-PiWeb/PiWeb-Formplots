@@ -24,18 +24,18 @@ namespace Zeiss.PiWeb.Formplot.Common
 	/// https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/nullable-types/using-nullable-types
 	///
 	/// Comparing nullables returns:
-	/// 
+	///
 	/// double? num1 = 10;
 	/// double? num2 = null;
 	/// double? num3 = null;
-	/// 
+	///
 	/// num1 == num2 = False
 	/// num1 != num2 = True
 	/// num1 >  num2 = False
 	/// num1 >= num2 = False
 	/// num1 &lt;  num2 = False
 	/// num1 &lt;= num2 = False
-	/// 
+	///
 	/// num3 == num2 = True
 	/// num3 != num2 = False
 	/// num3 >  num2 = False
@@ -67,7 +67,7 @@ namespace Zeiss.PiWeb.Formplot.Common
 			// ReSharper disable once CompareOfFloatsByEqualityOperator
 			return x == y || Math.Abs( x - y ) <= tolerance;
 		}
-		
+
 		/// <summary>
 		/// Checks if the given doubles can be considered "equal" under the given tolerance.
 		/// </summary>
@@ -81,8 +81,8 @@ namespace Zeiss.PiWeb.Formplot.Common
 		{
 			if( !x.HasValue && !y.HasValue )
 				return true;
-			
-			if( !x.HasValue || !y.HasValue ) 
+
+			if( !x.HasValue || !y.HasValue )
 				return false;
 
 			return IsCloseTo( x.Value, y.Value, tolerance );

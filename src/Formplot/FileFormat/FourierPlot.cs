@@ -19,7 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		/// <summary>Constructor.</summary>
 		public FourierPlot() : base( FormplotTypes.Fourier )
-		{}
+		{ }
 
 		#endregion
 	}

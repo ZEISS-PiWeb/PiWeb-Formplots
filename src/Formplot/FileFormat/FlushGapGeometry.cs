@@ -90,7 +90,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.WriteAttributeString( "ConnectionType", GapConnectionType.ToString() );
 			writer.WriteString( XmlConvert.ToString( GapValue ) );
 			writer.WriteEndElement();
-
 		}
 
 		/// <inheritdoc />

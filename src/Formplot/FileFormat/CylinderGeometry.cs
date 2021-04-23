@@ -50,7 +50,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#endregion
 
-		#region overrides
+		#region methods
 
 		/// <inheritdoc />
 		internal override void Serialize( XmlWriter writer )

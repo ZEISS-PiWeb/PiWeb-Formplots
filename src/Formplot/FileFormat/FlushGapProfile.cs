@@ -23,10 +23,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public sealed class FlushGapProfile
 	{
-		#region members
-
-		#endregion
-
 		#region properties
 
 		/// <summary>
@@ -48,6 +44,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// Gets or sets the gap point.
 		/// </summary>
 		public FlushGapPoint? Gap { get; set; }
+
+		#endregion
+
+		#region methods
 
 		private static void SerializePoint( XmlWriter writer, FlushGapPoint point, string name )
 		{

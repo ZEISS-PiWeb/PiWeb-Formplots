@@ -37,6 +37,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		// ReSharper disable once InconsistentNaming
 		[ThreadStatic] private static NameTable? _NameTable;
 
+		#endregion
+
+		#region properties
+
 		private static NameTable NameTable => _NameTable ??= new NameTable();
 
 		#endregion

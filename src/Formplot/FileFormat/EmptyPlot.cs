@@ -18,7 +18,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region constructors
 
 		/// <summary>Constructor.</summary>
-		public EmptyPlot() : base( FormplotTypes.None ){}
+		public EmptyPlot() : base( FormplotTypes.None ) { }
 
 		#endregion
 	}

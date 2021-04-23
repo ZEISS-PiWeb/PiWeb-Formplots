@@ -19,7 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a cylinder point.
 	/// </summary>
-	public sealed class CylinderPoint : Point<CylinderPoint,CylinderGeometry>
+	public sealed class CylinderPoint : Point<CylinderPoint, CylinderGeometry>
 	{
 		#region constructors
 

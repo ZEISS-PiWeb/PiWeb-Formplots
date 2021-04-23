@@ -19,14 +19,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a curve point.
 	/// </summary>
-	public abstract class CurvePointBase<TPoint,TGeometry> : Point<TPoint,TGeometry>
-		where TPoint : Point<TPoint,TGeometry>, new()
+	public abstract class CurvePointBase<TPoint, TGeometry> : Point<TPoint, TGeometry>
+		where TPoint : Point<TPoint, TGeometry>, new()
 		where TGeometry : Geometry, new()
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		internal CurvePointBase( ) { }
+		internal CurvePointBase() { }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>

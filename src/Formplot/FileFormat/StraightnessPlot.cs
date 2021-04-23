@@ -19,7 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		/// <summary>Constructor.</summary>
 		public StraightnessPlot() : base( FormplotTypes.Straightness )
-		{}
+		{ }
 
 		#endregion
 	}

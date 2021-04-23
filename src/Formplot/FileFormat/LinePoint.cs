@@ -19,12 +19,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point of a line
 	/// </summary>
-	public sealed class LinePoint : Point<LinePoint,LineGeometry>
+	public sealed class LinePoint : Point<LinePoint, LineGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public LinePoint( ) { }
+		public LinePoint() { }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>

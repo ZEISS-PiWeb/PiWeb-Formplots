@@ -15,15 +15,16 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Point that is used as a dummy for the <see cref="EmptyPlot"/>.
 	/// </summary>
-	public sealed class EmptyPoint : Point<EmptyPoint,EmptyGeometry>
+	public sealed class EmptyPoint : Point<EmptyPoint, EmptyGeometry>
 	{
-		/// <inheritdoc />
-		internal override void WriteToStream( BinaryWriter writer ){ }
+		#region methods
 
 		/// <inheritdoc />
-		internal override void ReadFromStream( BinaryReader reader ){ }
+		internal override void WriteToStream( BinaryWriter writer ) { }
+
+		/// <inheritdoc />
+		internal override void ReadFromStream( BinaryReader reader ) { }
+
+		#endregion
 	}
 }
-
-
-

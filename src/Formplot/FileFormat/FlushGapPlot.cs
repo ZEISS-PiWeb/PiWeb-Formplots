@@ -19,8 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		/// <summary>Constructor.</summary>
 		public FlushGapPlot() : base( FormplotTypes.FlushGap )
-		{
-		}
+		{ }
 
 		#endregion
 	}

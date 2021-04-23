@@ -20,7 +20,8 @@ namespace Zeiss.PiWeb.Formplot.Common
 	/// <summary>
 	/// Responsible for parsing enums.
 	/// </summary>
-	internal static class EnumParser<T> where T : struct
+	internal static class EnumParser<T>
+		where T : struct
 	{
 		#region members
 
@@ -40,7 +41,7 @@ namespace Zeiss.PiWeb.Formplot.Common
 				if( Items.TryGetValue( value, out var result ) )
 					return result;
 
-				return Items[ value ] = ( T ) Enum.Parse( typeof( T ), value, true );
+				return Items[ value ] = (T)Enum.Parse( typeof( T ), value, true );
 			}
 		}
 

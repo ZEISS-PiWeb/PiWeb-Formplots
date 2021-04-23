@@ -19,12 +19,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// An item of the defect plot.
 	/// </summary>
-	public sealed class Defect : Point<Defect,DefectGeometry>
+	public sealed class Defect : Point<Defect, DefectGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public Defect( ) { }
+		public Defect() { }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
@@ -100,14 +100,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Size.Y );
 			writer.Write( Size.Z );
 
-			if( Voxels == null || Voxels.Length == 0)
+			if( Voxels == null || Voxels.Length == 0 )
 			{
 				writer.Write( 0 );
 				return;
 			}
 
 			writer.Write( Voxels.Length );
-			foreach( var voxel in Voxels)
+			foreach( var voxel in Voxels )
 			{
 				writer.Write( voxel.Position.X );
 				writer.Write( voxel.Position.Y );
@@ -130,7 +130,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
-		public Voxel(Vector position, Vector size)
+		public Voxel( Vector position, Vector size )
 		{
 			Position = position;
 			Size = size;

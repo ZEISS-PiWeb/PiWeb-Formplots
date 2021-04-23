@@ -67,7 +67,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
-				throw new ArgumentNullException( nameof(writer) );
+				throw new ArgumentNullException( nameof( writer ) );
 
 			writer.WriteAttributeString( "X", XmlConvert.ToString( X ) );
 			writer.WriteAttributeString( "Y", XmlConvert.ToString( Y ) );
@@ -83,7 +83,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal static Vector Deserialize( XmlReader reader )
 		{
 			if( reader == null )
-				throw new ArgumentNullException( nameof(reader) );
+				throw new ArgumentNullException( nameof( reader ) );
 
 			var value = reader.GetAttribute( "X" );
 			var x = string.IsNullOrWhiteSpace( value ) ? default : XmlConvert.ToDouble( value );
@@ -121,8 +121,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		private static bool Equals( Vector a, Vector b )
 		{
 			return Math.Abs( a.X - b.X ) < double.Epsilon &&
-			       Math.Abs( a.Y - b.Y ) < double.Epsilon &&
-			       Math.Abs( a.Z - b.Z ) < double.Epsilon;
+					Math.Abs( a.Y - b.Y ) < double.Epsilon &&
+					Math.Abs( a.Z - b.Z ) < double.Epsilon;
 		}
 
 		/// <inheritdoc />

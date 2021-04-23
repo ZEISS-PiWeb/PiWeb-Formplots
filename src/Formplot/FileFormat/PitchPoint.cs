@@ -19,12 +19,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point of a pitch.
 	/// </summary>
-	public sealed class PitchPoint : Point<PitchPoint,PitchGeometry>
+	public sealed class PitchPoint : Point<PitchPoint, PitchGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public PitchPoint(  ) { }
+		public PitchPoint() { }
 
 		/// <summary>Constructor.</summary>
 		/// <param name="deviation">The deviation.</param>
