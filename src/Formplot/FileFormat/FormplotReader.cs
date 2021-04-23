@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2017-2021                        */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -36,6 +36,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		// ReSharper disable once InconsistentNaming
 		[ThreadStatic] private static NameTable? _NameTable;
+
+		#endregion
+
+		#region properties
 
 		private static NameTable NameTable => _NameTable ??= new NameTable();
 

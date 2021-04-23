@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -11,7 +11,7 @@
 namespace Zeiss.PiWeb.Formplot.FileFormat
 {
 	/// <summary>
-	/// Stellt einen Kurvenpunkt dar.
+	/// Represents a curve point.
 	/// </summary>
 	public sealed class CurvePoint : CurvePointBase<CurvePoint, CurveGeometry>
 	{
@@ -20,9 +20,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public CurvePoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CurvePoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="direction">The direction.</param>
 		/// <param name="deviation">The deviation.</param>

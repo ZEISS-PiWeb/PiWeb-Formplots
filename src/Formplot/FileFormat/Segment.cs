@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -20,14 +20,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a segment of points.
 	/// </summary>
-	public sealed class Segment<TPoint,TGeometry> : Segment, IEquatable<Segment<TPoint,TGeometry>>
-		where TPoint : Point<TPoint,TGeometry>, new()
+	public sealed class Segment<TPoint, TGeometry> : Segment, IEquatable<Segment<TPoint, TGeometry>>
+		where TPoint : Point<TPoint, TGeometry>, new()
 		where TGeometry : Geometry, new()
 	{
 		#region constructors
 
-		/// <summary>
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="name">The name.</param>
 		/// <param name="segmentType">Type of the segment.</param>
 		public Segment( string name, SegmentTypes segmentType ) : base( name, segmentType )
@@ -42,27 +41,29 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets the points
 		/// </summary>
-		public new PointCollection<TPoint,TGeometry> Points { get; }
+		public new PointCollection<TPoint, TGeometry> Points { get; }
 
 		/// <summary>
 		/// The plot to which this segment belongs.
 		/// </summary>
-		public new Formplot<TPoint,TGeometry>? Formplot { get; internal set; }
+		public new Formplot<TPoint, TGeometry>? Formplot { get; internal set; }
 
+		/// <inheritdoc />
 		internal override Formplot? AbstractFormplot => Formplot;
 
+		/// <inheritdoc />
 		internal override IReadOnlyCollection<Point> AbstractPoints => Points;
 
 		#endregion
 
 		#region methods
 
-		private static bool Equals( Segment<TPoint,TGeometry> a, Segment<TPoint,TGeometry> b )
+		private static bool Equals( Segment<TPoint, TGeometry> a, Segment<TPoint, TGeometry> b )
 		{
 			return Segment.Equals( a, b );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return base.GetHashCode();
@@ -70,10 +71,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#endregion
 
-		#region interface IEquatable<Segment<TPoint>>
+		#region interface IEquatable<Segment<TPoint,TGeometry>>
 
-		/// <inheritdoc/>>
-		public bool Equals( Segment<TPoint,TGeometry> other )
+		/// <inheritdoc />
+		public bool Equals( Segment<TPoint, TGeometry> other )
 		{
 			return Equals( this, other );
 		}
@@ -88,8 +89,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="name">The name.</param>
 		/// <param name="segmentType">Type of the segment.</param>
 		protected Segment( string name, SegmentTypes segmentType )
@@ -107,7 +107,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal abstract IReadOnlyCollection<Point> AbstractPoints { get; }
 
 		/// <summary>
-		/// Gets the points
+		/// Gets the points.
 		/// </summary>
 		public IReadOnlyCollection<Point> Points => AbstractPoints;
 
@@ -127,8 +127,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public SegmentTypes SegmentType { get; }
 
 		/// <summary>
-		/// Gets the position of this segment. It's only set when converting
-		/// from another plot type.
+		/// Gets the position of this segment. It's only set when converting from another plot type.
 		/// </summary>
 		public double Position { get; internal set; }
 
@@ -147,19 +146,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return false;
 		}
 
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-		/// <returns>
-		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-		/// </returns>
+		/// <inheritdoc />
 		public override bool Equals( object obj )
 		{
 			return Equals( this, obj as Segment );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return Name.GetHashCode() ^ SegmentType.GetHashCode();
@@ -169,7 +162,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region interface IEquatable<Segment>
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool Equals( Segment? other )
 		{
 			return Equals( this, other );

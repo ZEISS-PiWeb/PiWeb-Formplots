@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2019-2021                        */
+/* (c) Carl Zeiss 2019                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -34,8 +34,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region constructors
 
-		/// <summary>
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="segment">The segment to which this point collection belongs.</param>
 		public PointCollection( Segment<TPoint, TGeometry> segment )
 		{
@@ -46,7 +45,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region interface IList<TPoint>
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void Clear()
 		{
 			foreach( var point in _Points )
@@ -55,19 +54,19 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			_Points.Clear();
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool Contains( TPoint point )
 		{
 			return _Points.Contains( point );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void CopyTo( TPoint[] array, int arrayIndex )
 		{
 			_Points.CopyTo( array, arrayIndex );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool Remove( TPoint point )
 		{
 			_Points.Remove( point );
@@ -76,10 +75,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return true;
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool IsReadOnly => false;
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void Add( TPoint point )
 		{
 			point.Segment?.Points.Remove( point );
@@ -119,13 +118,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc cref="IReadOnlyList{T}" />>
 		public int Count => _Points.Count;
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public IEnumerator<TPoint> GetEnumerator()
 		{
 			return _Points.GetEnumerator();
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();

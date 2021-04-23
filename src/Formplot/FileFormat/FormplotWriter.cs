@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2017-2021                        */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -23,7 +23,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Extension class to provide serialization of formplots.
+	/// Extension class to provide serialization of form plots.
 	/// </summary>
 	internal static class FormplotWriter
 	{

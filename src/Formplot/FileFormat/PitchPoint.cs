@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -19,16 +19,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point of a pitch.
 	/// </summary>
-	public sealed class PitchPoint : Point<PitchPoint,PitchGeometry>
+	public sealed class PitchPoint : Point<PitchPoint, PitchGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public PitchPoint(  ) { }
+		public PitchPoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PitchPoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="deviation">The deviation.</param>
 		public PitchPoint( double deviation )
 		{
@@ -56,11 +54,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Position = Index;

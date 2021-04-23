@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -26,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Tolerance"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="lower">The lower tolerance.</param>
 		/// <param name="upper">The upper tolerance.</param>
 		public Tolerance( double? lower = null, double? upper = null )
@@ -112,7 +110,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region methods
 
 		/// <summary>
-		/// Serializes this instance
+		/// Serializes this instance.
 		/// </summary>
 		internal void Serialize( XmlWriter writer )
 		{
@@ -262,7 +260,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Bestimmt, ob die angegebenen Instanzen gleich sind.
+		/// Can the given instances be considered equal?
 		/// </summary>
 		public static bool Equals( Tolerance? t1, Tolerance? t2 )
 		{

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -28,9 +28,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Property"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="name">The name.</param>
 		/// <param name="datatype">The datatype.</param>
 		/// <param name="value">The value.</param>
@@ -40,7 +38,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		private Property( string name, DataTypeId datatype, object value, string? description, string? unit )
 		{
 			if( string.IsNullOrWhiteSpace( name ) )
-				throw new ArgumentException( "name must not be null or empty", nameof(name) );
+				throw new ArgumentException( "name must not be null or empty", nameof( name ) );
 
 
 			Name = name;
@@ -196,15 +194,15 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			switch( DataType )
 			{
 				case DataTypeId.Integer:
-					return XmlConvert.ToString( ( long ) ( Value ?? 0 ) );
+					return XmlConvert.ToString( (long)( Value ?? 0 ) );
 				case DataTypeId.Double:
-					return XmlConvert.ToString( ( double ) ( Value ?? 0.0 ) );
+					return XmlConvert.ToString( (double)( Value ?? 0.0 ) );
 				case DataTypeId.String:
-					return ( string? ) Value;
+					return (string?)Value;
 				case DataTypeId.DateTime:
-					return XmlConvert.ToString( ( DateTime ) ( Value ?? new DateTime() ), XmlDateTimeSerializationMode.RoundtripKind );
+					return XmlConvert.ToString( (DateTime)( Value ?? new DateTime() ), XmlDateTimeSerializationMode.RoundtripKind );
 				case DataTypeId.TimeSpan:
-					return XmlConvert.ToString( ( TimeSpan ) ( Value ?? new TimeSpan() ) );
+					return XmlConvert.ToString( (TimeSpan)( Value ?? new TimeSpan() ) );
 				default:
 					throw new NotSupportedException( $"type \"{DataType}\" is not supported" );
 			}
@@ -218,7 +216,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
-				throw new ArgumentNullException( nameof(writer) );
+				throw new ArgumentNullException( nameof( writer ) );
 
 			var value = GetStringValue();
 
@@ -248,7 +246,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal static Property Deserialize( XmlReader reader )
 		{
 			if( reader == null )
-				throw new ArgumentNullException( nameof(reader) );
+				throw new ArgumentNullException( nameof( reader ) );
 
 			var name = reader.GetAttribute( "Name" );
 			var dataType = EnumParser<DataTypeId>.TryParse( reader.GetAttribute( "Type" ), out var parsedDataType )
@@ -288,42 +286,26 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			if( m1 != null && m2 != null )
 			{
 				return m1.Name == m2.Name &&
-				       m1.DataType == m2.DataType &&
-				       Equals( m1.Value, m2.Value );
+						m1.DataType == m2.DataType &&
+						Equals( m1.Value, m2.Value );
 			}
 
 			return false;
 		}
 
-		/// <summary>
-		/// Returns a hash code for this instance.
-		/// </summary>
-		/// <returns>
-		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-		/// </returns>
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return Name.GetHashCode() ^ DataType.GetHashCode() ^ ( Value?.GetHashCode() ?? 0 );
 		}
 
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-		/// <returns>
-		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-		/// </returns>
+		/// <inheritdoc />
 		public override bool Equals( object? obj )
 		{
 			return Equals( this, obj as Property );
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String" /> that represents this instance.
-		/// </returns>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			var sb = new StringBuilder();
@@ -336,17 +318,17 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		private static DateTime? ObjectToNullableDateTime( string stringValue, IFormatProvider? provider = null, DateTimeStyles style = DateTimeStyles.RoundtripKind )
 		{
-			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out var result ) ? ( DateTime? ) result : null;
+			return DateTime.TryParse( stringValue, provider ?? CultureInfo.CurrentCulture, style, out var result ) ? (DateTime?)result : null;
 		}
 
 		private static long? ObjectToNullableInt64( string stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Integer )
 		{
-			return long.TryParse( stringValue, style, provider, out var result ) ? ( long? ) result : null;
+			return long.TryParse( stringValue, style, provider, out var result ) ? (long?)result : null;
 		}
 
 		internal static double? ObjectToNullableDouble( string stringValue, IFormatProvider? provider = null, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands )
 		{
-			return double.TryParse( stringValue, style, provider, out var result ) ? ( double? ) result : null;
+			return double.TryParse( stringValue, style, provider, out var result ) ? (double?)result : null;
 		}
 
 		private static TimeSpan? ObjectToNullableTimeSpan( string stringValue, IFormatProvider? provider = null )

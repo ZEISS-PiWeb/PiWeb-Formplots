@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -25,9 +25,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Vector"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="x">The x.</param>
 		/// <param name="y">The y.</param>
 		/// <param name="z">The z.</param>
@@ -48,7 +46,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public double X { get; }
 
 		/// <summary>
-		/// Y coordinate
+		/// Y coordinate.
 		/// </summary>
 		public double Y { get; }
 
@@ -69,7 +67,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
-				throw new ArgumentNullException( nameof(writer) );
+				throw new ArgumentNullException( nameof( writer ) );
 
 			writer.WriteAttributeString( "X", XmlConvert.ToString( X ) );
 			writer.WriteAttributeString( "Y", XmlConvert.ToString( Y ) );
@@ -85,7 +83,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal static Vector Deserialize( XmlReader reader )
 		{
 			if( reader == null )
-				throw new ArgumentNullException( nameof(reader) );
+				throw new ArgumentNullException( nameof( reader ) );
 
 			var value = reader.GetAttribute( "X" );
 			var x = string.IsNullOrWhiteSpace( value ) ? default : XmlConvert.ToDouble( value );
@@ -97,53 +95,21 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return new Vector( x, y, z );
 		}
 
-		/// <summary>
-		/// Implements the operator +.
-		/// </summary>
-		/// <param name="a">a.</param>
-		/// <param name="b">The b.</param>
-		/// <returns>
-		/// The result of the operator.
-		/// </returns>
 		public static Vector operator +( Vector a, Vector b )
 		{
 			return new Vector( a.X + b.X, a.Y + b.Y, a.Z + b.Z );
 		}
 
-		/// <summary>
-		/// Implements the operator -.
-		/// </summary>
-		/// <param name="a">a.</param>
-		/// <param name="b">The b.</param>
-		/// <returns>
-		/// The result of the operator.
-		/// </returns>
 		public static Vector operator -( Vector a, Vector b )
 		{
 			return new Vector( a.X - b.X, a.Y - b.Y, a.Z - b.Z );
 		}
 
-		/// <summary>
-		/// Implements the operator ==.
-		/// </summary>
-		/// <param name="a">a.</param>
-		/// <param name="b">The b.</param>
-		/// <returns>
-		/// The result of the operator.
-		/// </returns>
 		public static bool operator ==( Vector a, Vector b )
 		{
 			return Equals( a, b );
 		}
 
-		/// <summary>
-		/// Implements the operator !=.
-		/// </summary>
-		/// <param name="a">a.</param>
-		/// <param name="b">The b.</param>
-		/// <returns>
-		/// The result of the operator.
-		/// </returns>
 		public static bool operator !=( Vector a, Vector b )
 		{
 			return !Equals( a, b );
@@ -155,40 +121,23 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		private static bool Equals( Vector a, Vector b )
 		{
 			return Math.Abs( a.X - b.X ) < double.Epsilon &&
-			       Math.Abs( a.Y - b.Y ) < double.Epsilon &&
-			       Math.Abs( a.Z - b.Z ) < double.Epsilon;
+					Math.Abs( a.Y - b.Y ) < double.Epsilon &&
+					Math.Abs( a.Z - b.Z ) < double.Epsilon;
 		}
 
-
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-		/// <returns>
-		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-		/// </returns>
+		/// <inheritdoc />
 		public override bool Equals( object obj )
 		{
 			return obj is Vector vector && Equals( this, vector );
 		}
 
-		/// <summary>
-		/// Returns a hash code for this instance.
-		/// </summary>
-		/// <returns>
-		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
-		/// </returns>
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String" /> that represents this instance.
-		/// </returns>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format( CultureInfo.InvariantCulture, "{0}, {1}, {2}", X, Y, Z );

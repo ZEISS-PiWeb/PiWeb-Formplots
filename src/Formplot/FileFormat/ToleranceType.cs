@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2014-2021                        */
+/* (c) Carl Zeiss 2014                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -31,7 +31,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		Rectangular,
 
 		/// <summary>
-		/// Thee dimensional tolerance
+		/// Thee dimensional tolerance.
 		/// </summary>
 		Spatial
 	}

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2017-2021                        */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -65,9 +65,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		{
 			using var stream = headerEntry.Open();
 
-			// Ok, so here is the problem: Some applications writes broken XML files which end on ascii zero bytes. The XML loader used in GetFormplotType() does not like this.
-			// We need to cut of trailling zeros. However, we cannot do this in little endian UTF-16 encoded files (the last zero would be part of the '>' character).
-			// So we compare the first few bytes of the XML header to what Calypso would write to make sure it is not UTF-16.
+			// Ok, so here is the problem: Some applications writes broken XML files which end on ascii zero bytes.
+			// The XML loader used in GetFormplotType() does not like this. We need to cut of trailing zeros. However,
+			// we cannot do this in little endian UTF-16 encoded files (the last zero would be part of the '>'
+			// character). So we compare the first few bytes of the XML header to what Calypso would write to make sure
+			// it is not UTF-16.
 			var streamLength = (int)headerEntry.Length;
 			var content = ArrayPool<byte>.Shared.Rent( streamLength );
 			stream.Read( content, 0, streamLength );
@@ -82,7 +84,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		private static bool IsTruncationSafe( byte[] content )
 		{
 			// check if first few bytes correspond to ascii "<?xml"
-			return ( content[ 0 ] == 0x3C ) && ( content[ 1 ] == 0x3F ) && ( content[ 2 ] == 0x78 ) && ( content[ 3 ] == 0x6D ) && ( content[ 4 ] == 0x6C );
+			return ( content[ 0 ] == 0x3C )
+					&& ( content[ 1 ] == 0x3F )
+					&& ( content[ 2 ] == 0x78 )
+					&& ( content[ 3 ] == 0x6D )
+					&& ( content[ 4 ] == 0x6C );
 		}
 
 		private static int FindEndOfContent( byte[] content )
@@ -109,6 +115,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			#region constructors
 
+			/// <summary>Constructor.</summary>
 			public ArrayPoolStream( byte[] buffer, int length )
 			{
 				_Buffer = buffer;

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2017-2021                        */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -17,12 +17,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FlushGapPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public FlushGapPlot() : base( FormplotTypes.FlushGap )
-		{
-		}
+		{ }
 
 		#endregion
 	}

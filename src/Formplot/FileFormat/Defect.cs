@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2018-2021                        */
+/* (c) Carl Zeiss 2018                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -17,18 +17,16 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// An item of the defect plot
+	/// An item of the defect plot.
 	/// </summary>
-	public sealed class Defect : Point<Defect,DefectGeometry>
+	public sealed class Defect : Point<Defect, DefectGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public Defect( ) { }
+		public Defect() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Defect" /> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
 		/// <param name="voxels"></param>
@@ -68,6 +66,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Position = new Vector( reader.ReadDouble(), reader.ReadDouble(), reader.ReadDouble() );
@@ -90,6 +89,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			}
 		}
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Position.X );
@@ -100,14 +100,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Size.Y );
 			writer.Write( Size.Z );
 
-			if( Voxels == null || Voxels.Length == 0)
+			if( Voxels == null || Voxels.Length == 0 )
 			{
 				writer.Write( 0 );
 				return;
 			}
 
 			writer.Write( Voxels.Length );
-			foreach( var voxel in Voxels)
+			foreach( var voxel in Voxels )
 			{
 				writer.Write( voxel.Position.X );
 				writer.Write( voxel.Position.Y );
@@ -123,16 +123,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	}
 
 	/// <summary>
-	/// Defect Voxel (Pixel)
+	/// Defect Voxel (Pixel).
 	/// </summary>
 	public readonly struct Voxel
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Voxel" /> struct.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
-		public Voxel(Vector position, Vector size)
+		public Voxel( Vector position, Vector size )
 		{
 			Position = position;
 			Size = size;

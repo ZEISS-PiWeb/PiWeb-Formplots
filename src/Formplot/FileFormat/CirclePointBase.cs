@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -28,9 +28,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		internal CirclePointBase() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CirclePoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="angle">The angle.</param>
 		/// <param name="deviation">The deviation.</param>
 		internal CirclePointBase( double angle, double deviation )
@@ -60,12 +58,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Angle );
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Angle = reader.ReadDouble();

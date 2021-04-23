@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2019-2021                        */
+/* (c) Carl Zeiss 2019                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -32,9 +32,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region properties
 
 		/// <summary>
-		/// Gibt das Property mit dem Namen <code>name</code> zurück. Der Zugriff
-		/// auf das entsprechende Property geschieht über eine Hash-Tabelle und ist
-		/// somit sehr effizient.
+		/// Gets the property with the given <c>name</c>. Accessing the property is done efficiently via hash table.
 		/// </summary>
 		public Property? this[ string name ] => _Map.TryGetValue( name, out var result ) ? result : null;
 
@@ -43,9 +41,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region methods
 
 		/// <summary>
-		/// Fügt die angegebenen Properties zu dieser Collection hinzu.
+		/// Adds the given properties to this collection.
 		/// </summary>
-		/// <param name="properties">Die hinzuzufügenden Properties.</param>
+		/// <param name="properties">Will be added.</param>
 		public void AddRange( IEnumerable<Property> properties )
 		{
 			foreach( var prop in properties )
@@ -55,9 +53,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Leert die Liste und fügt ihr die angegebene Property hinzu,
+		/// Clears this collection and adds the given property.
 		/// </summary>
-		/// <param name="prop"></param>
+		/// <param name="prop">Replaces all other entries.</param>
 		public void Set( Property prop )
 		{
 			Clear();
@@ -65,9 +63,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Leert die Liste und fügt ihr die angegebene Properties hinzu,
+		/// Cle
+		/// Clears this collection and adds the given properties.
 		/// </summary>
-		/// <param name="prop"></param>
+		/// <param name="prop">Replace all other entries.</param>
 		public void Set( IEnumerable<Property> prop )
 		{
 			Clear();
