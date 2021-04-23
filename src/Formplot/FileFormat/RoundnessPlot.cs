@@ -17,9 +17,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="RoundnessPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public RoundnessPlot() : base( FormplotTypes.Roundness )
 		{
 

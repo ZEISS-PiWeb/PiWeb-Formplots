@@ -17,7 +17,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Stellt einen Zylinderpunkt dar.
+	/// Represents a cylinder point.
 	/// </summary>
 	public sealed class CylinderPoint : Point<CylinderPoint,CylinderGeometry>
 	{
@@ -26,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public CylinderPoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CylinderPoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="angle">The angle.</param>
 		/// <param name="height">The height.</param>
 		/// <param name="deviation">The deviation.</param>
@@ -62,6 +60,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Angle );
@@ -69,6 +68,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Angle = reader.ReadDouble();

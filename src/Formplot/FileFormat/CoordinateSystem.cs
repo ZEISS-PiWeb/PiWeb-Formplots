@@ -15,6 +15,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	using System;
 	using System.Globalization;
 	using System.Xml;
+	using System.Xml.Serialization;
 
 	#endregion
 
@@ -25,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CoordinateSystem"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public CoordinateSystem()
 		{
 			Origin = new Vector( 0, 0, 0 );
@@ -64,11 +63,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
-		/// <summary>
-		/// Writes the coordinate system information in the specified <see cref="XmlWriter"/>.
-		/// </summary>
-		/// <param name="writer">The writer.</param>
-		/// <exception cref="System.ArgumentNullException">writer</exception>
+		/// <inheritdoc cref="IXmlSerializable.WriteXml" />
 		internal void Serialize( XmlWriter writer )
 		{
 			if( writer == null )
@@ -93,12 +88,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.WriteEndElement();
 		}
 
-		/// <summary>
-		/// Reads the coordinate system information from the specified <see cref="XmlReader"/>.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <returns></returns>
-		/// <exception cref="System.ArgumentNullException">reader</exception>
+		/// <inheritdoc cref="IXmlSerializable.ReadXml" />
 		public static CoordinateSystem Deserialize( XmlReader reader )
 		{
 			if( reader == null )
@@ -130,12 +120,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return result;
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
+		/// <inheritdoc />
 		public override string ToString()
 		{
-			return string.Format( CultureInfo.InvariantCulture, "Orgin={{{0}}}; Axis1={{{1}}}; Axis2={{{2}}}; Axis3={{{3}}}", Origin, Axis1, Axis2, Axis3 );
+			return string.Format(
+				CultureInfo.InvariantCulture,
+				"Origin={{{0}}}; Axis1={{{1}}}; Axis2={{{2}}}; Axis3={{{3}}}",
+				Origin, Axis1, Axis2, Axis3 );
 		}
 
 		#endregion

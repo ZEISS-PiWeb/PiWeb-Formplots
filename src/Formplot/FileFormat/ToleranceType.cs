@@ -31,7 +31,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		Rectangular,
 
 		/// <summary>
-		/// Thee dimensional tolerance
+		/// Thee dimensional tolerance.
 		/// </summary>
 		Spatial
 	}

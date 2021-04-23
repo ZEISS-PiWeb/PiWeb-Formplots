@@ -19,7 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Stellt eine "Kreis in Kontur" Geometrie dar.
+	/// Represents a "circle in contour" geometry.
 	/// </summary>
 	public sealed class CircleInProfileGeometry : Geometry
 	{
@@ -29,9 +29,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region constructors
 
-		/// <summary>
-		/// Konstruktor
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public CircleInProfileGeometry()
 		{
 			Radius = 1.0;
@@ -47,9 +45,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets or sets the radius.
 		/// </summary>
-		/// <value>
-		/// The radius.
-		/// </value>
 		public double Radius { get; set; }
 
 		/// <summary>
@@ -71,11 +66,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
-		/// <summary>
-		/// Writes the geometry information to the specified <see cref="XmlWriter" />.
-		/// </summary>
-		/// <param name="writer">The writer.</param>
-		/// <exception cref="System.ArgumentNullException">writer</exception>
+		/// <inheritdoc />
 		internal override void Serialize( XmlWriter writer )
 		{
 			base.Serialize( writer );
@@ -122,12 +113,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.WriteEndElement();
 		}
 
-		/// <summary>
-		/// Reads the geometry information from the specified <see cref="XmlReader" />.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <param name="version">The version of the formplot file.</param>
-		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <inheritdoc />
 		protected override bool DeserializeItem( XmlReader reader, Version version )
 		{
 			if( base.DeserializeItem( reader, version ) )
@@ -164,7 +150,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 						if( tolerance != null )
 							MaxGapPoint.Tolerance = tolerance;
-						
+
 						return true;
 					}
 					case "FirstTouchingPoint":
@@ -190,10 +176,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 							Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
 							Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
 						};
-						
+
 						if( tolerance != null )
 							FirstTouchingPoint.Tolerance = tolerance;
-						
+
 						return true;
 					}
 					case "SecondTouchingPoint":
@@ -219,10 +205,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 							Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
 							Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
 						};
-						
+
 						if( tolerance != null )
 							SecondTouchingPoint.Tolerance = tolerance;
-						
+
 						return true;
 					}
 			}
@@ -230,9 +216,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return false;
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format( CultureInfo.InvariantCulture, "Radius={0}, CoordinateSystem={{{1}}}", Radius, CoordinateSystem );

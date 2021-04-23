@@ -19,7 +19,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Holds Information about the profiles in Flush- Gapplot
+	/// Holds Information about the profiles in Flush-Gap plot.
 	/// </summary>
 	public sealed class FlushGapProfile
 	{

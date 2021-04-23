@@ -15,9 +15,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public sealed class FilletPlot : Formplot<FilletPoint, FilletGeometry>
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FilletPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public FilletPlot() : base( FormplotTypes.Fillet )
 		{
 		}

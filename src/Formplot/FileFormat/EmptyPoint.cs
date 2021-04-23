@@ -17,8 +17,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public sealed class EmptyPoint : Point<EmptyPoint,EmptyGeometry>
 	{
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer ){ }
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader ){ }
 	}
 }

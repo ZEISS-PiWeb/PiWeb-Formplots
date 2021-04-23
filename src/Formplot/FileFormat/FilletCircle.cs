@@ -17,7 +17,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Represents the circle of a fillet plot, which consists of a radius and a FilletPoint
+	/// Represents the circle of a fillet plot, which consists of a radius and a FilletPoint.
 	/// </summary>
 	public sealed class FilletCircle
 	{
@@ -26,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal FilletCircle()
 		{}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FilletCircle" /> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="radius">The radius.</param>
 		/// <param name="center">The center point of circle.</param>
 		public FilletCircle( double radius, FilletPoint center )
@@ -49,12 +47,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region properties
 
 		/// <summary>
-		/// Radius of FilletCircle
+		/// Radius of FilletCircle.
 		/// </summary>
 		public double Radius { get; set; }
 
 		/// <summary>
-		/// Center point of FilletCircle
+		/// Center point of FilletCircle.
 		/// </summary>
 		public FilletPoint? Center { get; set; }
 

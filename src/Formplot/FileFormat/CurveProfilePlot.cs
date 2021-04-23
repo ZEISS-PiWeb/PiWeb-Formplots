@@ -11,15 +11,13 @@
 namespace Zeiss.PiWeb.Formplot.FileFormat
 {
 	/// <summary>
-	/// A plot representing a curve profile
+	/// A plot representing a curve profile.
 	/// </summary>
 	public sealed class CurveProfilePlot : Formplot<CurvePoint, CurveGeometry>
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CurveProfilePlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public CurveProfilePlot() : base( FormplotTypes.CurveProfile )
 		{ }
 

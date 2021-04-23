@@ -26,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public PitchPoint(  ) { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PitchPoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="deviation">The deviation.</param>
 		public PitchPoint( double deviation )
 		{
@@ -56,11 +54,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Position = Index;

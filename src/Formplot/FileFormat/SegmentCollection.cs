@@ -34,8 +34,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region constructors
 
-		/// <summary>
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="formplot">The formplot to which this collection belongs.</param>
 		public SegmentCollection( Formplot<TPoint, TGeometry> formplot )
 		{
@@ -51,7 +50,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// </summary>
 		/// <param name="name">Name.</param>
 		/// <param name="type">Type.</param>
-		/// <returns></returns>
+		/// <returns>New instance.</returns>
 		public Segment<TPoint, TGeometry> Create( string name, SegmentTypes type )
 		{
 			var segment = new Segment<TPoint, TGeometry>( name, type );
@@ -64,7 +63,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region interface IList<Segment<TPoint,TGeometry>>
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void Clear()
 		{
 			foreach( var segment in _Segments )
@@ -73,19 +72,19 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			_Segments.Clear();
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool Contains( Segment<TPoint, TGeometry> segment )
 		{
 			return _Segments.Contains( segment );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void CopyTo( Segment<TPoint, TGeometry>[] array, int arrayIndex )
 		{
 			_Segments.CopyTo( array, arrayIndex );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool Remove( Segment<TPoint, TGeometry>? segment )
 		{
 			if( segment == null )
@@ -97,10 +96,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return true;
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public bool IsReadOnly => false;
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void Add( Segment<TPoint, TGeometry>? segment )
 		{
 			if( segment == null )
@@ -112,13 +111,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			_Segments.Add( segment );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public int IndexOf( Segment<TPoint, TGeometry> item )
 		{
 			return _Segments.IndexOf( item );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void Insert( int index, Segment<TPoint, TGeometry> segment )
 		{
 			if( segment == null )
@@ -130,7 +129,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			_Segments.Insert( index, segment );
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public void RemoveAt( int index )
 		{
 			var segment = this[ index ];
@@ -143,22 +142,22 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region interface IReadOnlyList<Segment<TPoint,TGeometry>>
 
-		/// <inheritdoc cref="IReadOnlyCollection{T}" />>
+		/// <inheritdoc cref="IReadOnlyCollection{T}" />
 		public int Count => _Segments.Count;
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		public IEnumerator<Segment<TPoint, TGeometry>> GetEnumerator()
 		{
 			return _Segments.GetEnumerator();
 		}
 
-		/// <inheritdoc/>>
+		/// <inheritdoc />
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
 		}
 
-		/// <inheritdoc cref="IReadOnlyCollection{T}" />>
+		/// <inheritdoc cref="IReadOnlyCollection{T}" />
 		public Segment<TPoint, TGeometry> this[ int index ]
 		{
 			get => _Segments[ index ];

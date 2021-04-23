@@ -11,7 +11,7 @@
 namespace Zeiss.PiWeb.Formplot.FileFormat
 {
 	/// <summary>
-	/// Stellt einen Kurvenpunkt dar.
+	/// Represents a flash gap point.
 	/// </summary>
 	public sealed class FlushGapPoint : CurvePointBase<FlushGapPoint, FlushGapGeometry>
 	{
@@ -20,9 +20,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public FlushGapPoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FlushGapPoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="direction">The direction.</param>
 		/// <param name="deviation">The deviation.</param>

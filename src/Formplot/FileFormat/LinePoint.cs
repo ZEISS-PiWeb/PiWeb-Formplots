@@ -26,9 +26,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public LinePoint( ) { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="LinePoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="deviation">The deviation.</param>
 		public LinePoint( double position, double deviation )
@@ -55,12 +53,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Position );
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Position = reader.ReadDouble();

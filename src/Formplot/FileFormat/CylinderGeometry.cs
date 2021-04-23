@@ -18,15 +18,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Representation of a cylinder geometry.
+	/// Represents a cylinder geometry.
 	/// </summary>
 	public sealed class CylinderGeometry : Geometry
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CylinderGeometry"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public CylinderGeometry()
 		{
 			Radius = 1.0;
@@ -54,11 +52,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region overrides
 
-		/// <summary>
-		/// Writes the geometry information to the specified <see cref="XmlWriter" />.
-		/// </summary>
-		/// <param name="writer">The writer.</param>
-		/// <exception cref="System.ArgumentNullException">writer</exception>
+		/// <inheritdoc />
 		internal override void Serialize( XmlWriter writer )
 		{
 			base.Serialize( writer );
@@ -67,12 +61,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.WriteElementString( "Height", XmlConvert.ToString( Height ) );
 		}
 
-		/// <summary>
-		/// Reads the geometry information from the specified <see cref="XmlReader" />.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <param name="version">The version of the formplot file.</param>
-		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <inheritdoc />
 		protected override bool DeserializeItem( XmlReader reader, Version version )
 		{
 			if( base.DeserializeItem( reader, version ) )

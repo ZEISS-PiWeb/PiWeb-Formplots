@@ -20,9 +20,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public CircleInProfilePoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CirclePoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="angle">The angle.</param>
 		/// <param name="deviation">The deviation.</param>
 		public CircleInProfilePoint( double angle, double deviation ) : base( angle, deviation )

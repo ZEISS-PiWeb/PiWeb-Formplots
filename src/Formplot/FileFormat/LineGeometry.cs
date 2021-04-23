@@ -24,9 +24,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="LineGeometry"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public LineGeometry()
 		{
 			Position = new Vector();
@@ -66,11 +64,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
-		/// <summary>
-		/// Writes the geometry information to the specified <see cref="XmlWriter" />.
-		/// </summary>
-		/// <param name="writer">The writer.</param>
-		/// <exception cref="System.ArgumentNullException">writer</exception>
+		/// <inheritdoc />
 		internal override void Serialize( XmlWriter writer )
 		{
 			base.Serialize( writer );
@@ -90,12 +84,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.WriteElementString( "Length", XmlConvert.ToString( Length ) );
 		}
 
-		/// <summary>
-		/// Reads the geometry information from the specified <see cref="XmlReader" />.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <param name="version">The version of the formplot file.</param>
-		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <inheritdoc />
 		protected override bool DeserializeItem( XmlReader reader, Version version )
 		{
 			//Compatibility with first version of calypso straightness plot, which switched Axis1 and Axis3

@@ -17,9 +17,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FlushGapPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public FlushGapPlot() : base( FormplotTypes.FlushGap )
 		{
 		}

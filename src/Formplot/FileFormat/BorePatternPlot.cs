@@ -13,15 +13,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Shows points on a plane, which have a planar deviation in a certain direction.
 	/// </summary>
-	public sealed class BorePatternPlot : Formplot<CurvePoint,CurveGeometry>
+	public sealed class BorePatternPlot : Formplot<CurvePoint, CurveGeometry>
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="BorePatternPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public BorePatternPlot() : base( FormplotTypes.BorePattern )
-		{}
+		{ }
 
 		#endregion
 	}

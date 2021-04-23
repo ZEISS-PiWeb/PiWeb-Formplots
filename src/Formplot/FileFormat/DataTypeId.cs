@@ -38,6 +38,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Timespan
 		/// </summary>
-		TimeSpan = 32,
+		TimeSpan = 32
 	}
 }

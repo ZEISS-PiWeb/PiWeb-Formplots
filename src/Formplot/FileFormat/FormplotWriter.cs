@@ -23,7 +23,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Extension class to provide serialization of formplots.
+	/// Extension class to provide serialization of form plots.
 	/// </summary>
 	internal static class FormplotWriter
 	{

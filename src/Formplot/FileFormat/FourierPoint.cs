@@ -18,7 +18,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Represents a point of a Fourierplot
+	/// Represents a point of a Fourier plot
 	/// </summary>
 	public sealed class FourierPoint : Point<FourierPoint,EmptyGeometry>
 	{
@@ -27,9 +27,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <inheritdoc/>
 		public FourierPoint( ) { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FourierPoint" /> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="harmonic">The harmonic of fundamental frequency.</param>
 		/// <param name="amplitude">The amplitude.</param>
 		public FourierPoint( uint harmonic, double amplitude )
@@ -56,6 +54,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			var buffer = BitConverter.GetBytes( Harmonic );
@@ -67,6 +66,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Amplitude );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			var buffer = reader.ReadBytes( sizeof( uint ) );

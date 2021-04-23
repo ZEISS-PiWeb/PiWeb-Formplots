@@ -17,9 +17,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="StraightnessPlot"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		public StraightnessPlot() : base( FormplotTypes.Straightness )
 		{}
 

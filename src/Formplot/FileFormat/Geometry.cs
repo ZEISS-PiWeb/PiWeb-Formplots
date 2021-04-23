@@ -32,7 +32,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region properties
 
 		/// <summary>
-		/// The <see cref="CoordinateSystem"/> of the geometry.
+		/// Gets or sets the <see cref="CoordinateSystem"/> of the geometry.
 		/// </summary>
 		public CoordinateSystem CoordinateSystem
 		{
@@ -101,12 +101,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			}
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
-		/// <returns>
-		/// A <see cref="System.String" /> that represents this instance.
-		/// </returns>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format( CultureInfo.InvariantCulture, "CoordinateSystem={{{0}}}", CoordinateSystem );

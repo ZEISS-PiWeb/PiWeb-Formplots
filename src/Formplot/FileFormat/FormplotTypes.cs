@@ -66,6 +66,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Defect plot data
 		/// </summary>
-		Defect,
+		Defect
 	}
 }

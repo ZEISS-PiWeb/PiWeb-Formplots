@@ -30,7 +30,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <param name="source">Source plot</param>
 		/// <param name="target">Target plot</param>
 		/// <typeparam name="TPlot">Target plot type</typeparam>
-		/// <returns><c>true</c> if the conversion was succcessful, otherwise <c>false</c></returns>
+		/// <returns><c>true</c> if the conversion was successful, otherwise <c>false</c></returns>
 		public static bool TryConvert<TPlot>( Formplot source, out TPlot? target )
 			where TPlot : Formplot
 
