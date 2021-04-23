@@ -66,7 +66,6 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		[Test]
 		public void Test_Property_Serialization()
 		{
-			var i = 0;
 			var plot = new EmptyPlot();
 			GenerateExampleProperties( plot );
 
