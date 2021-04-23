@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2019-2021                        */
+/* (c) Carl Zeiss 2019                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -15,11 +15,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public sealed class FilletPlot : Formplot<FilletPoint, FilletGeometry>
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FilletPlot"/> class.
-		/// </summary>
+		#region constructors
+
+		/// <summary>Constructor.</summary>
 		public FilletPlot() : base( FormplotTypes.Fillet )
-		{
-		}
+		{ }
+
+		#endregion
 	}
 }

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -30,9 +30,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Range"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="start">The starting index.</param>
 		/// <param name="end">The last index.</param>
 		public Range( int start = 0, int? end = null )
@@ -54,7 +52,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region properties
 
 		/// <summary>
-		/// First index inside the range
+		/// First index inside the range.
 		/// </summary>
 		public int Start
 		{
@@ -67,7 +65,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Last index inside the range
+		/// Last index inside the range.
 		/// </summary>
 		public int End
 		{
@@ -114,7 +112,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					var endString = rangeString.Substring( index + 1 );
 
 					if( int.TryParse( startString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var start ) &&
-					    int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var end ) && IsValidRange( start, end ) )
+						int.TryParse( endString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var end ) && IsValidRange( start, end ) )
 						return new Range( start, end );
 				}
 			}
@@ -131,7 +129,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		{
 			if( !IsValidRange( start, end ) )
 			{
-				throw new ArgumentOutOfRangeException( "start is greater then end", default ( Exception ) );
+				throw new ArgumentOutOfRangeException( "start is greater then end", default( Exception ) );
 			}
 		}
 
@@ -148,38 +146,25 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			if( rangeA != null && rangeB != null )
 			{
 				return Equals( rangeA._Start, rangeB._Start ) &&
-				       Equals( rangeA._End, rangeB._End );
+						Equals( rangeA._End, rangeB._End );
 			}
 
 			return false;
 		}
 
-		/// <summary>
-		/// Returns a hash code for this instance.
-		/// </summary>
-		/// <returns>
-		/// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-		/// </returns>
+		/// <inheritdoc />
 		public override int GetHashCode()
 		{
 			return Start.GetHashCode() ^ End.GetHashCode();
 		}
 
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-		/// <returns>
-		///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
-		/// </returns>
+		/// <inheritdoc />
 		public override bool Equals( object obj )
 		{
 			return Equals( this, obj as Range );
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return _Start == _End ? _Start.ToString( CultureInfo.InvariantCulture ) : string.Format( CultureInfo.InvariantCulture, "{0}-{1}", _Start, _End );

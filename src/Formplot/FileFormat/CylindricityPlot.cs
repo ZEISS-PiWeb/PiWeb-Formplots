@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -17,10 +17,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CylindricityPlot"/> class.
-		/// </summary>
-		public CylindricityPlot() : base( FormplotTypes.Cylindricity ){}
+		/// <summary>Constructor.</summary>
+		public CylindricityPlot() : base( FormplotTypes.Cylindricity ) { }
 
 		#endregion
 	}

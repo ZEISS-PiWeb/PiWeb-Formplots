@@ -48,9 +48,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return returnValue;
 		}
 
-		/// <summary>
-		/// Returns a <see cref="System.String" /> that represents this instance.
-		/// </summary>
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			var rangeString = new StringBuilder();

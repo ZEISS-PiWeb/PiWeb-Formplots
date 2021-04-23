@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -19,8 +19,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Describes a point.
 	/// </summary>
-	public abstract class Point<TPoint,TGeometry> : Point
-		where TPoint : Point<TPoint,TGeometry>, new()
+	public abstract class Point<TPoint, TGeometry> : Point
+		where TPoint : Point<TPoint, TGeometry>, new()
 		where TGeometry : Geometry, new()
 	{
 		#region properties
@@ -28,7 +28,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets the segment this point belongs to.
 		/// </summary>
-		public new Segment<TPoint,TGeometry>? Segment { get; internal set; }
+		public new Segment<TPoint, TGeometry>? Segment { get; internal set; }
 
 		internal override Segment? AbstractSegment => Segment;
 

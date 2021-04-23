@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2019-2021                        */
+/* (c) Carl Zeiss 2019                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -20,7 +20,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Base class for all kinds of formplots.
+	/// Base class for all kinds of form plots.
 	/// </summary>
 	public abstract class Formplot
 	{
@@ -32,10 +32,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of the formplot class.
-		/// </summary>
-		/// <param name="formplotType"></param>
+		/// <summary>Constructor.</summary>
 		protected Formplot( FormplotTypes formplotType )
 		{
 			FormplotType = formplotType;
@@ -178,11 +175,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			var untypedResult = FormplotReader.ReadFrom( stream );
 			if( untypedResult is null )
 				return null;
-			
+
 			var typedResult = untypedResult as TPlot;
 			if( typedResult != null )
 				return typedResult;
-			
+
 			return FormplotConverter.TryConvert( untypedResult, out typedResult ) ? typedResult : null;
 		}
 
@@ -198,9 +195,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <summary>
-		/// Initializes a new instance of a formplot.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="formplotType">Type of the formplot.</param>
 		protected Formplot( FormplotTypes formplotType ) : base( formplotType )
 		{
@@ -228,7 +223,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// Gets or sets the plot points.
 		/// </summary>
 		public IEnumerable<TPoint> Points => Segments.SelectMany( s => s.Points );
-		
+
 		internal override IReadOnlyList<Segment> AbstractSegments => Segments;
 
 		internal override Geometry AbstractNominal => Nominal;
@@ -249,10 +244,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
-		/// <summary>
-		/// Writes the plot to the specified stream
-		/// </summary>
-		/// <param name="stream"></param>
+		/// <inheritdoc />
 		public override void WriteTo( Stream stream )
 		{
 			FormplotWriter.WriteTo( this, stream );

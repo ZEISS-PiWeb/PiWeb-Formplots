@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -19,16 +19,14 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// <summary>
 	/// Represents a point on a plane.
 	/// </summary>
-	public sealed class PlanePoint : Point<PlanePoint,PlaneGeometry>
+	public sealed class PlanePoint : Point<PlanePoint, PlaneGeometry>
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		public PlanePoint( ){}
+		public PlanePoint() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="PlanePoint"/> class.
-		/// </summary>
+		//// <summary>Constructor.</summary>
 		/// <param name="coordinate1">The coordinate in the first plane axis direction.</param>
 		/// <param name="coordinate2">The coordinate in the second plane axis direction.</param>
 		/// <param name="deviation">The deviation.</param>
@@ -62,6 +60,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Coordinate1 );
@@ -69,6 +68,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Coordinate1 = reader.ReadDouble();

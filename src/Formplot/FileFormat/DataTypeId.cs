@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2017-2021                        */
+/* (c) Carl Zeiss 2017                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -38,6 +38,6 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Timespan
 		/// </summary>
-		TimeSpan = 32,
+		TimeSpan = 32
 	}
 }

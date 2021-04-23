@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2018-2021                        */
+/* (c) Carl Zeiss 2018                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -19,14 +19,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Holds Information about the profiles in Flush- Gapplot
+	/// Holds Information about the profiles in Flush-Gap plot.
 	/// </summary>
 	public sealed class FlushGapProfile
 	{
-		#region members
-
-		#endregion
-
 		#region properties
 
 		/// <summary>
@@ -48,6 +44,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// Gets or sets the gap point.
 		/// </summary>
 		public FlushGapPoint? Gap { get; set; }
+
+		#endregion
+
+		#region methods
 
 		private static void SerializePoint( XmlWriter writer, FlushGapPoint point, string name )
 		{

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2019-2021                        */
+/* (c) Carl Zeiss 2019                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -132,7 +132,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 						radius = Property.ObjectToNullableDouble( reader.ReadString(), CultureInfo.InvariantCulture ) ?? 0.0;
 						break;
 					case "Center":
-						 center = DeserializePoint( reader );
+						center = DeserializePoint( reader );
 						break;
 				}
 			}
@@ -144,11 +144,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			};
 		}
 
-		/// <summary>
-		/// Writes the geometry information to the specified <see cref="XmlWriter" />.
-		/// </summary>
-		/// <param name="writer">The writer.</param>
-		/// <exception cref="System.ArgumentNullException">writer</exception>
+		/// <inheritdoc />
 		internal override void Serialize( XmlWriter writer )
 		{
 			base.Serialize( writer );
@@ -161,15 +157,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			if( Outlet != null )
 				SerializePoint( writer, Outlet, "Outlet" );
-
 		}
 
-		/// <summary>
-		/// Reads the geometry information from the specified <see cref="XmlReader" />.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <param name="version">The version of the formplot file.</param>
-		/// <exception cref="System.ArgumentNullException"></exception>
+		/// <inheritdoc />
 		protected override bool DeserializeItem( XmlReader reader, Version version )
 		{
 			if( base.DeserializeItem( reader, version ) )

@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -17,20 +17,18 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// Stellt einen Kurvenpunkt dar.
+	/// Represents a curve point.
 	/// </summary>
-	public abstract class CurvePointBase<TPoint,TGeometry> : Point<TPoint,TGeometry>
-		where TPoint : Point<TPoint,TGeometry>, new()
+	public abstract class CurvePointBase<TPoint, TGeometry> : Point<TPoint, TGeometry>
+		where TPoint : Point<TPoint, TGeometry>, new()
 		where TGeometry : Geometry, new()
 	{
 		#region constructors
 
 		/// <inheritdoc/>
-		internal CurvePointBase( ) { }
+		internal CurvePointBase() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CurvePoint"/> class.
-		/// </summary>
+		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="direction">The direction.</param>
 		/// <param name="deviation">The deviation.</param>
@@ -67,6 +65,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		#region methods
 
+		/// <inheritdoc />
 		internal override void WriteToStream( BinaryWriter writer )
 		{
 			writer.Write( Position.X );
@@ -80,6 +79,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Deviation );
 		}
 
+		/// <inheritdoc />
 		internal override void ReadFromStream( BinaryReader reader )
 		{
 			Position = new Vector( reader.ReadDouble(), reader.ReadDouble(), reader.ReadDouble() );

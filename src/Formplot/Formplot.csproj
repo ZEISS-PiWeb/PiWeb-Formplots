@@ -17,7 +17,7 @@
       An API to read and write plot data for the ZEISS PiWeb quality data management system.
     </Description>
     <PackageId>Zeiss.PiWeb.Formplot</PackageId>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <PackageIcon>logo_128x128.png</PackageIcon>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ZEISS-PiWeb/PiWeb-Formplots</PackageProjectUrl>
@@ -25,17 +25,17 @@
     <RepositoryUrl>https://github.com/ZEISS-PiWeb/PiWeb-Formplots.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\Release\Formplot.xml</DocumentationFile>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="FileFormat\Compatibility\*.xsl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.1" />
   </ItemGroup>
