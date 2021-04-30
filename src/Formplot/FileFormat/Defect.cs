@@ -85,7 +85,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			ReadVoxels( reader );
 
-			if( version >= Formplot.Version21 )
+			if( version >= Formplot.Version3 )
 				this.Shape = Mesh.Read( reader );
 		}
 
