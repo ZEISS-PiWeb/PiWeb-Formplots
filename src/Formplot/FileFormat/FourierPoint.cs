@@ -67,7 +67,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <inheritdoc />
-		internal override void ReadFromStream( BinaryReader reader )
+		internal override void ReadFromStream( BinaryReader reader, Version version )
 		{
 			var buffer = reader.ReadBytes( sizeof( uint ) );
 
