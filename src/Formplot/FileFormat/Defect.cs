@@ -38,24 +38,40 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			Voxels = voxels;
 		}
 
+		/// <summary>Constructor.</summary>
+		/// <param name="position">The position.</param>
+		/// <param name="size">The size.</param>
+		/// <param name="shape">The mesh that describes the defects shape.</param>
+		public Defect( Vector position, Vector size, Mesh shape )
+		{
+			Position = position;
+			Size = size;
+			Shape = shape;
+		}
+
 		#endregion
 
 		#region properties
 
 		/// <summary>
-		/// Gets or sets the position.
+		/// Gets the position.
 		/// </summary>
-		public Vector Position { get; set; }
+		public Vector Position { get; private set; }
 
 		/// <summary>
-		/// Gets or sets the size.
+		/// Gets the size.
 		/// </summary>
-		public Vector Size { get; set; }
+		public Vector Size { get; private set; }
 
 		/// <summary>
-		/// Gets or sets the shape.
+		/// Gets the voxel shape.
 		/// </summary>
-		public Voxel[]? Voxels { get; set; }
+		public Voxel[]? Voxels { get; private set; }
+
+		/// <summary>
+		/// Gets the mesh shape.
+		/// </summary>
+		public Mesh? Shape { get; private set; }
 
 		#endregion
 
@@ -67,21 +83,22 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			Position = new Vector( reader.ReadDouble(), reader.ReadDouble(), reader.ReadDouble() );
 			Size = new Vector( reader.ReadDouble(), reader.ReadDouble(), reader.ReadDouble() );
 
+			ReadVoxels( reader );
+
+			if( version >= Formplot.Version21 )
+				this.Shape = Mesh.Read( reader );
+		}
+
+		private void ReadVoxels( BinaryReader reader )
+		{
 			var length = reader.ReadInt32();
+			if( length == 0 )
+				return;
+
 			Voxels = new Voxel[ length ];
 
 			for( var i = 0; i < length; i++ )
-			{
-				var px = reader.ReadDouble();
-				var py = reader.ReadDouble();
-				var pz = reader.ReadDouble();
-
-				var sx = reader.ReadDouble();
-				var sy = reader.ReadDouble();
-				var sz = reader.ReadDouble();
-
-				Voxels[ i ] = new Voxel( new Vector( px, py, pz ), new Vector( sx, sy, sz ) );
-			}
+				Voxels[ i ] = Voxel.Read( reader );
 		}
 
 		/// <inheritdoc />
@@ -95,6 +112,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Size.Y );
 			writer.Write( Size.Z );
 
+			WriteVoxels( writer );
+			WriteMesh( writer );
+		}
+
+		private void WriteVoxels( BinaryWriter writer )
+		{
 			if( Voxels == null || Voxels.Length == 0 )
 			{
 				writer.Write( 0 );
@@ -104,41 +127,23 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			writer.Write( Voxels.Length );
 			foreach( var voxel in Voxels )
 			{
-				writer.Write( voxel.Position.X );
-				writer.Write( voxel.Position.Y );
-				writer.Write( voxel.Position.Z );
-
-				writer.Write( voxel.Size.X );
-				writer.Write( voxel.Size.Y );
-				writer.Write( voxel.Size.Z );
+				voxel.Write( writer );
+				voxel.Check( this );
 			}
 		}
 
-		#endregion
-	}
-
-	/// <summary>
-	/// Defect Voxel (Pixel).
-	/// </summary>
-	public readonly struct Voxel
-	{
-		/// <summary>Constructor.</summary>
-		/// <param name="position">The position.</param>
-		/// <param name="size">The size.</param>
-		public Voxel( Vector position, Vector size )
+		private void WriteMesh( BinaryWriter writer )
 		{
-			Position = position;
-			Size = size;
+			if( Shape == null )
+			{
+				writer.Write( 0 );
+				return;
+			}
+
+			Shape.Value.Write( writer );
+			Shape.Value.Check( this );
 		}
 
-		/// <summary>
-		/// Gets or sets the position.
-		/// </summary>
-		public Vector Position { get; }
-
-		/// <summary>
-		/// Gets or sets the size.
-		/// </summary>
-		public Vector Size { get; }
+		#endregion
 	}
 }
