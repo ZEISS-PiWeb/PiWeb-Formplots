@@ -3,7 +3,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Carl Zeiss Industrielle Messtechnik GmbH        */
 /* Softwaresystem PiWeb                            */
-/* (c) Carl Zeiss 2013-2021                        */
+/* (c) Carl Zeiss 2013                             */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #endregion
@@ -66,7 +66,6 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		[Test]
 		public void Test_Property_Serialization()
 		{
-			var i = 0;
 			var plot = new EmptyPlot();
 			GenerateExampleProperties( plot );
 
