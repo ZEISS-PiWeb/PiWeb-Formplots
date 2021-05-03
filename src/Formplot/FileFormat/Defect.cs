@@ -29,7 +29,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>Constructor.</summary>
 		/// <param name="position">The position.</param>
 		/// <param name="size">The size.</param>
-		/// <param name="voxels"></param>
+		/// <param name="voxels">The voxels.</param>
 		public Defect( Vector position, Vector size, Voxel[] voxels )
 		{
 			Position = position;
@@ -44,17 +44,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets or sets the position.
 		/// </summary>
-		/// <value>
-		/// The position.
-		/// </value>
 		public Vector Position { get; set; }
 
 		/// <summary>
 		/// Gets or sets the size.
 		/// </summary>
-		/// <value>
-		/// The size.
-		/// </value>
 		public Vector Size { get; set; }
 
 		/// <summary>
@@ -139,17 +133,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Gets or sets the position.
 		/// </summary>
-		/// <value>
-		/// The position.
-		/// </value>
 		public Vector Position { get; }
 
 		/// <summary>
 		/// Gets or sets the size.
 		/// </summary>
-		/// <value>
-		/// The size.
-		/// </value>
 		public Vector Size { get; }
 	}
 }
