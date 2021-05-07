@@ -4,4 +4,4 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-[assembly: InternalsVisibleTo( "PiWeb.Formplot.Tests" )]
+[assembly: InternalsVisibleTo( "Zeiss.PiWeb.Formplot.Tests" )]

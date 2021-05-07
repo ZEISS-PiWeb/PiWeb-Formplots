@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <AssemblyName>PiWeb.Formplot</AssemblyName>
+    <AssemblyName>Zeiss.PiWeb.Formplot</AssemblyName>
     <RootNamespace>Zeiss.PiWeb.Formplot</RootNamespace>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
     <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
