@@ -1,3 +1,6 @@
+[![master](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/ZEISS-PiWeb/PiWeb-MeshModel/actions/workflows/dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/v/Zeiss.PiWeb.Formplot?logo=nuget)](https://www.nuget.org/packages/Zeiss.PiWeb.Formplot/)
+
 [logo]: docs/gfx/Logo.png "PiWeb Logo"
 [axiality]: docs/gfx/32px/AxialityplotElement.png "Axiality plot"
 [pattern]: docs/gfx/32px/BorepatternplotElement.png "Pattern plot"
