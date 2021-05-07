@@ -121,95 +121,104 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					Radius = XmlConvert.ToDouble( reader.ReadString() );
 					return true;
 				case "MaxGapPoint":
-				{
-					var angleString = reader.GetAttribute( "Angle" );
-					var deviationString = reader.GetAttribute( "Deviation" );
-
-					Tolerance? tolerance = null;
-
-					if( !reader.IsEmptyElement )
-					{
-						while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
-						{
-							if( reader.Name.Equals( "Tolerance" ) )
-							{
-								tolerance = Tolerance.Deserialize( reader );
-							}
-						}
-					}
-
-					MaxGapPoint = new CircleInProfilePoint
-					{
-						Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
-						Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
-					};
-
-					if( tolerance != null )
-						MaxGapPoint.Tolerance = tolerance;
-
-					return true;
-				}
+					return DeserializeMaxGapPoint( reader );
 				case "FirstTouchingPoint":
-				{
-					var angleString = reader.GetAttribute( "Angle" );
-					var deviationString = reader.GetAttribute( "Deviation" );
-
-					Tolerance? tolerance = null;
-
-					if( !reader.IsEmptyElement )
-					{
-						while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
-						{
-							if( reader.Name.Equals( "Tolerance" ) )
-							{
-								tolerance = Tolerance.Deserialize( reader );
-							}
-						}
-					}
-
-					FirstTouchingPoint = new CircleInProfilePoint
-					{
-						Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
-						Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
-					};
-
-					if( tolerance != null )
-						FirstTouchingPoint.Tolerance = tolerance;
-
-					return true;
-				}
+					return DeserializeFirstTouchingPoint( reader );
 				case "SecondTouchingPoint":
-				{
-					var angleString = reader.GetAttribute( "Angle" );
-					var deviationString = reader.GetAttribute( "Deviation" );
-
-					Tolerance? tolerance = null;
-
-					if( !reader.IsEmptyElement )
-					{
-						while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
-						{
-							if( reader.Name.Equals( "Tolerance" ) )
-							{
-								tolerance = Tolerance.Deserialize( reader );
-							}
-						}
-					}
-
-					SecondTouchingPoint = new CircleInProfilePoint
-					{
-						Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
-						Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
-					};
-
-					if( tolerance != null )
-						SecondTouchingPoint.Tolerance = tolerance;
-
-					return true;
-				}
+					return DeserializeSecondTouchingPoint( reader );
 			}
 
 			return false;
+		}
+
+		private bool DeserializeMaxGapPoint( XmlReader reader )
+		{
+			var angleString = reader.GetAttribute( "Angle" );
+			var deviationString = reader.GetAttribute( "Deviation" );
+
+			Tolerance? tolerance = null;
+
+			if( !reader.IsEmptyElement )
+			{
+				while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
+				{
+					if( reader.Name.Equals( "Tolerance" ) )
+					{
+						tolerance = Tolerance.Deserialize( reader );
+					}
+				}
+			}
+
+			MaxGapPoint = new CircleInProfilePoint
+			{
+				Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
+				Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
+			};
+
+			if( tolerance != null )
+				MaxGapPoint.Tolerance = tolerance;
+
+			return true;
+		}
+
+		private bool DeserializeFirstTouchingPoint( XmlReader reader )
+		{
+			var angleString = reader.GetAttribute( "Angle" );
+			var deviationString = reader.GetAttribute( "Deviation" );
+
+			Tolerance? tolerance = null;
+
+			if( !reader.IsEmptyElement )
+			{
+				while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
+				{
+					if( reader.Name.Equals( "Tolerance" ) )
+					{
+						tolerance = Tolerance.Deserialize( reader );
+					}
+				}
+			}
+
+			FirstTouchingPoint = new CircleInProfilePoint
+			{
+				Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
+				Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
+			};
+
+			if( tolerance != null )
+				FirstTouchingPoint.Tolerance = tolerance;
+
+			return true;
+		}
+
+		private bool DeserializeSecondTouchingPoint( XmlReader reader )
+		{
+			var angleString = reader.GetAttribute( "Angle" );
+			var deviationString = reader.GetAttribute( "Deviation" );
+
+			Tolerance? tolerance = null;
+
+			if( !reader.IsEmptyElement )
+			{
+				while( reader.Read() && reader.NodeType != XmlNodeType.EndElement )
+				{
+					if( reader.Name.Equals( "Tolerance" ) )
+					{
+						tolerance = Tolerance.Deserialize( reader );
+					}
+				}
+			}
+
+			SecondTouchingPoint = new CircleInProfilePoint
+			{
+				Angle = Property.ObjectToNullableDouble( angleString, CultureInfo.InvariantCulture ) ?? 0.0,
+				Deviation = Property.ObjectToNullableDouble( deviationString, CultureInfo.InvariantCulture ) ?? 0.0
+			};
+
+			if( tolerance != null )
+				SecondTouchingPoint.Tolerance = tolerance;
+
+			return true;
 		}
 
 		/// <inheritdoc />

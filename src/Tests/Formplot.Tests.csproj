@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <LangVersion>9.0</LangVersion>
-    <AssemblyName>PiWeb.Formplot.Tests</AssemblyName>
+    <AssemblyName>Zeiss.PiWeb.Formplot.Tests</AssemblyName>
     <RootNamespace>Zeiss.PiWeb.Formplot.Tests</RootNamespace>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
     <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
     <Authors>$(Company)</Authors>
     <IsPackable>false</IsPackable>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,5 +35,5 @@
     <Content CopyToOutputDirectory="PreserveNewest" Include="TestData\prpx\*.prpx" />
     <Content CopyToOutputDirectory="PreserveNewest" Include="TestData\pltx\*.pltx" />
   </ItemGroup>
-  
+
 </Project>
