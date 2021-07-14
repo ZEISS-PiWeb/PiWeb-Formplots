@@ -18,13 +18,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#endregion
 
 	/// <summary>
-	/// An item of the defect plot.
+	///     An item of the defect plot.
 	/// </summary>
 	public sealed class Defect : Point<Defect, DefectGeometry>
 	{
 		#region constructors
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Defect() { }
 
 		/// <summary>Constructor.</summary>
@@ -54,22 +54,22 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		#region properties
 
 		/// <summary>
-		/// Gets the position.
+		///     Gets the position.
 		/// </summary>
 		public Vector Position { get; private set; }
 
 		/// <summary>
-		/// Gets the size.
+		///     Gets the size.
 		/// </summary>
 		public Vector Size { get; private set; }
 
 		/// <summary>
-		/// Gets the voxel shape.
+		///     Gets the voxel shape.
 		/// </summary>
 		public Voxel[]? Voxels { get; private set; }
 
 		/// <summary>
-		/// Gets the mesh shape.
+		///     Gets the mesh shape.
 		/// </summary>
 		public Mesh? Shape { get; private set; }
 
@@ -85,8 +85,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			ReadVoxels( reader );
 
-			if( version >= Formplot.Version3 )
-				this.Shape = Mesh.Read( reader );
+			if( version < Formplot.Version3 )
+				return;
+
+			var shape = Mesh.Read( reader );
+			if( shape.Indices.Length > 0 )
+				Shape = shape;
 		}
 
 		private void ReadVoxels( BinaryReader reader )
@@ -134,14 +138,15 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		private void WriteMesh( BinaryWriter writer )
 		{
-			if( Shape == null )
+			if( Shape.HasValue )
 			{
-				writer.Write( 0 );
-				return;
+				Shape.Value.Write( writer );
+				Shape.Value.Check( this );
 			}
-
-			Shape.Value.Write( writer );
-			Shape.Value.Check( this );
+			else
+			{
+				Mesh.Empty.Write( writer );
+			}
 		}
 
 		#endregion

@@ -19,6 +19,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	/// </summary>
 	public readonly struct Mesh
 	{
+		/// <summary>
+		/// An empty mesh with no triangles in it.
+		/// </summary>
+		public static Mesh Empty = new Mesh( Array.Empty<int>(), Array.Empty<float>() );
+
 		/// <summary>Constructor.</summary>
 		/// <param name="indices">The mesh indices.</param>
 		/// <param name="vertices">The mesh vertices in form [x,y,z,x,y,z,...]</param>
@@ -41,21 +46,15 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Reads a mesh from the specified <paramref name="reader"/>
 		/// </summary>
-		internal static Mesh? Read( BinaryReader reader )
+		internal static Mesh Read( BinaryReader reader )
 		{
 			var indiceCount = reader.ReadInt32();
-			if( indiceCount == 0 )
-				return null;
-
 			var indices = new int[ indiceCount ];
 
 			for( var i = 0; i < indiceCount; i++ )
 				indices[ i ] = reader.ReadInt32();
 
 			var verticeCount = reader.ReadInt32();
-			if( verticeCount == 0 )
-				return null;
-
 			var vertices = new float[ verticeCount ];
 
 			for( var i = 0; i < verticeCount; i++ )
