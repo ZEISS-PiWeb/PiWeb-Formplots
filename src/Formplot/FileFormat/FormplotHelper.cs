@@ -27,8 +27,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		{
 			return formplotType switch
 			{
-				FormplotTypes.None => new Version( 1, 0 ),
-				_                  => new Version( 2, 0 )
+				FormplotTypes.None   => new Version( 1, 0 ),
+				FormplotTypes.Defect => new Version( 3, 0 ),
+				_                    => new Version( 2, 0 ),
 			};
 		}
 

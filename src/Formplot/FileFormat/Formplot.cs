@@ -26,6 +26,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region members
 
+		internal static readonly Version Version3 = new Version( 3, 0 );
+
 		private double? _DefaultErrorScaling;
 
 		#endregion

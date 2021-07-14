@@ -12,6 +12,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 {
 	#region usings
 
+	using System;
 	using System.IO;
 
 	#endregion
@@ -69,7 +70,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <inheritdoc />
-		internal override void ReadFromStream( BinaryReader reader )
+		internal override void ReadFromStream( BinaryReader reader, Version version )
 		{
 			Coordinate1 = reader.ReadDouble();
 			Coordinate2 = reader.ReadDouble();

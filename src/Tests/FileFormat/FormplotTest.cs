@@ -32,17 +32,17 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		private static readonly Tolerance[] TestTolerances =
 		{
 			new(),
-			new( 77 ),
-			new( null, 77 ),
+			new(77),
+			new(null, 77),
 			new() { ToleranceType = ToleranceType.Spatial, SpatialTolerance = new Vector( 1, 2, 3 ) },
 			new() { ToleranceType = ToleranceType.Rectangular, RectangleToleranceHeight = 2, RectangleToleranceWidth = 3 },
 			new() { ToleranceType = ToleranceType.Circular, CircularToleranceRadius = 7.5 },
-			new( 12, 13 ) { WarningLevel = 99 },
-			new( 12, 13 ) { WarningLevel = 12 },
-			new( 12, 13 ) { RectangleToleranceWidth = 134 },
-			new( 12, 13 ) { RectangleToleranceHeight = 134 },
-			new( 12, 13 ) { RectangleToleranceWidth = 234, RectangleToleranceHeight = 134 },
-			new( 12, 13 ) { SpatialTolerance = new Vector( 1, 2, 3 ) }
+			new(12, 13) { WarningLevel = 99 },
+			new(12, 13) { WarningLevel = 12 },
+			new(12, 13) { RectangleToleranceWidth = 134 },
+			new(12, 13) { RectangleToleranceHeight = 134 },
+			new(12, 13) { RectangleToleranceWidth = 234, RectangleToleranceHeight = 134 },
+			new(12, 13) { SpatialTolerance = new Vector( 1, 2, 3 ) }
 		};
 
 		#endregion
