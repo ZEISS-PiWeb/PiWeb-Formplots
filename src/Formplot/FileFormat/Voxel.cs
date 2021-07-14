@@ -14,7 +14,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	using System.IO;
 
 	/// <summary>
-	/// Defect Voxel (Pixel).
+	/// Describes a cuboid with a position and a size.
 	/// </summary>
 	public readonly struct Voxel
 	{
@@ -44,7 +44,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public Vector Size { get; }
 
 		/// <summary>
-		/// Reads a voxel from the specified <paramref name="reader"/>.
+		/// Reads a voxel from the specified <paramref name="reader" />.
 		/// </summary>
 		internal static Voxel Read( BinaryReader reader )
 		{
@@ -60,7 +60,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Writes the voxel to the specified <paramref name="writer"/>.
+		/// Writes the voxel to the specified <paramref name="writer" />.
 		/// </summary>
 		internal void Write( BinaryWriter writer )
 		{
@@ -74,7 +74,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
-		/// Checks, whether the voxel is completely within the bounds of the <paramref name="defect"/>.
+		/// Checks, whether the voxel is completely within the bounds of the <paramref name="defect" />.
 		/// </summary>
 		internal void Check( Defect defect )
 		{

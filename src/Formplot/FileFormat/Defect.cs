@@ -24,7 +24,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	{
 		#region constructors
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Defect() { }
 
 		/// <summary>Constructor.</summary>
@@ -85,8 +85,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 			ReadVoxels( reader );
 
-			if( version >= Formplot.Version3 )
-				this.Shape = Mesh.Read( reader );
+			if( version < Formplot.Version3 )
+				return;
+
+			var shape = Mesh.Read( reader );
+			if( shape.Indices.Length > 0 )
+				Shape = shape;
 		}
 
 		private void ReadVoxels( BinaryReader reader )
@@ -98,7 +102,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			Voxels = new Voxel[ length ];
 
 			for( var i = 0; i < length; i++ )
+			{
 				Voxels[ i ] = Voxel.Read( reader );
+			}
 		}
 
 		/// <inheritdoc />
@@ -134,14 +140,15 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		private void WriteMesh( BinaryWriter writer )
 		{
-			if( Shape == null )
+			if( Shape.HasValue )
 			{
-				writer.Write( 0 );
-				return;
+				Shape.Value.Write( writer );
+				Shape.Value.Check( this );
 			}
-
-			Shape.Value.Write( writer );
-			Shape.Value.Check( this );
+			else
+			{
+				Mesh.Empty.Write( writer );
+			}
 		}
 
 		#endregion
