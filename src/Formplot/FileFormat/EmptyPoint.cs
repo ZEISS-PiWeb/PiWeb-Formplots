@@ -10,6 +10,7 @@
 
 namespace Zeiss.PiWeb.Formplot.FileFormat
 {
+	using System;
 	using System.IO;
 
 	/// <summary>
@@ -23,7 +24,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		internal override void WriteToStream( BinaryWriter writer ) { }
 
 		/// <inheritdoc />
-		internal override void ReadFromStream( BinaryReader reader ) { }
+		internal override void ReadFromStream( BinaryReader reader, Version version ) { }
 
 		#endregion
 	}

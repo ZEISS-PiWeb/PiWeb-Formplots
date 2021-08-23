@@ -145,7 +145,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 						ReadGeometry<TPlot, TPoint, TGeometry>( metaDataReader, formplotType, version, plot );
 						break;
 					case "Points":
-						ReadPoints( plot, metaDataReader, pointDataStream );
+						ReadPoints( plot, metaDataReader, pointDataStream, version );
 						break;
 				}
 			}
@@ -176,7 +176,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			}
 		}
 
-		private static void ReadPoints<TPoint, TGeometry>( Formplot<TPoint, TGeometry> plot, XmlReader metadataReader, Stream? pointdataStream )
+		private static void ReadPoints<TPoint, TGeometry>( Formplot<TPoint, TGeometry> plot, XmlReader metadataReader, Stream? pointdataStream, Version version )
 			where TPoint : Point<TPoint, TGeometry>, new()
 			where TGeometry : Geometry, new()
 		{
@@ -213,7 +213,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			foreach( var segment in segments.Keys )
 				plot.Segments.Add( segment );
 
-			var plotPoints = DeserializePoints<TPoint, TGeometry>( pointdataStream, pointCount );
+			var plotPoints = DeserializePoints<TPoint, TGeometry>( pointdataStream, pointCount, version );
 
 			ApplyProperties<TPoint, TGeometry>( properties, plotPoints );
 			ApplyPointStates<TPoint, TGeometry>( states, plotPoints );
@@ -298,7 +298,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			}
 		}
 
-		private static List<TPoint> DeserializePoints<TPoint, TGeometry>( Stream? pointDataStream, int pointCount )
+		private static List<TPoint> DeserializePoints<TPoint, TGeometry>( Stream? pointDataStream, int pointCount, Version version )
 			where TPoint : Point<TPoint, TGeometry>, new()
 			where TGeometry : Geometry, new()
 		{
@@ -310,7 +310,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			for( var index = 0; index < pointCount; index++ )
 			{
 				var point = new TPoint { Index = index };
-				point.ReadFromStream( binaryReader );
+				point.ReadFromStream( binaryReader, version );
 
 				result.Add( point );
 			}

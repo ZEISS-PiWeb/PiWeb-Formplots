@@ -12,6 +12,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 {
 	#region usings
 
+	using System;
 	using System.IO;
 
 	#endregion
@@ -101,7 +102,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Reads the point from a binary data stream
 		/// </summary>
-		internal abstract void ReadFromStream( BinaryReader reader );
+		internal abstract void ReadFromStream( BinaryReader reader, Version version );
 
 		#endregion
 	}
