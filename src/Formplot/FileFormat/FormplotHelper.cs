@@ -73,7 +73,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			// it is not UTF-16.
 			var streamLength = (int)headerEntry.Length;
 			var content = ArrayPool<byte>.Shared.Rent( streamLength );
-			stream.Read( content, 0, streamLength );
+
+			SafeReadFromStream( stream, content, 0, streamLength );
 
 			if( !IsTruncationSafe( content ) )
 				return new ArrayPoolStream( content, streamLength );
@@ -99,6 +100,26 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				--i;
 
 			return i;
+		}
+
+		private static int SafeReadFromStream( Stream stream, byte[] content, int startOffset, int bytesToRead )
+		{
+			if( bytesToRead < 0 || startOffset < 0 || bytesToRead + startOffset >= int.MaxValue )
+				return 0;
+
+			var numBytesToRead = bytesToRead;
+			var offset = startOffset;
+			do
+			{
+				var bytesRead = stream.Read( content, offset, numBytesToRead );
+				if( bytesRead == 0 ) break;
+
+				offset += bytesRead;
+				numBytesToRead -= bytesRead;
+
+			} while( numBytesToRead > 0 );
+
+			return offset - startOffset;
 		}
 
 		#endregion
@@ -166,7 +187,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			/// <inheritdoc />
 			public override int Read( byte[] buffer, int offset, int count )
 			{
-				return _Stream.Read( buffer, offset, count );
+				return SafeReadFromStream( _Stream, buffer, offset, count );
 			}
 
 			/// <inheritdoc />
