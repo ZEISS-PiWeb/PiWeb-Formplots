@@ -14,7 +14,10 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 
 	using System;
 	using System.IO;
+	using System.IO.Compression;
 	using System.Linq;
+	using System.Text;
+	using System.Xml;
 	using NUnit.Framework;
 	using Zeiss.PiWeb.Formplot.FileFormat;
 
@@ -61,6 +64,22 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			using var stream = File.OpenRead( propertyFile );
 			Assert.That( Formplot.ReadFrom( stream ), Is.Not.Null );
+		}
+
+		[Test, TestCaseSource( nameof( AllPropertyFiles ) )]
+		public void BatchTest_ReadAndSanitizeHeaderEntry( string propertyFile )
+		{
+			using var propertyFileStream = File.OpenRead( propertyFile );
+
+			Assert.That( propertyFileStream, Is.Not.Null );
+
+			using var zipFile = new ZipArchive( propertyFileStream, ZipArchiveMode.Read, true, Encoding.UTF8 );
+			var headerEntry = zipFile.GetEntry( "header.xml" );
+
+			Assert.That( headerEntry, Is.Not.Null );
+
+			TextReader textReader = new StreamReader( FormplotHelper.ReadAndSanitizeHeaderEntry( headerEntry ) );
+			Assert.DoesNotThrow( () => XmlConvert.VerifyXmlChars( textReader.ReadToEnd() ) );
 		}
 
 		[Test]
