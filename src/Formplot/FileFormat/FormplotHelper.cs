@@ -79,7 +79,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			if( !IsTruncationSafe( content ) )
 				return new ArrayPoolStream( content, streamLength );
 
-			var endOfContent = FindEndOfContent( content ) + 1;
+			var endOfContent = FindEndOfContent( content, streamLength - 1 ) + 1;
 			return new ArrayPoolStream( content, endOfContent );
 		}
 
@@ -93,9 +93,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					&& ( content[ 4 ] == 0x6C );
 		}
 
-		private static int FindEndOfContent( byte[] content )
+		private static int FindEndOfContent( byte[] content, int position )
 		{
-			var i = content.Length - 1;
+			if( position < 0 || position > content.Length - 1 )
+			 	return content.Length - 1;
+
+			var i = position;
 			while( i > -1 && content[ i ] == 0 )
 				--i;
 
