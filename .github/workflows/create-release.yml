@@ -8,12 +8,13 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
+      version:
+        description: 'New release version number'
+        type: string
+        required: true
+      oldversion:
+        description: 'Old version number. Needed to replace it in the csproj.'
+        type: string
         required: true
 
 jobs:
@@ -24,11 +25,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: save current date
-        run: |
-          # do some operation that changes a file in the git repo
-          date > time.txt
-
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -38,21 +34,22 @@ jobs:
       - name: start release
         run: |
           git checkout develop
-          git checkout -b release/<version number>
+          git checkout -b release/${{ github.event.inputs.version }}
           git flow start release
 
       - name: commit
         run: |
           # Change version number, commit and push
+          sed -i 's/${{ github.event.inputs.oldversion }}/${{ github.event.inputs.version }}/g' ./Formplot/Formplot.csproj
           git add ./Formplot/Formplot.csproj
           git commit -m "feat: Raises version number"
           
       - name: finish release
         run: |
           git checkout master
-          git merge release/<version number>
-          git tag <version number>
-          git branch -d release/versionnumber
+          git merge release/${{ github.event.inputs.version }}
+          git tag ${{ github.event.inputs.version }}
+          git branch -d release/${{ github.event.inputs.version }}
           git checkout develop
           git merge master
           
