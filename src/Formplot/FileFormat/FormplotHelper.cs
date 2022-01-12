@@ -96,7 +96,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		private static int FindEndOfContent( byte[] content, int position )
 		{
 			if( position < 0 || position > content.Length - 1 )
-			 	return content.Length - 1;
+				throw new ArgumentOutOfRangeException($"Invalid position '{position}'");
 
 			var i = position;
 			while( i > -1 && content[ i ] == 0 )
