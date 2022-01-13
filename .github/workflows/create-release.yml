@@ -55,7 +55,7 @@ jobs:
           
       - name: tag release commit
         run: |
-          git tag ${{ github.event.inputs.version }}
+          git tag release/${{ github.event.inputs.version }}
           
       - name: delete release branch
         run: |
