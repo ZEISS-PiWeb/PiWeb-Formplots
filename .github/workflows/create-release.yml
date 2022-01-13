@@ -1,0 +1,63 @@
+# This is a basic workflow that is manually triggered
+
+name: Create release
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      version:
+        description: 'New release version number'
+        type: string
+        required: true
+      oldversion:
+        description: 'Old version number. Needed to replace it in the csproj.'
+        type: string
+        required: true
+
+jobs:
+  date:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the branch
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          
+      - name: start release
+        run: |
+          git checkout develop
+          git checkout -b release/${{ github.event.inputs.version }}
+          git flow start release
+
+      - name: commit
+        run: |
+          # Change version number, commit and push
+          sed -i 's/${{ github.event.inputs.oldversion }}/${{ github.event.inputs.version }}/g' ./Formplot/Formplot.csproj
+          git add ./Formplot/Formplot.csproj
+          git commit -m "feat: Raises version number"
+          
+      - name: finish release
+        run: |
+          git checkout master
+          git merge release/${{ github.event.inputs.version }}
+          git tag ${{ github.event.inputs.version }}
+          git branch -d release/${{ github.event.inputs.version }}
+          git checkout develop
+          git merge master
+          
+      - name: push
+        run: |
+          git checkout develop
+          git push origin develop
+          git checkout master
+          git push origin master
+          git push --tags
+      
