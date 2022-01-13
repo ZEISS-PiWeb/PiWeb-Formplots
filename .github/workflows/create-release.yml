@@ -9,11 +9,7 @@ on:
     # Inputs the workflow accepts.
     inputs:
       version:
-        description: 'New release version number'
-        type: string
-        required: true
-      oldversion:
-        description: 'Old version number. Needed to replace it in the csproj.'
+        description: 'New release version number (semantic versioning).'
         type: string
         required: true
 
@@ -41,7 +37,8 @@ jobs:
       - name: commit
         run: |
           # Change version number, commit and push
-          sed -i 's/${{ github.event.inputs.oldversion }}/${{ github.event.inputs.version }}/g' ./src/Formplot/Formplot.csproj
+          sed -i 's#<PackageVersion>[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]#<PackageVersion>${{ github.event.inputs.version }}#g' ./src/Formplot/Formplot.csproj
+          sed -i 's#<Version>[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]#<Version>${{ github.event.inputs.version }}#g' ./src/Formplot/Formplot.csproj
           git add ./src/Formplot/Formplot.csproj
           git commit -m "feat: Raises version number"
           
