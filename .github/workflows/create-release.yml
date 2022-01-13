@@ -18,39 +18,55 @@ on:
         required: true
 
 jobs:
-  date:
+  release:
     runs-on: ubuntu-latest
     steps:
       # Checkout the branch
-      - name: checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ADMIN_TOKEN }}
 
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           
       - name: start release
         run: |
           git checkout develop
           git checkout -b release/${{ github.event.inputs.version }}
-          git flow start release
 
       - name: commit
         run: |
           # Change version number, commit and push
-          sed -i 's/${{ github.event.inputs.oldversion }}/${{ github.event.inputs.version }}/g' ./Formplot/Formplot.csproj
-          git add ./Formplot/Formplot.csproj
+          sed -i 's/${{ github.event.inputs.oldversion }}/${{ github.event.inputs.version }}/g' ./src/Formplot/Formplot.csproj
+          git add ./src/Formplot/Formplot.csproj
           git commit -m "feat: Raises version number"
           
-      - name: finish release
+      - name: checkout master
         run: |
           git checkout master
+          
+      - name: merge release into master
+        run: |
           git merge release/${{ github.event.inputs.version }}
+          
+      - name: tag release commit
+        run: |
           git tag ${{ github.event.inputs.version }}
+          
+      - name: delete release branch
+        run: |
           git branch -d release/${{ github.event.inputs.version }}
+          
+      - name: checkout develop
+        run: |
           git checkout develop
+          
+      - name: merge back master into develop
+        run: |
           git merge master
           
       - name: push
