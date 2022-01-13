@@ -51,7 +51,7 @@ jobs:
           
       - name: merge release into master
         run: |
-          git merge release/${{ github.event.inputs.version }}
+          git merge --no-ff release/${{ github.event.inputs.version }}
           
       - name: tag release commit
         run: |
@@ -67,7 +67,7 @@ jobs:
           
       - name: merge back master into develop
         run: |
-          git merge master
+          git merge --no-ff master
           
       - name: push
         run: |
