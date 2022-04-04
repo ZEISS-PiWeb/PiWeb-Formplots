@@ -38,13 +38,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			if( typeof( TPlot ) == typeof( StraightnessPlot ) )
 			{
 				target = ConvertToStraightness( source ) as TPlot;
-				return true;
+				return target != null;
 			}
 
 			if( typeof( TPlot ) == typeof( RoundnessPlot ) )
 			{
 				target = ConvertToRoundness( source ) as TPlot;
-				return true;
+				return target != null;
 			}
 
 			target = null;
