@@ -104,6 +104,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				FormplotTypes.FlushGap        => Deserialize<FlushGapPlot, FlushGapPoint, FlushGapGeometry>( reader, pointDataStream, formplotType, version ),
 				FormplotTypes.Defect          => Deserialize<DefectPlot, Defect, DefectGeometry>( reader, pointDataStream, formplotType, version ),
 				FormplotTypes.Fillet          => Deserialize<FilletPlot, FilletPoint, FilletGeometry>( reader, pointDataStream, formplotType, version ),
+				FormplotTypes.CurveDistance   => Deserialize<CurveDistancePlot, CurveDistancePoint, CurveDistanceGeometry>( reader, pointDataStream, formplotType, version ),
 				_                             => throw new NotSupportedException( $"Invalid form plot file. The plot with type {formplotType} is not supported." )
 			};
 		}

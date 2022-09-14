@@ -47,32 +47,62 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				return target != null;
 			}
 
+			if( typeof( TPlot ) == typeof( CurveProfilePlot ) )
+			{
+				target = ConvertToCurveProfile( source ) as TPlot;
+				return target != null;
+			}
+
+			if( typeof( TPlot ) == typeof( CurveDistancePlot ) )
+			{
+				target = ConvertToCurveDistance( source ) as TPlot;
+				return target != null;
+			}
+
 			target = null;
 			return false;
 		}
 
 		private static StraightnessPlot? ConvertToStraightness( Formplot source )
 		{
-			switch( source )
+			return source switch
 			{
-				case CylindricityPlot cylindricity: return ConvertToStraightness( cylindricity );
-				case CurveProfilePlot curveProfile: return ConvertCurveToStraightness( curveProfile );
-				case FlushGapPlot flushGap: return ConvertCurveToStraightness( flushGap );
-				case FilletPlot fillet: return ConvertCurveToStraightness( fillet );
-				case FlatnessPlot flatness: return ConvertToStraightness( flatness );
-				case RoundnessPlot roundness: return ConvertCircleToStraightness( roundness );
-				case CircleInProfilePlot circleInProfile: return ConvertCircleToStraightness( circleInProfile );
-				default: return null;
-			}
+				CylindricityPlot cylindricity       => ConvertToStraightness( cylindricity ),
+				CurveProfilePlot curveProfile       => ConvertCurveToStraightness( curveProfile ),
+				FlushGapPlot flushGap               => ConvertCurveToStraightness( flushGap ),
+				FilletPlot fillet                   => ConvertCurveToStraightness( fillet ),
+				FlatnessPlot flatness               => ConvertToStraightness( flatness ),
+				RoundnessPlot roundness             => ConvertCircleToStraightness( roundness ),
+				CircleInProfilePlot circleInProfile => ConvertCircleToStraightness( circleInProfile ),
+				_                                   => null
+			};
 		}
 
 		private static RoundnessPlot? ConvertToRoundness( Formplot source )
 		{
-			switch( source )
+			return source switch
 			{
-				case CylindricityPlot cylindricity: return ConvertToRoundness( cylindricity );
-				default: return null;
-			}
+				CylindricityPlot cylindricity => ConvertToRoundness( cylindricity ),
+				_                             => null
+			};
+		}
+
+		private static CurveProfilePlot? ConvertToCurveProfile( Formplot source )
+		{
+			return source switch
+			{
+				CurveDistancePlot curve => ConvertToCurveProfile( curve ),
+				_                       => null
+			};
+		}
+
+		private static CurveDistancePlot? ConvertToCurveDistance( Formplot source )
+		{
+			return source switch
+			{
+				CurveProfilePlot curve => ConvertToCurveDistance( curve ),
+				_                      => null
+			};
 		}
 
 		private static void CopyDefaults( Formplot source, Formplot target )
@@ -292,6 +322,113 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					resultSegment.Points.Add( resultPoint );
 					resultPoint.State = point.State;
 				}
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( CurveDistancePlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					resultSegment.Points.Add( new CurvePoint(
+						point.FirstPosition,
+						point.FirstDirection,
+						point.FirstDeviation ) );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					resultSegment.Points.Add( new CurvePoint(
+						point.SecondPosition,
+						point.SecondDirection,
+						point.SecondDeviation )
+					{
+						State = point.State
+					} );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			return result;
+		}
+
+		private static CurveDistancePlot? ConvertToCurveDistance( CurveProfilePlot source )
+		{
+			if( source.Segments.Count % 2 != 0 )
+				return null;
+
+			var result = new CurveDistancePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			var targetSegmentCount = source.Segments.Count / 2;
+
+			for( var i = 0; i < targetSegmentCount; i++ )
+			{
+				var firstSegment = source.Segments[ i ];
+				var secondSegment = source.Segments[ i + targetSegmentCount ];
+
+				if( firstSegment.Points.Count != secondSegment.Points.Count )
+					return null;
+
+				var resultSegment = new Segment<CurveDistancePoint, CurveDistanceGeometry>( firstSegment.Name, firstSegment.SegmentType );
+
+				for( var j = 0; j < firstSegment.Points.Count; j++ )
+				{
+					var firstPoint = firstSegment.Points[ j ];
+					var secondPoint = secondSegment.Points[ j ];
+
+					var firstPointActual = new Vector(
+						firstPoint.Position.X + firstPoint.Direction.X * firstPoint.Deviation,
+						firstPoint.Position.Y + firstPoint.Direction.Y * firstPoint.Deviation,
+						firstPoint.Position.Z + firstPoint.Direction.Z * firstPoint.Deviation );
+
+					var secondPointActual = new Vector(
+						secondPoint.Position.X + secondPoint.Direction.X * secondPoint.Deviation,
+						secondPoint.Position.Y + secondPoint.Direction.Y * secondPoint.Deviation,
+						secondPoint.Position.Z + secondPoint.Direction.Z * secondPoint.Deviation );
+
+					var distance = Math.Sqrt( ( firstPointActual.X - secondPointActual.X ) * ( firstPointActual.X - secondPointActual.X ) +
+											( firstPointActual.Y - secondPointActual.Y ) * ( firstPointActual.Y - secondPointActual.Y ) +
+											( firstPointActual.Z - secondPointActual.Z ) * ( firstPointActual.Z - secondPointActual.Z ) );
+
+					var resultPoint = new CurveDistancePoint(
+						firstPoint.Position,
+						firstPoint.Direction,
+						firstPoint.Deviation,
+						secondPoint.Position,
+						secondPoint.Direction,
+						secondPoint.Deviation,
+						distance )
+					{
+						State = firstPoint.State | secondPoint.State
+					};
+
+					resultSegment.Points.Add( resultPoint );
+				}
+
+				result.Segments.Add( resultSegment );
 			}
 
 			return result;

@@ -68,6 +68,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Pitch
 		/// </summary>
-		Pitch
+		Pitch,
+
+		/// <summary>
+		/// Curve distance
+		/// </summary>
+		CurveDistance,
 	}
 }

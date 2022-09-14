@@ -364,6 +364,26 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			ComparePoint( clonePoint, point );
 		}
 
+		[Test]
+		public void SerializationSmokeTest_CurveDistancePlot()
+		{
+			var plot = new CurveDistancePlot();
+			var segment = new Segment<CurveDistancePoint, CurveDistanceGeometry>( "Segment", SegmentTypes.Line );
+
+			var point = new CurveDistancePoint( new Vector( 1, 2, 3 ), new Vector( 4, 5, 6 ), 13, new Vector( 7, 8, 9 ), new Vector( 10, 11, 12 ), 14, 15  );
+
+			plot.Segments.Add( segment );
+			segment.Points.Add( point );
+
+			GenerateExampleProperties( plot );
+
+			var clone = plot.Clone();
+			ComparePlot( clone, plot );
+
+			var clonePoint = clone.Points.FirstOrDefault();
+			ComparePoint( clonePoint, point );
+		}
+
 		private static void ComparePlot( Formplot actual, Formplot expected )
 		{
 			CompareBasicProperties( actual, expected );
@@ -494,6 +514,19 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			Assert.That( actual.Angle, Is.EqualTo( expected.Angle ) );
 			Assert.That( actual.Height, Is.EqualTo( expected.Height ) );
 			Assert.That( actual.Deviation, Is.EqualTo( expected.Deviation ) );
+		}
+
+		private static void ComparePoint( CurveDistancePoint actual, CurveDistancePoint expected )
+		{
+			ComparePoint( actual, (Point)expected );
+
+			Assert.That( actual.FirstPosition, Is.EqualTo( expected.FirstPosition ) );
+			Assert.That( actual.FirstDirection, Is.EqualTo( expected.FirstDirection ) );
+			Assert.That( actual.FirstDeviation, Is.EqualTo( expected.FirstDeviation ) );
+			Assert.That( actual.SecondPosition, Is.EqualTo( expected.SecondPosition ) );
+			Assert.That( actual.SecondDirection, Is.EqualTo( expected.SecondDirection ) );
+			Assert.That( actual.SecondDeviation, Is.EqualTo( expected.SecondDeviation ) );
+			Assert.That( actual.Distance, Is.EqualTo( expected.Distance ) );
 		}
 
 		private static void CompareSegment( Segment expected, Segment actual )
