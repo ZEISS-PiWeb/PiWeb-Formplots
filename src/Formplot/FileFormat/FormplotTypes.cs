@@ -78,6 +78,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>
 		/// Defect plot data
 		/// </summary>
-		Defect
+		Defect,
+
+		/// <summary>
+		/// Curve distance plot
+		/// </summary>
+		CurveDistance
 	}
 }
