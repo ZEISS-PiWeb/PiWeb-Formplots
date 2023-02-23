@@ -1,4 +1,5 @@
-[![master](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/ZEISS-PiWeb/PiWeb-MeshModel/actions/workflows/dotnet.yml)
+[![build on develop](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/develop.yml/badge.svg?branch=develop&event=push)](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/develop.yml)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/mit)
 [![NuGet](https://img.shields.io/nuget/v/Zeiss.PiWeb.Formplot?logo=nuget)](https://www.nuget.org/packages/Zeiss.PiWeb.Formplot/)
 
 [logo]: docs/gfx/Logo.png "PiWeb Logo"
