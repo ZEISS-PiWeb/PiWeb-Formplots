@@ -1,6 +1,6 @@
 # Workflow to build and publish the develop branch
 
-name: Build, Test & Pack on develop
+name: build on develop
 
 on:
   push:
