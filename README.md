@@ -1,4 +1,5 @@
-[![master](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/ZEISS-PiWeb/PiWeb-MeshModel/actions/workflows/dotnet.yml)
+[![build on develop](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/develop.yml/badge.svg?branch=develop&event=push)](https://github.com/ZEISS-PiWeb/PiWeb-Formplots/actions/workflows/develop.yml)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/mit)
 [![NuGet](https://img.shields.io/nuget/v/Zeiss.PiWeb.Formplot?logo=nuget)](https://www.nuget.org/packages/Zeiss.PiWeb.Formplot/)
 
 [logo]: docs/gfx/Logo.png "PiWeb Logo"
@@ -32,6 +33,7 @@
 	- [Formplot types](#formplot-types)
 	- [Properties](#properties)
 	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
+- [Contributing](#contributing)
 
 
 # Introduction
@@ -173,3 +175,7 @@ public static async Task WriteToDatabase(
 
 >Please note that, in any case, The file extension and the mimetype are *mandatory*. Files with other mimetypes or extensions will not be recognized as formplot data.
 
+
+# Contributing
+
+This repository makes use of resuable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the documentation (especially about automated semantic versioning) before committing any changes.
