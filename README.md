@@ -32,6 +32,7 @@
 	- [Formplot types](#formplot-types)
 	- [Properties](#properties)
 	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
+- [Contributing](#contributing)
 
 
 # Introduction
@@ -173,3 +174,7 @@ public static async Task WriteToDatabase(
 
 >Please note that, in any case, The file extension and the mimetype are *mandatory*. Files with other mimetypes or extensions will not be recognized as formplot data.
 
+
+# Contributing
+
+This repository makes use of resuable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the documentation (especially about automated semantic versioning) before committing any changes.
