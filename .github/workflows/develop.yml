@@ -14,7 +14,7 @@ on:
 
 jobs:
   develop:
-    uses: ZEISS-PiWeb/github-actions/.github/workflows/develop.yml@1.1.0
+    uses: ZEISS-PiWeb/github-actions/.github/workflows/develop.yml@main
     with:
       do_pack: true  
     secrets: inherit
