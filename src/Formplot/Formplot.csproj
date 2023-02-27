@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Zeiss.PiWeb.Formplot</RootNamespace>
     <Authors>$(Company)</Authors>
-    <PackageVersion>2.0.2</PackageVersion>
+    <PackageVersion>2.0.3</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Label="Assembly information">
     <AssemblyName>Zeiss.PiWeb.Formplot</AssemblyName>
-    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <AssemblyVersion>2.0.3</AssemblyVersion>
     <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
     <FileVersion>$(AssemblyVersion)</FileVersion>
