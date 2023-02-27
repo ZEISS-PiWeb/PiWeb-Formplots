@@ -1,14 +1,22 @@
-# Create a stable project release. This workflow is manually triggered.
+# Calls a workflow that
+# + creates a new release branch from develop,
+# + raises version numbers semantically,
+# + merges the release branch into main,
+# + sets a version tag,
+# + generates release notes from commits and contributors,
+# + creates a support branch off the last release if necessary
+# + and publishes a NuGet.
+#
+# This workflow must be triggered manually.
 
-name: Create release (from develop only!)
+name: Create & publish release from develop
 
-# Run on manual trigger only
 on:
   workflow_dispatch:
 
 jobs:
   release:
-    uses: ZEISS-PiWeb/github-actions/.github/workflows/create-release.yml@main
+    uses: ZEISS-PiWeb/github-actions/.github/workflows/create-release.yml@1.1.0
     with:
       generate_release_notes: true
     secrets: inherit
