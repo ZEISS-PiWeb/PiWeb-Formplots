@@ -1,0 +1,82 @@
+# This workflow
+# + computes a semantic version,
+# + builds and tests the active branch,
+# + packs a NuGet with the given configuration,
+# + stores the package as artifact
+# + and publishes the package on pushes and manual runs.
+#
+# It's assumed that all source files reside in a directory 'src' inside the root of the repository.
+# This workflow must be called from other workflows.
+
+name: Build, test & pack
+
+on:
+  workflow_call: # Called by other workflows only.
+    inputs:
+      configuration:
+        description: 'Define whether this is a debug or a release build.'
+        required: true
+        type: string
+      do_pack:
+        description: 'If this build should be packed as NuGet package.'
+        required: true
+        type: boolean
+      is_prerelease:
+        # Decides whether a pre-release suffix is needed.
+        description: 'Define if this is a prerelease.'
+        required: true
+        type: boolean
+      suffix:
+        description: 'Define the prerelease suffix, e.g. alpha.'
+        required: true
+        type: string
+      publish_target:
+        description: 'Define the publish target (None/nuget.org).'
+        required: true
+        type: string
+
+defaults:
+  run:
+    # Set the default working directory.
+    working-directory: src
+
+jobs:
+  # Computes version with gitversion.yml.
+  compute-version:
+    uses: ./.github/workflows/gitversion.yml
+    with:
+      is_prerelease: ${{ inputs.is_prerelease }}
+      suffix: ${{ inputs.suffix }}
+
+
+  build-and-pack:
+
+    needs: compute-version
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+           
+    - name: Setup .NET
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Pack
+      if: inputs.do_pack
+      run: msbuild src\Formplot.csproj -t:pack -property:Configuration=${{ inputs.configuration }} -property:PackageOutputPath=".\package_output" -property:PackageVersion=${{ needs.compute-version.outputs.package_version }}
+
+    - name: Upload artifacts
+      # Upload all NuGet packages to GitHub. Artifact name "packages".
+      if: inputs.do_pack
+      uses: actions/upload-artifact@v3
+      with:
+        name: packages
+        path: src/package_output/*.nupkg
+        
+  publish:
+    needs: build-and-pack
+    # Publish NuGet packages only on "push" events (merge of PR into develop) or on manual run (on release).
+    if: ${{ inputs.do_pack && ( github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) }}
+    uses: ./.github/workflows/publish.yml
+    with:
+      target: ${{ inputs.publish_target }}
+    secrets: inherit

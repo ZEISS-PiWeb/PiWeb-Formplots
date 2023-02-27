@@ -1,0 +1,101 @@
+# This workflow
+# + runs on support branches only,
+# + raises version numbers semantically,
+# + sets a version tag,
+# + generates release notes from commits and contributors
+# + and publishes a NuGet.
+#
+# This workflow must be called manually.
+
+name: Create & Publish - Releasing new support version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if not on support/*
+        if: ${{ !contains(github.ref_name, 'support/') }}
+        run: |
+          echo We are on branch ${{ github.ref_name }}. Do run from a support branch only! Failing...
+          exit 1
+  
+  compute-version:
+    needs: check-branch
+    uses: ./.github/workflows/gitversion.yml
+    with:
+      is_prerelease: false
+      
+  check-version-change:
+    needs: compute-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if minor or major changes exist
+        if: ${{ needs.compute-version.outputs.semver_raise_type != 'patch' }}
+        run: |
+          echo Found a version raise of type ${{ needs.compute-version.outputs.semver_raise_type }}.
+          echo In support branches only patches are allowed. Please remove your changes and try again.
+          exit 1
+
+  release-flow:
+    needs: [ check-version-change, compute-version ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PUSH_TO_GITHUB_REPO_PAT }}
+          
+      - name: Save NuGet version to a variable for easy access.
+        run: |
+          echo "NUGET_VERSION=${{ needs.compute-version.outputs.package_version }}" >> $GITHUB_ENV
+
+      - name: Setup git config
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
+      - name: Commit and merge changes
+        run: |
+          echo Checkout support branch ${{ github.ref_name }}.
+          git checkout ${{ github.ref_name }}
+
+          echo Change version number, commit and push.
+          find . -type f -name "*.csproj" -exec sed -i 's#<PackageVersion>[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]#<PackageVersion>${{ env.NUGET_VERSION }}#g' '{}' \;
+          find . -type f -name "*.csproj" -exec sed -i 's#<AssemblyVersion>[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]#<AssemblyVersion>${{ env.NUGET_VERSION }}#g' '{}' \;
+
+          git add *.csproj
+          git commit -m "Raises version number to ${{ env.NUGET_VERSION }}"
+          
+          echo Tag release commit
+          git tag release/${{ env.NUGET_VERSION }}
+
+          echo Pushing branches into repository.
+          git push origin ${{ github.ref_name }} --tags
+          
+      # Automatically create release notes on the GitHub page.
+      # They are assembled from commit messages and contributors.
+      - name: Create Release Notes
+        if: inputs.generate_release_notes
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          generateReleaseNotes: true
+          makeLatest: "false"
+          tag: release/${{ needs.compute-version.outputs.package_version }}
+          
+  build-and-publish:
+    needs: release-flow
+    # Last but not least, run, package and publish from "main" to upload stable NuGet.
+    uses: ./.github/workflows/build-and-pack.yml
+    with:
+      configuration: "Release"
+      do_pack: true
+      is_prerelease: false
+      suffix: "stable"
+      publish_target: "nuget.org"
+    secrets: inherit
