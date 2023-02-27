@@ -4,11 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <AssemblyName>Zeiss.PiWeb.Formplot</AssemblyName>
     <RootNamespace>Zeiss.PiWeb.Formplot</RootNamespace>
-    <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
-    <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
     <Authors>$(Company)</Authors>
+    <PackageVersion>2.0.2</PackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Assembly information">
+    <AssemblyName>Zeiss.PiWeb.Formplot</AssemblyName>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <Company>Carl Zeiss Industrielle Messtechnik GmbH</Company>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.Year) Carl Zeiss Industrielle Messtechnik GmbH</Copyright>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <InformationalVersion>$(AssemblyVersion)</InformationalVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Product>ZEISS PiWeb Formplot</Product>
   </PropertyGroup>
 
   <PropertyGroup Label="NuGet package specifications">
@@ -17,7 +26,6 @@
       An API to read and write plot data for the ZEISS PiWeb quality data management system.
     </Description>
     <PackageId>Zeiss.PiWeb.Formplot</PackageId>
-    <Version>2.0.2</Version>
     <PackageIcon>logo_128x128.png</PackageIcon>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/ZEISS-PiWeb/PiWeb-Formplots</PackageProjectUrl>
