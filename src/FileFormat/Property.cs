@@ -270,8 +270,9 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 			if( m1 != null && m2 != null )
 			{
 				return m1.Name == m2.Name &&
-				       m1.DataType == m2.DataType &&
-				       Equals( m1.Value, m2.Value );
+						m1.DataType == m2.DataType &&
+						Equals( m1.Value, m2.Value ) &&
+						Equals( m1.Unit, m2.Unit );
 			}
 			return false;
 		}

@@ -314,7 +314,7 @@ namespace Zeiss.IMT.PiWeb.Formplot.FileFormat
 					if( lastPoint == null ) 
 						continue;
 					
-					if( lastPoint.PropertyList.Contains( property ) )
+					if( Equals( lastpoint.PropertyList[ property.Name ], property ) )
 						propertyLists[ property ].Last().End = index;
 					else
 						propertyLists[ property ].Add( new Range( index ) );
