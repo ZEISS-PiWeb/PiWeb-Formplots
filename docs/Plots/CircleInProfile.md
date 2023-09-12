@@ -1,4 +1,4 @@
-[preview]: gfx/CircleInProfile.png "Circle-in-profile plot"
+[preview]: img/CircleInProfile.png "Circle-in-profile plot"
 <br/>
 ### Circle-in-profile plot
 

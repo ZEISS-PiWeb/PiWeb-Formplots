@@ -1,4 +1,4 @@
-[preview]: gfx/Cylindricity.png "Cylindricity plot"
+[preview]: img/Cylindricity.png "Cylindricity plot"
 <br/>
 ### Cylindricity plot
 

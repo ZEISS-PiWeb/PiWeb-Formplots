@@ -1,4 +1,4 @@
-[preview]: gfx/Defect.png "Defect file format"
+[preview]: img/Defect.png "Defect file format"
 <br/>
 
 ### Defect plot
@@ -13,7 +13,7 @@ The defect file format is used to transport information about one or more defect
 
 The format defines one point for every defect, which has a `Position` and a `Size` parameter. Be aware, that the `Position` refers to the corner of the defects bounding box, which is closest to the point of origin.
 
-![defect position](gfx/DefectPosition.png "Defect position")
+![defect position](img/DefectPosition.png "Defect position")
 
 Besides the `Position` and `Size` parameters, every point contains an arbitrary number of `Voxels` that define its shape. Be aware that both, the defect `Size` and `Position` as well as the voxel `Size` and `Position` are double values. We suggest to specify all positions and sizes in voxel coordinates and to specify the properties described in the [Geometry](#geometry) section.
 
