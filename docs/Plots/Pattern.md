@@ -1,4 +1,4 @@
-[preview]: gfx/Pattern.png "Pattern plot"
+[preview]: img/Pattern.png "Pattern plot"
 <br/>
 ### Pattern plot
 

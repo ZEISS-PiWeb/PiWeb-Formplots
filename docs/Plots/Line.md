@@ -1,4 +1,4 @@
-[preview]: gfx/Line.png "Line plot"
+[preview]: img/Line.png "Line plot"
 <br/>
 ### Line plot
 

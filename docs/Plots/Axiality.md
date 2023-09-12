@@ -1,5 +1,5 @@
 
-[preview]: gfx/Axiality.png "Axiality plot"
+[preview]: img/Axiality.png "Axiality plot"
 <br/>
 ### Axiality plot
 
