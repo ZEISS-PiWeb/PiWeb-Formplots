@@ -13,6 +13,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#region usings
 
 	using System;
+	using System.Collections.Generic;
 	using System.Linq;
 
 	#endregion
@@ -145,37 +146,24 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
 			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
 
-			double? lastAngle = null;
 			const double radToDeg = 180 / Math.PI;
 
 			foreach( var segment in source.Segments )
 			{
 				var resultSegment = new Segment<LinePoint, LineGeometry>( segment.Name, segment.SegmentType );
+				var points = new List<LinePoint>( segment.Points.Count );
+
 				result.Segments.Add( resultSegment );
 
 				foreach( var point in segment.Points )
 				{
-					double position;
-					if( !lastAngle.HasValue )
-					{
-						lastAngle = AdjustAngle( point.Angle * radToDeg );
-						position = lastAngle.Value;
-					}
-					else
-					{
-						var angle = AdjustAngle( point.Angle * radToDeg );
-
-						while( angle < lastAngle )
-							angle += 360;
-
-						lastAngle = angle;
-						position = angle;
-					}
-
-					var resultPoint = new LinePoint( position, point.Deviation );
+					var resultPoint = new LinePoint( AdjustAngle( point.Angle * radToDeg ), point.Deviation );
 					CopyDefaults( point, resultPoint );
-					resultSegment.Points.Add( resultPoint );
+					points.Add( resultPoint );
 				}
+
+				foreach( var point in points.OrderBy( p => p.Position ) )
+					resultSegment.Points.Add( point );
 			}
 
 			return result;
