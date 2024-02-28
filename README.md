@@ -2,25 +2,25 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/mit)
 [![NuGet](https://img.shields.io/nuget/v/Zeiss.PiWeb.Formplot?logo=nuget)](https://www.nuget.org/packages/Zeiss.PiWeb.Formplot/)
 
-[logo]: docs/gfx/Logo.png "PiWeb Logo"
-[axiality]: docs/gfx/32px/AxialityplotElement.png "Axiality plot"
-[pattern]: docs/gfx/32px/BorepatternplotElement.png "Pattern plot"
-[roundness]: docs/gfx/32px/CircleplotElement.png "Roundness plot"
-[circleinprofile]: docs/gfx/32px/CircleprofileplotElement.png "Circle in profile plot"
-[lineprofile]:docs/gfx/32px/CurveplotElement.png "Line profile plot"
-[cylindricity]: docs/gfx/32px/CylinderplotElement.png "Cylindricity plot"
-[straightness]: docs/gfx/32px/LineplotElement.png "Straightness plot"
-[pitch]: docs/gfx/32px/PitchplotElement.png "Pitch plot"
-[flatness]: docs/gfx/32px/PlaneplotElement.png "Flatness plot"
-[roughness]: docs/gfx/32px/RoughnessplotElement.png "Roughness plot"
-[generatrix]: docs/gfx/32px/SurfaceLineplotElement.png "Generatrix plot"
-[fourier]: docs/gfx/32px/FourierplotElement.png "Fourier plot"
-[defect]: docs/gfx/32px/DefectElement.png "Defect image"
+[logo]: docs/img/Logo.png "PiWeb Logo"
+[axiality]: docs/img/32px/AxialityplotElement.png "Axiality plot"
+[pattern]: docs/img/32px/BorepatternplotElement.png "Pattern plot"
+[roundness]: docs/img/32px/CircleplotElement.png "Roundness plot"
+[circleinprofile]: docs/img/32px/CircleprofileplotElement.png "Circle in profile plot"
+[lineprofile]:docs/img/32px/CurveplotElement.png "Line profile plot"
+[cylindricity]: docs/img/32px/CylinderplotElement.png "Cylindricity plot"
+[straightness]: docs/img/32px/LineplotElement.png "Straightness plot"
+[pitch]: docs/img/32px/PitchplotElement.png "Pitch plot"
+[flatness]: docs/img/32px/PlaneplotElement.png "Flatness plot"
+[roughness]: docs/img/32px/RoughnessplotElement.png "Roughness plot"
+[generatrix]: docs/img/32px/SurfaceLineplotElement.png "Generatrix plot"
+[fourier]: docs/img/32px/FourierplotElement.png "Fourier plot"
+[defect]: docs/img/32px/DefectElement.png "Defect image"
 
 
 # PiWeb Formplot Library
 
-| ![Zeiss IQS Logo](docs/gfx/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing PiWeb formplot data. |
+| ![Zeiss IQS Logo](docs/img/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing formplot data for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
 |-|:-|
 
 

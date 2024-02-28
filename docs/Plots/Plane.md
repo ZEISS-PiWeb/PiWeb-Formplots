@@ -1,4 +1,4 @@
-[preview]: gfx/Plane.png "Plane plot"
+[preview]: img/Plane.png "Plane plot"
 <br/>
 ### Plane plot
 

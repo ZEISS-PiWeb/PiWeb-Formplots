@@ -1,4 +1,4 @@
-[preview]: gfx/Circle.png "Circle plot"
+[preview]: img/Circle.png "Circle plot"
 <br/>
 ### Circle plot
 
