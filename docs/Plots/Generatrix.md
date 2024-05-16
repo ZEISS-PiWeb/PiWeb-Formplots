@@ -1,4 +1,4 @@
-[preview]: img/Generatrix.png "Generatrix plot"
+[preview]: gfx/Generatrix.png "Generatrix plot"
 <br/>
 ### Generatrix plot
 

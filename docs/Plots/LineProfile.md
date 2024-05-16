@@ -1,4 +1,4 @@
-[preview]: img/LineProfile.png "Curve plot"
+[preview]: gfx/LineProfile.png "Curve plot"
 <br/>
 ### Line profile plot
 

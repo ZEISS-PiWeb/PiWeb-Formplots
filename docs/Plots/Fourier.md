@@ -1,4 +1,4 @@
-[preview]: img/Fourier.png "Fourier plot"
+[preview]: gfx/Fourier.png "Fourier plot"
 <br/>
 ### Fourier plot
 

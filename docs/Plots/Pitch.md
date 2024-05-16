@@ -1,4 +1,4 @@
-[preview]: img/Pitch.png "Pitch plot"
+[preview]: gfx/Pitch.png "Pitch plot"
 <br/>
 ### Pitch plot
 
