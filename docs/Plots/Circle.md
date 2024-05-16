@@ -23,23 +23,24 @@ Although the circle plot geometry has a radius parameter, it has no effect for d
 
 ```csharp
 var plot = new RoundnessPlot();
-var points = new List<CirclePoint>();
+
+var segment = new Segment<CirclePoint, CircleGeometry>( "All", SegmentTypes.Circle );
+plot.Segments.Add( segment )
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 for( var i = 0; i < count; i++ )
 {
 	var angle = ( double ) i / count * 2.0 * Math.PI;
 	var deviation = 0.1 * ( Math.Sin( angle ) + ( rand.NextDouble() - 0.5 ) * 0.2 );
 
-	var point = new CirclePoint( segment, angle, deviation );
-	points.Add( point );
+	var point = new CirclePoint( angle, deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 
 #### Remarks

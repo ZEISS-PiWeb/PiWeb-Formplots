@@ -20,10 +20,11 @@ While the points are specified as three dimensional entities, the plot displays 
 
 ```csharp
 var plot = new BorePatternPlot();
-var points = new List<BorePatternPoint>();
+
+var segment = new Segment<CurvePoint, CurveGeometry>( "All", SegmentTypes.None );
+plot.Segments.Add( segment );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 for( var i = 0; i < count; i++ )
 {
@@ -31,8 +32,9 @@ for( var i = 0; i < count; i++ )
 	var y = rand.NextDouble();
 	var deviation = ( rand.NextDouble() - 0.5 ) * 0.2;
 
-	var point = new BorePatternPoint( segment, new Vector( x, y ), new Vector( 1 ), deviation );
-	points.Add( point );
+	var point = new CurvePoint( new Vector( x, y ), new Vector( 1 ), deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance
@@ -42,7 +44,6 @@ plot.Tolerance = new Tolerance
 };
 
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 <br/>
 <br/>

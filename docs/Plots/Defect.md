@@ -41,7 +41,9 @@ To allow PiWeb to create various visualizations of your data, you can specify ad
 public static Formplot Create( BitmapSource img )
 {
 	var plot = new DefectPlot();
-	var points = new List<Defect>();
+
+	var segment = new Segment<Defect, DefectGeometry>( "All", SegmentTypes.None );
+	plot.Segments.Add( segment );
 
 	plot.Nominal.Size = new Vector( img.PixelWidth, img.PixelHeight );
 
@@ -59,11 +61,10 @@ public static Formplot Create( BitmapSource img )
 				continue;
 
 			if( IsDefect( position, data ) )
-				points.Add( DetectDefect( new Pixel( x, y ), data, img.PixelWidth, img.PixelHeight, done ) );
+				segment.Points.Add( DetectDefect( new Pixel( x, y ), data, img.PixelWidth, img.PixelHeight, done ) );
 		}
 	}
-
-	plot.Points = points;
+	
 	return plot;
 }
 ```
@@ -104,7 +105,7 @@ private static Defect DetectDefect( Pixel origin, byte[] data, int pixelWidth, i
 
 	var voxels = found.Select( p => new Voxel( new Vector( p.X, p.Y ), new Vector( 1, 1 ) ) ).ToArray();
 	var bounds = GetBounds( voxels );
-	return new Defect( new Segment( "All", SegmentTypes.None ), new Vector( bounds.X, bounds.Y ), new Vector( bounds.Width, bounds.Height ) )
+	return new Defect( new Vector( bounds.X, bounds.Y ), new Vector( bounds.Width, bounds.Height ) )
 	{
 		Voxels = voxels
 	};

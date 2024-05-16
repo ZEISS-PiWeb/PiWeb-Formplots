@@ -19,21 +19,21 @@ Fourier points consist of...
 
 ```csharp
 var plot = new FourierPlot();
-var points = new List<FourierPoint>();
+
+var segment = new Segment<FourierPoint, EmptyGeometry>( "All", SegmentTypes.None );
+plot.Segments.Add( segment );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 // Harmonics are greater or equal to 1
 for( uint harmonic = 1; harmonic <= count; harmonic++ )
 {
 	//No negative amplitudes
 	var amplitude = ( 1.0 / (1.0 + ( double )harmonic / 1 ) + rand.NextDouble() * 0.2 ) * 0.0025;
-	var point = new FourierPoint( segment, harmonic, amplitude ) { Tolerance = new Tolerance( null, 0.0003 ) };
-	points.Add( point );
-}
+	var point = new FourierPoint( harmonic, amplitude ) { Tolerance = new Tolerance( null, 0.0003 ) };
 
-plot.Points = points;
+	segment.Points.Add( point );
+}
 ```
 #### Remarks
 * Be aware that the harmonic is stored as an unsigned integer value in network byte order (big endian) and its value must be greater than 0

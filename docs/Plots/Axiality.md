@@ -25,10 +25,11 @@ The plot can display a height axis. The range of the axis is determined by multi
 
 ```csharp
 var plot = new CylindricityPlot();
-var points = new List<CylinderPoint>();
+
+var segment = new Segment<CylinderPoint, CylinderGeometry>( "All", SegmentTypes.Axis );
+plot.Segments.Add( segment )
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.Axis);
 
 //The range of the displayed z-axis will be this height multiplied with the points height range.
 plot.Actual.Height = 10;
@@ -38,13 +39,13 @@ for( var i = 0; i < count; i++ )
 	var deviation = 0.2 + rand.NextDouble() * 0.1;
 	var height = (double)i / count;
 
-	var point = new CylinderPoint( segment, rand.NextDouble() * 0.1, height, deviation );
-	points.Add( point );
+	var point = new CylinderPoint( rand.NextDouble() * 0.1, height, deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 
 #### Remarks

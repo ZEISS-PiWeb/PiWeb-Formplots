@@ -24,10 +24,11 @@ The _actual_ geometries parameters `Length1` and `Length2` are multiplied with t
 
 ```csharp
 var plot = new FlatnessPlot();
-var points = new List<PlanePoint>();
+
+var segment = new Segment<PlanePoint, PlaneGeometry>( "All", SegmentTypes.Line );
+plot.Segments.Add( segment );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 //The plot point coordinates will be multiplied with the length values when the plot is displayed.
 plot.Actual.Length1 = 5.0;
@@ -41,13 +42,13 @@ for( var i = 0; i < count; i++ )
 
 	var deviation = ( rand.NextDouble() - 0.5 ) * 0.2;
 
-	var point = new PlanePoint( segment, x, y, deviation );
-	points.Add( point );
+	var point = new PlanePoint( x, y, deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 
 #### Remarks

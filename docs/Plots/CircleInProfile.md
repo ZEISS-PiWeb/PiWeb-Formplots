@@ -22,9 +22,11 @@ These special points can be part of the plots point list, but are usually define
 
 ```csharp
 var plot = new CircleInProfilePlot();
-var points = new List<CircleInProfilePoint>();
+
+var segment = new Segment<CircleInProfilePoint, CircleInProfileGeometry>( "All", SegmentTypes.Line );
+plot.Segments.Add( segment )
+
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.Circle );
 
 var angleShift = ( rand.NextDouble() - 0.5 ) * 0.25;
 
@@ -33,16 +35,16 @@ for( var i = 0; i < count; i++ )
 	var angle = (double)i / count * Math.PI;
 
 	var deviation = Math.Abs( Math.Sin( angle ) - Math.Sin( 0.25 * Math.PI ) ) * 0.1 + ( rand.NextDouble() - 0.5 ) * 0.005;
-	var point = new CircleInProfilePoint( segment, angle + angleShift, deviation );
+	var point = new CircleInProfilePoint( angle + angleShift, deviation );
 
 
 	if( i == count / 4 )
 	{
-		plot.Nominal.FirstTouchingPoint = new CircleInProfilePoint( segment, angle, 0 );
+		plot.Nominal.FirstTouchingPoint = new CircleInProfilePoint( angle, 0 );
 
 		//To create an angular tolerance, add it to the actual touching points.
 		//The tolerance spans around the nominal touching point angle.
-		plot.Actual.FirstTouchingPoint = new CircleInProfilePoint( segment, point.Angle, point.Deviation )
+		plot.Actual.FirstTouchingPoint = new CircleInProfilePoint( point.Angle, point.Deviation )
 		{
 			Tolerance = new Tolerance( -0.1, 0.1 )
 		};
@@ -50,11 +52,11 @@ for( var i = 0; i < count; i++ )
 
 	if( i == count / 4 * 3 )
 	{
-		plot.Nominal.SecondTouchingPoint = new CircleInProfilePoint( segment, angle, 0 );
+		plot.Nominal.SecondTouchingPoint = new CircleInProfilePoint( angle, 0 );
 
 		//To create an angular tolerance, add it to the actual touching points.
 		//The tolerance spans around the nominal touching point angle.
-		plot.Actual.SecondTouchingPoint = new CircleInProfilePoint( segment, point.Angle, point.Deviation )
+		plot.Actual.SecondTouchingPoint = new CircleInProfilePoint( point.Angle, point.Deviation )
 		{
 			Tolerance = new Tolerance( -0.1, 0.1 )
 		};
@@ -62,16 +64,15 @@ for( var i = 0; i < count; i++ )
 
 	if( i == count / 2 )
 	{
-		plot.Nominal.MaxGapPoint = new CircleInProfilePoint( segment, angle, 0 );
-		plot.Actual.MaxGapPoint = new CircleInProfilePoint( segment, point.Angle, point.Deviation );
+		plot.Nominal.MaxGapPoint = new CircleInProfilePoint( angle, 0 );
+		plot.Actual.MaxGapPoint = new CircleInProfilePoint( point.Angle, point.Deviation );
 	}
-
-	points.Add( point );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( 0.1 );
 plot.DefaultErrorScaling = 250;
-plot.Points = points;
 ```
 <br/>
 <br/>
