@@ -1,4 +1,4 @@
-[preview]: img/Pitch.png "Pitch plot"
+[preview]: gfx/Pitch.png "Pitch plot"
 <br/>
 ### Pitch plot
 
@@ -19,23 +19,24 @@ Please note that the `Position` parameter will __not be serialized__ and therefo
 
 ```csharp
 var plot = new PitchPlot();
-var points = new List<PitchPoint>();
+
+var segment = new Segment<PitchPoint, PitchGeometry>( "All", SegmentTypes.Line );
+plot.Segments.Add( segment );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 for( var i = 0; i < count; i++ )
 {
 	var deviation = 0.1 * ( Math.Sin( i * 0.05 * Math.PI ) + ( rand.NextDouble() - 0.5 ) * 0.5 );
 
 	//The pitch point has a position property, but it won't be written. Instead, the point order matters.
-	var point = new PitchPoint( segment, deviation );
-	points.Add( point );
+	var point = new PitchPoint( deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 <br/>
 <br/>

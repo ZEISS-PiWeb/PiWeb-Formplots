@@ -1,4 +1,4 @@
-[preview]: img/Line.png "Line plot"
+[preview]: gfx/Line.png "Line plot"
 <br/>
 ### Line plot
 
@@ -24,10 +24,11 @@ The plot axis can be modified with the _actual_ geometry parameters `Length` and
 
 ```csharp
 var plot = new StraightnessPlot();
-var points = new List<LinePoint>();
+
+var segment = new Segment<LinePoint, LineGeometry>( "All", SegmentTypes.None );
+plot.Segments.Add( segment );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 plot.Actual.Length = 5.0; //All positions will be multiplied with the length when the plot is drawn.
 
@@ -40,14 +41,13 @@ for( var i = 0; i < pointCount; i++ )
 {
 	var position = ( double ) i / pointCount;
 	var deviation = 0.1 * ( Math.Sin( position * 2.0 * Math.PI ) + ( rand.NextDouble() - 0.5 ) * 0.1 );
-	var point = new LinePoint( segment, position, deviation );
+	var point = new LinePoint( position, deviation );
 
-	points.Add( point );
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 #### Remarks
 
