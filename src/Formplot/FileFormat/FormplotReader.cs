@@ -13,6 +13,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 	#region usings
 
 	using System;
+	using System.Buffers;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.IO.Compression;
@@ -56,9 +57,31 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			var version = ReadFileVersion( zipFile );
 			var metadataStream = ReadMetadataStream( zipFile );
 
-			using var pointDataStream = zipFile.GetEntry( "plotpoints.dat" )?.Open();
+			var zipEntry = zipFile.GetEntry( "plotpoints.dat" );
 
-			return ReadFormplot( metadataStream, pointDataStream, version, acceptedTypes );
+			//property files don't have plot points.
+			if( zipEntry is null )
+				return ReadFormplot( metadataStream, null, version, acceptedTypes );
+
+			//There's a very significant performance impact when parsing values from a zip stream. Therefore, we copy
+			//all data to a memory stream before deserializing the plot data.
+			var length = (int)zipEntry.Length;
+			var data = ArrayPool<byte>.Shared.Rent( length );
+
+			try
+			{
+				using var pointDataStream = zipEntry.Open();
+
+				var deflatedPointDataStream = new MemoryStream( data, true );
+				pointDataStream.CopyTo( deflatedPointDataStream );
+				deflatedPointDataStream.Seek( 0, SeekOrigin.Begin );
+
+				return ReadFormplot( metadataStream, deflatedPointDataStream, version, acceptedTypes );
+			}
+			finally
+			{
+				ArrayPool<byte>.Shared.Return( data );
+			}
 		}
 
 		private static Formplot? ReadFormplot( Stream metadataStream, Stream? pointDataStream, Version version, FormplotTypes[]? acceptedTypes )

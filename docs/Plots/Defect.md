@@ -1,4 +1,4 @@
-[preview]: img/Defect.png "Defect file format"
+[preview]: gfx/Defect.png "Defect file format"
 <br/>
 
 ### Defect plot
@@ -13,7 +13,7 @@ The defect file format is used to transport information about one or more defect
 
 The format defines one point for every defect, which has a `Position` and a `Size` parameter. Be aware, that the `Position` refers to the corner of the defects bounding box, which is closest to the point of origin.
 
-![defect position](img/DefectPosition.png "Defect position")
+![defect position](gfx/DefectPosition.png "Defect position")
 
 Besides the `Position` and `Size` parameters, every point contains an arbitrary number of `Voxels` that define its shape. Be aware that both, the defect `Size` and `Position` as well as the voxel `Size` and `Position` are double values. We suggest to specify all positions and sizes in voxel coordinates and to specify the properties described in the [Geometry](#geometry) section.
 
@@ -41,7 +41,9 @@ To allow PiWeb to create various visualizations of your data, you can specify ad
 public static Formplot Create( BitmapSource img )
 {
 	var plot = new DefectPlot();
-	var points = new List<Defect>();
+
+	var segment = new Segment<Defect, DefectGeometry>( "All", SegmentTypes.None );
+	plot.Segments.Add( segment );
 
 	plot.Nominal.Size = new Vector( img.PixelWidth, img.PixelHeight );
 
@@ -59,11 +61,10 @@ public static Formplot Create( BitmapSource img )
 				continue;
 
 			if( IsDefect( position, data ) )
-				points.Add( DetectDefect( new Pixel( x, y ), data, img.PixelWidth, img.PixelHeight, done ) );
+				segment.Points.Add( DetectDefect( new Pixel( x, y ), data, img.PixelWidth, img.PixelHeight, done ) );
 		}
 	}
-
-	plot.Points = points;
+	
 	return plot;
 }
 ```
@@ -104,7 +105,7 @@ private static Defect DetectDefect( Pixel origin, byte[] data, int pixelWidth, i
 
 	var voxels = found.Select( p => new Voxel( new Vector( p.X, p.Y ), new Vector( 1, 1 ) ) ).ToArray();
 	var bounds = GetBounds( voxels );
-	return new Defect( new Segment( "All", SegmentTypes.None ), new Vector( bounds.X, bounds.Y ), new Vector( bounds.Width, bounds.Height ) )
+	return new Defect( new Vector( bounds.X, bounds.Y ), new Vector( bounds.Width, bounds.Height ) )
 	{
 		Voxels = voxels
 	};

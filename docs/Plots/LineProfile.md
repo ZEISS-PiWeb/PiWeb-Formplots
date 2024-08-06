@@ -1,4 +1,4 @@
-[preview]: img/LineProfile.png "Curve plot"
+[preview]: gfx/LineProfile.png "Curve plot"
 <br/>
 ### Line profile plot
 
@@ -20,10 +20,11 @@ While the points are specified as three dimensional entities, the plot displays 
 
 ```csharp
 var plot = new CurveProfilePlot();
-var points = new List<CurvePoint>();
+
+var segment = new Segment<CurvePoint, CurveGeometry>( "All", SegmentTypes.None );
+plot.Segments.Add( segment )
 
 var rand = new Random( DateTime.Now.Millisecond );
-var segment = new Segment( "All", SegmentTypes.None );
 
 var lastPosition = new Vector();
 
@@ -44,14 +45,13 @@ for( var i = 0; i < count; i++ )
 	if( i == 0 )
 		continue;
 
-	var point = new CurvePoint( segment, position, direction, deviation );
-
-	points.Add( point );
+	var point = new CurvePoint( position, direction, deviation );
+	
+	segment.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 <br/>
 <br/>

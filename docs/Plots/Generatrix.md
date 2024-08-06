@@ -1,4 +1,4 @@
-[preview]: img/Generatrix.png "Generatrix plot"
+[preview]: gfx/Generatrix.png "Generatrix plot"
 <br/>
 ### Generatrix plot
 
@@ -24,11 +24,13 @@ The plot can display a height and a radius axis. The range of these axis is dete
 
 ```csharp
 var plot = new CylindricityPlot();
-var points = new List<CylinderPoint>();
+
+var left = new Segment<CylinderPoint, CylinderGeometry>( "Left", SegmentTypes.Line );
+var right = new Segment<CylinderPoint, CylinderGeometry>( "Right", SegmentTypes.Line );
+plot.Segments.Add( left );
+plot.Segments.Add( right );
 
 var rand = new Random( DateTime.Now.Millisecond );
-var left = new Segment( "Left", SegmentTypes.Line);
-var right = new Segment( "Right", SegmentTypes.Line );
 
 //The x- and y-axis of the plot will span over the radius and height * plotpoints min/max.
 plot.Actual.Height = 15;
@@ -39,16 +41,15 @@ for( var i = 0; i < count; i++ )
 	var deviation = rand.NextDouble() * 0.1;
 	var height = (double)i / count;
 
-	var point = new CylinderPoint( left, 0.0, height, deviation );
-	points.Add( point );
+	var point = new CylinderPoint( 0.0, height, deviation );
+	left.Points.Add( point );
 
-	point = new CylinderPoint( right, 0.5 * Math.PI, height, deviation );
-	points.Add( point );
+	point = new CylinderPoint( 0.5 * Math.PI, height, deviation );
+	right.Points.Add( point );
 }
 
 plot.Tolerance = new Tolerance( -0.1, 0.1 );
 plot.DefaultErrorScaling = 100;
-plot.Points = points;
 ```
 
 #### Remarks
