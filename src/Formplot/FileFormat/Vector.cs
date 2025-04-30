@@ -95,6 +95,17 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 			return new Vector( x, y, z );
 		}
 
+		/// <summary>
+		/// Returns the vector with normalized length.
+		/// </summary>
+		public Vector Normalized()
+		{
+			var l = Math.Sqrt( X * X + Y * Y + Z * Z );
+			return l == 0.0
+				? new Vector( 0 )
+				: this / l;
+		}
+
 		public static Vector operator +( Vector a, Vector b )
 		{
 			return new Vector( a.X + b.X, a.Y + b.Y, a.Z + b.Z );
@@ -103,6 +114,21 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		public static Vector operator -( Vector a, Vector b )
 		{
 			return new Vector( a.X - b.X, a.Y - b.Y, a.Z - b.Z );
+		}
+
+		public static Vector operator *( Vector a, double b )
+		{
+			return new Vector( a.X * b, a.Y * b, a.Z * b );
+		}
+
+		public static Vector operator *( double b, Vector a )
+		{
+			return a * b;
+		}
+
+		public static Vector operator /( Vector a, double b )
+		{
+			return new Vector( a.X / b, a.Y / b, a.Z / b );
 		}
 
 		public static bool operator ==( Vector a, Vector b )

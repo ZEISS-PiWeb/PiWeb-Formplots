@@ -62,6 +62,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		}
 
 		/// <summary>
+		/// Returns <code>true</code> if this point has a tolerance and the tolerance is not empty.
+		/// </summary>
+		public bool HasProperties => _Properties is { Count: > 0 };
+
+		/// <summary>
 		/// Gets the current state.
 		/// </summary>
 		public PointState State { get; set; }

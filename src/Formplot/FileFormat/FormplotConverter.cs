@@ -92,7 +92,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		{
 			return source switch
 			{
-				CurveDistancePlot curve => ConvertToCurveProfile( curve ),
+				BorePatternPlot typed   => ConvertToCurveProfile( typed ),
+				CurveDistancePlot typed => ConvertToCurveProfile( typed ),
+				CylindricityPlot typed  => ConvertToCurveProfile( typed ),
+				StraightnessPlot typed  => ConvertToCurveProfile( typed ),
+				RoundnessPlot typed     => ConvertToCurveProfile( typed ),
+				FlatnessPlot typed      => ConvertToCurveProfile( typed ),
 				_                       => null
 			};
 		}
@@ -120,12 +125,13 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 
 		private static void CopyDefaults( Point source, Point target )
 		{
-			target.Properties.Set( source.Properties );
-			target.Tolerance = source.Tolerance;
+			if( source.HasProperties )
+				target.Properties.Set( source.Properties );
+			if( source.HasTolerance )
+				target.Tolerance = source.Tolerance;
 			target.State = source.State;
 			target.Index = source.Index;
 		}
-
 
 		private static double AdjustAngle( double angle )
 		{
@@ -310,6 +316,160 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					resultSegment.Points.Add( resultPoint );
 					resultPoint.State = point.State;
 				}
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( BorePatternPlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			//Segments and points have a reference to the plot, so we must copy them, despite being of the same type.
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+
+				foreach( var point in segment.Points )
+				{
+					var resultPoint = new CurvePoint( point.Position, point.Direction, point.Deviation );
+					CopyDefaults( point, resultPoint );
+					resultSegment.Points.Add( resultPoint );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( CylindricityPlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					var x = Math.Cos( point.Angle ) * source.Nominal.Radius;
+					var y = Math.Sin( point.Angle ) * source.Nominal.Radius;
+
+					var curvePoint = new CurvePoint(
+						new Vector( x, y, point.Height * source.Nominal.Height ),
+						new Vector( x, y ).Normalized(),
+						point.Deviation );
+
+					CopyDefaults( point, curvePoint );
+
+					resultSegment.Points.Add( curvePoint );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( StraightnessPlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					var curvePoint = new CurvePoint(
+						source.Nominal.Position + ( source.Nominal.Direction * point.Position * source.Nominal.Length ),
+						source.Nominal.Deviation,
+						point.Deviation );
+
+					CopyDefaults( point, curvePoint );
+
+					resultSegment.Points.Add( curvePoint );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( RoundnessPlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					var x = Math.Cos( point.Angle ) * source.Nominal.Radius;
+					var y = Math.Sin( point.Angle ) * source.Nominal.Radius;
+
+					var curvePoint = new CurvePoint(
+						new Vector( x, y ),
+						new Vector( x, y ).Normalized(),
+						point.Deviation );
+
+					CopyDefaults( point, curvePoint );
+
+					resultSegment.Points.Add( curvePoint );
+				}
+
+				result.Segments.Add( resultSegment );
+			}
+
+			return result;
+		}
+
+		private static CurveProfilePlot ConvertToCurveProfile( FlatnessPlot source )
+		{
+			var result = new CurveProfilePlot();
+
+			CopyDefaults( source, result );
+
+			result.Actual.CoordinateSystem = source.Actual.CoordinateSystem;
+			result.Nominal.CoordinateSystem = source.Nominal.CoordinateSystem;
+
+
+			foreach( var segment in source.Segments )
+			{
+				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
+				foreach( var point in segment.Points )
+				{
+					var curvePoint = new CurvePoint(
+						new Vector( point.Coordinate1 * source.Nominal.Length1, point.Coordinate2 * source.Nominal.Length2 ),
+						new Vector( 0, 0, 1 ),
+						point.Deviation );
+
+					CopyDefaults( point, curvePoint );
+
+					resultSegment.Points.Add( curvePoint );
+				}
+
+				result.Segments.Add( resultSegment );
 			}
 
 			return result;

@@ -29,7 +29,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 		/// <summary>Constructor.</summary>
 		/// <param name="name">The name.</param>
 		/// <param name="segmentType">Type of the segment.</param>
-		public Segment( string name, SegmentTypes segmentType ) : base( name, segmentType )
+		public Segment( string name = "", SegmentTypes segmentType = SegmentTypes.None ) : base( name, segmentType )
 		{
 			Points = new PointCollection<TPoint, TGeometry>( this );
 		}
