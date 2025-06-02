@@ -26,7 +26,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			var straightness = new StraightnessPlot
 			{
-				Nominal =
+				Actual =
 				{
 					Position = new Vector( 3, 3, 3 ),
 					Direction = new Vector( 0, 0, 1 ),
@@ -65,7 +65,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			var roundness = new RoundnessPlot
 			{
-				Nominal =
+				Actual =
 				{
 					Radius = 2
 				}
@@ -101,7 +101,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			var cylindricity = new CylindricityPlot
 			{
-				Nominal =
+				Actual =
 				{
 					Height = 3,
 					Radius = 2
@@ -137,7 +137,7 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 		{
 			var flatness = new FlatnessPlot
 			{
-				Nominal =
+				Actual =
 				{
 					Length1 = 4,
 					Length2 = 3

@@ -362,11 +362,11 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
 				foreach( var point in segment.Points )
 				{
-					var x = Math.Cos( point.Angle ) * source.Nominal.Radius;
-					var y = Math.Sin( point.Angle ) * source.Nominal.Radius;
+					var x = Math.Cos( point.Angle ) * source.Actual.Radius;
+					var y = Math.Sin( point.Angle ) * source.Actual.Radius;
 
 					var curvePoint = new CurvePoint(
-						new Vector( x, y, point.Height * source.Nominal.Height ),
+						new Vector( x, y, point.Height * source.Actual.Height ),
 						new Vector( x, y ).Normalized(),
 						point.Deviation );
 
@@ -396,8 +396,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				foreach( var point in segment.Points )
 				{
 					var curvePoint = new CurvePoint(
-						source.Nominal.Position + ( source.Nominal.Direction * point.Position * source.Nominal.Length ),
-						source.Nominal.Deviation,
+						source.Actual.Position + ( source.Actual.Direction * point.Position * source.Actual.Length ),
+						source.Actual.Deviation,
 						point.Deviation );
 
 					CopyDefaults( point, curvePoint );
@@ -425,8 +425,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				var resultSegment = new Segment<CurvePoint, CurveGeometry>( segment.Name, segment.SegmentType );
 				foreach( var point in segment.Points )
 				{
-					var x = Math.Cos( point.Angle ) * source.Nominal.Radius;
-					var y = Math.Sin( point.Angle ) * source.Nominal.Radius;
+					var x = Math.Cos( point.Angle ) * source.Actual.Radius;
+					var y = Math.Sin( point.Angle ) * source.Actual.Radius;
 
 					var curvePoint = new CurvePoint(
 						new Vector( x, y ),
@@ -460,7 +460,7 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				foreach( var point in segment.Points )
 				{
 					var curvePoint = new CurvePoint(
-						new Vector( point.Coordinate1 * source.Nominal.Length1, point.Coordinate2 * source.Nominal.Length2 ),
+						new Vector( point.Coordinate1 * source.Actual.Length1, point.Coordinate2 * source.Actual.Length2 ),
 						new Vector( 0, 0, 1 ),
 						point.Deviation );
 
