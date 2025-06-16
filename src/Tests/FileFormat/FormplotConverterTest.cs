@@ -52,10 +52,10 @@ namespace Zeiss.PiWeb.Formplot.Tests.FileFormat
 			var points = curve.Points.ToArray();
 
 			Assert.That( points[ 0 ].Position, Is.EqualTo( new Vector( 0, 0, 0 ) ) );
-			Assert.That( points[ 0 ].Direction, Is.EqualTo( new Vector( 0, 1 ) ) );
+			Assert.That( points[ 0 ].Direction, Is.EqualTo( new Vector( 0, 0, 1 ) ) );
 			Assert.That( points[ 0 ].Deviation, Is.EqualTo( 0.1 ) );
 			Assert.That( points[ 1 ].Position, Is.EqualTo( new Vector( 2, 0, 0 ) ) );
-			Assert.That( points[ 1 ].Direction, Is.EqualTo( new Vector( 0, 1 ) ) );
+			Assert.That( points[ 1 ].Direction, Is.EqualTo( new Vector( 0, 0, 1 ) ) );
 			Assert.That( points[ 1 ].Deviation, Is.EqualTo( 0.2 ) );
 			Assert.That( points[ 1 ].Tolerance, Is.EqualTo( new Tolerance( 0, 0.3 ) ) );
 		}
