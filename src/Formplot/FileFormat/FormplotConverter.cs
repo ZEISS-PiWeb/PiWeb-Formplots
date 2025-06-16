@@ -396,8 +396,8 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				foreach( var point in segment.Points )
 				{
 					var curvePoint = new CurvePoint(
-						source.Actual.Position + ( source.Actual.Direction * point.Position * source.Actual.Length ),
-						source.Actual.Deviation,
+						new Vector( point.Position * source.Actual.Length ),
+						new Vector( 0, 1 ),
 						point.Deviation );
 
 					CopyDefaults( point, curvePoint );
