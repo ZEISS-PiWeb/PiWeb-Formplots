@@ -366,7 +366,9 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					var y = Math.Sin( point.Angle ) * source.Actual.Radius;
 
 					var curvePoint = new CurvePoint(
-						new Vector( x, y, point.Height * source.Actual.Height ),
+						segment.SegmentType == SegmentTypes.Axis
+							? new Vector( 0, 0, point.Height * source.Actual.Height )
+							: new Vector( x, y, point.Height * source.Actual.Height ),
 						new Vector( x, y ).Normalized(),
 						point.Deviation );
 
