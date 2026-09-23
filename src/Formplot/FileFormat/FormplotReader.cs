@@ -264,7 +264,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					var range = RangeList.TryParseOrEmpty( metadataReader.GetAttribute( "Points" ) );
 					var tolerance = Tolerance.Deserialize( metadataReader );
 
-					tolerances[ tolerance ] = range;
+					if( tolerances.TryGetValue( tolerance, out var existingRange ) )
+						existingRange.AddRange( range );
+					else
+						tolerances[ tolerance ] = range;
 				}
 
 				metadataReader.Read();
@@ -287,10 +290,12 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 					type = EnumParser<SegmentTypes>.Parse( typeString );
 
 				var name = metadataReader.ReadString();
-
 				var segment = new Segment<TPoint, TGeometry>( name, type );
 
-				segments[ segment ] = range;
+				if( segments.TryGetValue( segment, out var existingRange ) )
+					existingRange.AddRange( range );
+				else
+					segments[ segment ] = range;
 			}
 		}
 
@@ -304,7 +309,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				var range = RangeList.TryParseOrEmpty( metadataReader.GetAttribute( "Points" ) );
 				var state = EnumParser<PointState>.Parse( metadataReader.ReadString() );
 
-				states[ state ] = range;
+				if( states.TryGetValue( state, out var existingRange ) )
+					existingRange.AddRange( range );
+				else
+					states[ state ] = range;
 			}
 		}
 
@@ -318,7 +326,10 @@ namespace Zeiss.PiWeb.Formplot.FileFormat
 				var range = RangeList.TryParseOrEmpty( metadataReader.GetAttribute( "Points" ) );
 				var property = Property.Deserialize( metadataReader );
 
-				properties[ property ] = range;
+				if( properties.TryGetValue( property, out var existingRange ) )
+					existingRange.AddRange( range );
+				else
+					properties[ property ] = range;
 			}
 		}
 
