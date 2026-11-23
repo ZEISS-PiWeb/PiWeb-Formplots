@@ -17,4 +17,5 @@ jobs:
     uses: ZEISS-PiWeb/github-actions/.github/workflows/create-support-release.yml@main
     with:
       generate_release_notes: true
+      dotnet_version: "10.0.x"
     secrets: inherit

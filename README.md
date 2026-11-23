@@ -62,7 +62,7 @@ PM> Install-Package Zeiss.PiWeb.Formplot
 
 Or compile the library by yourself. Requirements:
 
-* Microsoft Visual Studio 2019
+* Microsoft .NET 10 SDK
 * Microsoft .NET Standard 2.0
 
 
