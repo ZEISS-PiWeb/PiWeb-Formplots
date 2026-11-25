@@ -34,6 +34,7 @@
 	- [Properties](#properties)
 	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
 - [Contributing](#contributing)
+- [NuGet trusted publishing](#nuget-trusted-publishing)
 
 
 # Introduction

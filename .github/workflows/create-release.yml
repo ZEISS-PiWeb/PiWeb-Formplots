@@ -7,6 +7,8 @@
 # + creates a support branch off the last release if necessary
 # + and builds the release packages as an artifact.
 #
+# The built artifact is then published on nuget.org.
+#
 # This workflow must be triggered manually.
 
 name: Create & publish release from develop
