@@ -20,7 +20,7 @@
 
 # PiWeb Formplot Library
 
-| ![Zeiss IQS Logo](docs/img/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing formplot data for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
+| ![Zeiss IQS Logo](docs/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing formplot data for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
 |-|:-|
 
 
@@ -178,4 +178,4 @@ public static async Task WriteToDatabase(
 
 # Contributing
 
-This repository makes use of resuable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the documentation (especially about automated semantic versioning) before committing any changes.
+This repository makes use of reusable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the [contribution guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. Contributions require a signed [individual](docs/CONTRIBUTOR-AGREEMENT-INDIVIDUAL.txt) or [corporate](docs/CONTRIBUTOR-AGREEMENT-CORPORATE.txt) Contributor License Agreement.
