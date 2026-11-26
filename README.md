@@ -20,7 +20,7 @@
 
 # PiWeb Formplot Library
 
-| ![Zeiss IQS Logo](docs/img/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing formplot data for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
+| ![Zeiss IQS Logo](docs/logo_128x128.png) | The **PiWeb formplot library** provides an easy to use interface for reading and especially writing formplot data for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
 |-|:-|
 
 
@@ -34,6 +34,7 @@
 	- [Properties](#properties)
 	- [Writing plots into PiWeb](#writing-plots-into-piWeb)
 - [Contributing](#contributing)
+- [NuGet trusted publishing](#nuget-trusted-publishing)
 
 
 # Introduction
@@ -62,7 +63,7 @@ PM> Install-Package Zeiss.PiWeb.Formplot
 
 Or compile the library by yourself. Requirements:
 
-* Microsoft Visual Studio 2019
+* Microsoft .NET 10 SDK
 * Microsoft .NET Standard 2.0
 
 
@@ -178,4 +179,20 @@ public static async Task WriteToDatabase(
 
 # Contributing
 
-This repository makes use of resuable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the documentation (especially about automated semantic versioning) before committing any changes.
+This repository makes use of reusable workflows from [ZEISS-PiWeb/github-actions](https://github.com/ZEISS-PiWeb/github-actions). Read the [contribution guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before contributing. Contributions require a signed [individual](docs/CONTRIBUTOR-AGREEMENT-INDIVIDUAL.txt) or [corporate](docs/CONTRIBUTOR-AGREEMENT-CORPORATE.txt) Contributor License Agreement.
+
+## NuGet trusted publishing
+
+The shared workflows build and upload the `packages` artifact; NuGet login
+and publishing run in this repository using GitHub Actions OIDC. Configure
+NuGet trusted-publishing policies for `ZEISS-PiWeb/PiWeb-Formplots` for
+`develop.yml`, `create-release.yml`, and `create-support-release.yml`. Enter
+the workflow filename only, and leave the environment unset because these
+publish jobs do not use a GitHub Actions environment.
+
+Set the repository or organization secret `NUGET_USER` to the NuGet profile
+name that owns the package (not an email address). The release workflows also
+require `PUSH_TO_GITHUB_REPO_PAT` to push release branches and tags. NuGet
+login and publishing stay in these caller workflows because trusted-publishing
+policy matching is unreliable inside reusable workflows; see
+[NuGet/login issue #6](https://github.com/NuGet/login/issues/6).
